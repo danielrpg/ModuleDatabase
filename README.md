@@ -6,19 +6,21 @@ El modulo de base de datos
 
 ## 1)Create schema
 
-## 2)Initialization -> for existing data
+## 2)Initialization 
+
+    * for existing data
 
 ## 3)Auditing
 
-  - Trigger
+  * Trigger
   
-  - AuditHistory
+  * AuditHistory
   
 ## 4)Data Integration
 
-  - 1) ETL
+  * 1) ETL
   
-  - 2) Proc
+  * 2) Proc
   
       -Versioning
       
@@ -26,6 +28,6 @@ El modulo de base de datos
       
 ## 5)Reporting
 
- - 1) tabular Report
+ * 1) tabular Report
  
- - 2) DAshboard
+ * 2) DAshboard
