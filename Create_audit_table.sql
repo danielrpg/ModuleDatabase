@@ -28,3 +28,6 @@ CREATE TABLE [dbo].[AuditHistory]
 	[ModifiedBy]     INT
 );
 GO
+
+ALTER TABLE [dbo].[AuditHistory] ADD CONSTRAINT [DF_AuditHistory_ModifiedDate]  DEFAULT (GETUTCDATE()) FOR [ModifiedDate]
+GO
