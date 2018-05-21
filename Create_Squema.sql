@@ -32,7 +32,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 									    ,[CreatedDate] DATETIME  NOT NULL
 									    ,[ModifiedBy] DATETIME   NOT NULL
 									    ,[ModifiedDate] DATETIME NOT NULL
-		,CONSTRAINT [PK_Incident_Type] PRIMARY KEY
+		,CONSTRAINT [PK_IncidentType] PRIMARY KEY
 		(
 			[incident_type_id] ASC
 		));
@@ -76,7 +76,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 									    ,[CreatedDate] DATETIME  NOT NULL
 									    ,[ModifiedBy] DATETIME   NOT NULL
 									    ,[ModifiedDate] DATETIME NOT NULL
-		 CONSTRAINT [PK_Incident_Type] PRIMARY KEY
+		 CONSTRAINT [PK_IncidentDetail] PRIMARY KEY
 		(
 			[incident_detail_id] ASC
 		));
@@ -122,7 +122,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 									    ,[CreatedDate] DATETIME  NOT NULL
 									    ,[ModifiedBy] DATETIME   NOT NULL
 									    ,[ModifiedDate] DATETIME NOT NULL
-		 CONSTRAINT [PK_Incident_Type] PRIMARY KEY
+		 CONSTRAINT [PK_Incident] PRIMARY KEY
 		(
 			[incident_id] ASC
 		));
