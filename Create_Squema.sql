@@ -475,3 +475,239 @@ ELSE
     END
 
 GO
+
+-- Create Table Equipment
+/******************************************************************************
+**  Table Name: Equipment
+**  Desc: Table for Equipment
+** 
+**  Called by: SSI-D
+**
+**  Author: Ivan Misericordia E.
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Ivan Misericordia E.   Initial version
+*******************************************************************************/
+PRINT 'Creating the Equipment table....';
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[Equipment]') 
+		       AND type in (N'U'))
+ BEGIN
+		CREATE TABLE [dbo].[Equipment](
+						 [equipment_id][int] IDENTITY not null
+						,[equipment_name][varchar](50) CONSTRAINT NN_EquipmentName not null
+						,[equipment_type][int] CONSTRAINT NN_EquipmentType not null
+						,[equipment_description][varchar](200) CONSTRAINT NN_EquipmentDescription null
+						,[equipment_image][varbinary](max) CONSTRAINT NN_EquipmentImage not null
+			,CONSTRAINT [PK_Equipment] PRIMARY KEY
+			(
+				[equipment_id] ASC
+			)
+		);
+
+			PRINT 'Table Equipment created!';
+ END
+ ELSE 
+	BEGIN
+		PRINT 'Table Equipment already exists into the database';
+	END
+
+-- Create Table Kardex_equipment
+/******************************************************************************
+**  Table Name: Kardex_equipment
+**  Desc: Table for Kardex_equipment
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia E.
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Ivan Misericordia E.   Initial version
+*******************************************************************************/
+PRINT 'Creating the Kardex_equipment table....';
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[Kardex_equipment]') 
+		       AND type in (N'U'))
+ BEGIN
+		CREATE TABLE [dbo].[Kardex_equipment](
+						 [equipment_kardex_id][int] IDENTITY not null
+						,[date_kardex][datetime] CONSTRAINT NN_DateKardex not null
+						,[entry_kardex][int] CONSTRAINT NN_EntryKardex not null
+						,[outlay_kardex][int] CONSTRAINT NN_OutlayKardex not null
+						,[balance_kardex][int] CONSTRAINT NN_BalanceKardex not null
+						,[equipment_id][int] not null
+			,CONSTRAINT [PK_equipment_kardex] PRIMARY KEY
+			(
+				[equipment_kardex_id] ASC
+			)
+		);
+
+			PRINT 'Table Kardex_equipments created!';
+ END
+ ELSE 
+	BEGIN
+		PRINT 'Table Kardex_equipment already exists into the database';
+	END
+
+-- Create Table Inventory
+/******************************************************************************
+**  Table Name: Inventory
+**  Desc: Table for Inventory
+** 
+**  Called by: SSI-D
+**
+**  Author: Ivan Misericordia E.
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Ivan Misericordia E.   Initial version
+*******************************************************************************/
+PRINT 'Creating the Inventory table....';
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[Inventory]') 
+		       AND type in (N'U'))
+ BEGIN
+		CREATE TABLE [dbo].[Inventory](
+						 [inventory_id][int] IDENTITY not null
+						,[active_assigment][bit] CONSTRAINT NN_ActiveAssigment not null
+						,[date_assigment][datetime] CONSTRAINT NN_DateAssigmnet not null
+						,[status_assigment][varchar](50) CONSTRAINT NN_StatusAssigment not null
+						,[equipment_id][int] not null
+						,[personal_id][int] not null
+			,CONSTRAINT [PK_inventory] PRIMARY KEY
+			(
+				[inventory_id] ASC
+			)
+		);
+
+			PRINT 'Table Inventory created!';
+ END
+ ELSE 
+	BEGIN
+		PRINT 'Table Inventory already exists into the database';
+	END
+
+-- Define the relationship between Kardex_equipment and Equipment.
+/******************************************************************************
+**  Table Name: FK_kardex_equipment
+**  Desc: Foreing key for kardex_equipment
+** 
+**  Called by: SSI-D
+**
+**  Author: Ivan Misericordia E.
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Ivan Misericordia E.   Initial version
+*******************************************************************************/
+PRINT 'Creating FK_kardex_equipment to Kardex_equipment';
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_kardex_equipment]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[Kardex_equipment]'))
+	   BEGIN
+			ALTER TABLE [dbo].[Kardex_equipment]  WITH CHECK ADD  
+				   CONSTRAINT [FK_kardex_equipment] FOREIGN KEY([equipment_id])
+			REFERENCES [dbo].[equipment] ([equipment_id]);
+			
+			ALTER TABLE [dbo].[Kardex_equipment] CHECK 
+				   CONSTRAINT [FK_kardex_equipment];
+			
+			PRINT 'FK_kardex_equipment done ....';
+	   END
+ELSE
+	BEGIN
+		PRINT 'Foreing key: FK_kardex_equipment already exists into the database';
+	END
+
+-- Define the relationship between Inventory and Equipment.
+/******************************************************************************
+**  Table Name: FK_inventory_equipment
+**  Desc: Foreing key for Inventory
+** 
+**  Called by: SSI-D
+**
+**  Author: Ivan Misericordia E.
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Ivan Misericordia E.   Initial version
+*******************************************************************************/
+PRINT 'Creating FK_inventory_equipment to Inventory';
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_inventory_equipment]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[Inventory]'))
+	   BEGIN
+			ALTER TABLE [dbo].[Inventory]  WITH CHECK ADD  
+				   CONSTRAINT [FK_inventory_equipment] FOREIGN KEY([equipment_id])
+			REFERENCES [dbo].[equipment] ([equipment_id]);
+
+			ALTER TABLE [dbo].[Inventory] CHECK 
+				   CONSTRAINT [FK_inventory_equipment];
+			
+			PRINT 'FK_inventory_equipment done ....';
+	   END
+ELSE
+	BEGIN
+		PRINT 'Foreing key: FK_inventory_equipment already exists into the database';
+	END
+
+-- Define the relationship between Inventory and Personal.
+/******************************************************************************
+**  Table Name: FK_inventory_personal
+**  Desc: Foreing key for Inventory
+** 
+**  Called by: SSI-D
+**
+**  Author: Ivan Misericordia E.
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Ivan Misericordia E.   Initial version
+*******************************************************************************/
+PRINT 'Creating FK_inventory_personal to Inventory';
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_inventory_personal]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[Inventory]'))
+	   BEGIN
+			ALTER TABLE [dbo].[Inventory]  WITH CHECK ADD  
+				   CONSTRAINT [FK_inventory_personal] FOREIGN KEY([personal_id])
+			REFERENCES [dbo].[Personal] ([personal_id]);
+			
+			ALTER TABLE [dbo].[Inventory] CHECK 
+				   CONSTRAINT [FK_inventory_personal];
+			
+			PRINT 'FK_inventory_personal done ....';
+	   END
+ELSE
+	BEGIN
+		PRINT 'Foreing key: FK_inventory_personal already exists into the database';
+	END
