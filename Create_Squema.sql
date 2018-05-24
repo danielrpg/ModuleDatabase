@@ -41,7 +41,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	END
  ELSE 
 	BEGIN
-		PRINT 'Table Incident_type already exists into the database';
+*		PRINT 'Table Incident_type already exists into the database';
 	END
 GO
 
@@ -133,7 +133,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	BEGIN
 		PRINT 'Table Incident already exists into the database';
 	END
-
+	GO
 
 
 
@@ -174,7 +174,7 @@ ELSE
 	BEGIN
 		PRINT 'Table area already exists into the database';
 	END
-
+GO
 
 
 
@@ -224,7 +224,7 @@ ELSE
 	BEGIN
 		PRINT 'Table personal already exists into the database';
 	END
-
+GO
 
 
 -- Create Table user
@@ -266,7 +266,7 @@ ELSE
 	BEGIN
 		PRINT 'Table user already exists into the database';
 	END
-
+GO
 
 -- Create Table role
 /******************************************************************************
@@ -304,7 +304,7 @@ ELSE
 	BEGIN
 		PRINT 'Table role already exists into the database';
 	END
-
+GO
 
 PRINT 'Creating the user_role table....';
 IF NOT EXISTS(SELECT 1
@@ -326,7 +326,7 @@ ELSE
 	BEGIN
 		PRINT 'Table user_role already exists into the database';
 	END
-
+	GO
 
 -- Create Foreign key personal_area
 /******************************************************************************
@@ -363,7 +363,7 @@ ELSE
     BEGIN
         PRINT 'Foreign key already exist';
     END
-
+	GO
 
 -- Create Foreign key user_personal
 /******************************************************************************
@@ -399,7 +399,7 @@ ELSE
     BEGIN
         PRINT 'Foreign key already exist';
     END
-
+	GO
 
 -- Create Foreign key user_role
 /******************************************************************************
@@ -435,7 +435,7 @@ ELSE
     BEGIN
         PRINT 'Foreign key already exist';
     END
-
+	GO
 
 -- Create Foreign key role_user
 /******************************************************************************
@@ -473,7 +473,6 @@ ELSE
     BEGIN
         PRINT 'Foreign key already exist';
     END
-
 GO
 
 -- Create Table Equipment
@@ -517,6 +516,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	BEGIN
 		PRINT 'Table Equipment already exists into the database';
 	END
+	GO
 
 -- Create Table Kardex_equipment
 /******************************************************************************
@@ -560,6 +560,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	BEGIN
 		PRINT 'Table Kardex_equipment already exists into the database';
 	END
+	GO
 
 
 -- Create Table program_sso_trainer
@@ -737,6 +738,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	BEGIN
 		PRINT 'Table Inventory already exists into the database';
 	END
+	GO
 
 -- Define the relationship between Kardex_equipment and Equipment.
 /******************************************************************************
@@ -773,6 +775,7 @@ ELSE
 	BEGIN
 		PRINT 'Foreing key: FK_kardex_equipment already exists into the database';
 	END
+	GO
 
 -- Define the relationship between Inventory and Equipment.
 /******************************************************************************
@@ -809,6 +812,7 @@ ELSE
 	BEGIN
 		PRINT 'Foreing key: FK_inventory_equipment already exists into the database';
 	END
+	GO
 
 -- Define the relationship between Inventory and Personal.
 /******************************************************************************
@@ -845,3 +849,252 @@ ELSE
 	BEGIN
 		PRINT 'Foreing key: FK_inventory_personal already exists into the database';
 	END
+GO
+
+-- Create Table Department
+/******************************************************************************
+**  Table Name: Department
+**  Desc: Table for Department
+** 
+**  Called by: SSI-D
+**
+**  Author: Jesús David Piérola Alvarado
+**
+**  Date: 22/05/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+*******************************************************************************/
+PRINT 'Creating the Department table....';
+IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.department'))
+BEGIN
+	CREATE TABLE department(
+		department_id BIGINT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Department PRIMARY KEY
+		,created_on DATETIME CONSTRAINT NN_DepCreated NOT NULL
+		,updated_on DATETIME
+		,[version] INT CONSTRAINT NN_DepVersion NOT NULL
+		,department_name VARCHAR(50) CONSTRAINT NN_DepName NOT NULL
+		,department_description VARCHAR(100)
+	);
+
+	PRINT 'Table Department created!';
+END
+ELSE
+BEGIN
+	PRINT 'Table Department already exists into the database';
+
+	-- Agrego campo CreatedBy si no existe
+	IF NOT EXISTS (SELECT * FROM DBO.SYSCOLUMNS WHERE ID = OBJECT_ID(N'department') AND NAME = 'CreatedBy')
+	BEGIN
+		ALTER TABLE department ADD CreatedBy INT NOT NULL DEFAULT(0)
+		PRINT 'SE CREO EL CAMPO CreatedBy EN LA TABLA department'		
+	END
+
+	-- Agrego campo CreatedDate si no existe
+	IF NOT EXISTS (SELECT * FROM DBO.SYSCOLUMNS WHERE ID = OBJECT_ID(N'department') AND NAME = 'CreatedDate')
+	BEGIN
+		ALTER TABLE department ADD CreatedDate DATETIME NOT NULL DEFAULT GETDATE()
+		PRINT 'SE CREO EL CAMPO CreatedDate EN LA TABLA department'		
+	END
+
+	-- Agrego campo UpdatedBy si no existe
+	IF NOT EXISTS (SELECT * FROM DBO.SYSCOLUMNS WHERE ID = OBJECT_ID(N'department') AND NAME = 'UpdatedBy')
+	BEGIN
+		ALTER TABLE department ADD UpdatedBy INT NULL
+		PRINT 'SE CREO EL CAMPO UpdatedBy EN LA TABLA department'		
+	END
+
+	-- Agrego campo UpdatedDate si no existe
+	IF NOT EXISTS (SELECT * FROM DBO.SYSCOLUMNS WHERE ID = OBJECT_ID(N'department') AND NAME = 'UpdatedDate')
+	BEGIN
+		ALTER TABLE department ADD UpdatedDate DATETIME NULL
+		PRINT 'SE CREO EL CAMPO UpdatedDate EN LA TABLA department'		
+	END
+END
+GO
+
+-- Create Table Position
+/******************************************************************************
+**  Table Name: Position
+**  Desc: Table for Position
+** 
+**  Called by: SSI-D
+**
+**  Author: Jesús David Piérola Alvarado
+**
+**  Date: 22/05/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+*******************************************************************************/
+PRINT 'Creating the Position table....';
+IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.position'))
+BEGIN
+	CREATE TABLE [dbo].[position](
+		[position_id] BIGINT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Position PRIMARY KEY
+		,[created_on] [datetime] NOT NULL,
+		[updated_on] [datetime] NULL,
+		[version] [bigint] NOT NULL,
+		[position_description] [varchar](800) NULL,
+		[position_level] [int] NULL,
+		[position_name] [varchar](300) NULL,
+		[parent_position_position_id] [bigint] NULL
+	);
+
+	PRINT 'Table Position created!';
+END
+ELSE
+BEGIN
+	PRINT 'Table Position already exists'
+END
+GO
+-- Foreing key position
+IF NOT EXISTS(SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID('FK_Position_Position') 
+AND parent_object_id = OBJECT_ID('dbo.position'))
+BEGIN
+	ALTER TABLE position ADD CONSTRAINT FK_Position_Position
+	FOREIGN KEY(parent_position_position_id) REFERENCES position(position_id)
+
+	ALTER TABLE dbo.position CHECK CONSTRAINT FK_Position_Position
+END
+GO
+
+
+-- Create Table department_position
+/******************************************************************************
+**  Table Name: department_position
+**  Desc: Table for department_position
+** 
+**  Called by: SSI-D
+**
+**  Author: Jesús David Piérola Alvarado
+**
+**  Date: 22/05/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+*******************************************************************************/
+PRINT 'Creating the department_position table....';
+IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.department_position'))
+BEGIN
+	CREATE TABLE dbo.department_position(
+		department_id BIGINT NOT NULL
+		,position_id BIGINT NOT NULL
+		,PRIMARY KEY CLUSTERED 
+		(
+			department_id ASC,
+			position_id ASC
+		)
+	);
+	PRINT 'Table department_position created!';
+END
+ELSE 
+BEGIN
+	PRINT 'Table department_position already exists into the database';
+END
+GO
+
+-- Foreing key
+IF NOT EXISTS(SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID('FK_DepPos_Position') 
+AND parent_object_id = OBJECT_ID('dbo.department_position'))
+BEGIN
+	ALTER TABLE dbo.department_position WITH CHECK ADD CONSTRAINT FK_DepPos_Position FOREIGN KEY(position_id)
+	REFERENCES dbo.position (position_id)
+	
+	ALTER TABLE dbo.department_position CHECK CONSTRAINT FK_DepPos_Position
+END
+GO
+
+-- Foreing key
+IF NOT EXISTS(SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID('FK_DepPos_Department') 
+AND parent_object_id = OBJECT_ID('dbo.department_position'))
+BEGIN
+	ALTER TABLE dbo.department_position WITH CHECK ADD CONSTRAINT FK_DepPos_Department FOREIGN KEY(department_id)
+	REFERENCES dbo.department (department_id)
+
+	ALTER TABLE dbo.department_position CHECK CONSTRAINT FK_DepPos_Department
+END
+GO
+
+-- Create Table department_position
+/******************************************************************************
+**  Table Name: department_position
+**  Desc: Table for department_position
+** 
+**  Called by: SSI-D
+**
+**  Author: Jesús David Piérola Alvarado
+**
+**  Date: 22/05/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+*******************************************************************************/
+PRINT 'Creating the department_position table....';
+IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.department_position'))
+BEGIN
+	CREATE TABLE dbo.personal_position_contract(
+		[pers_pos_contract_id] [bigint] NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		[created_on] [datetime] NOT NULL,
+		[updated_on] [datetime] NULL,
+		[version] [bigint] NOT NULL,
+		[pers_pos_contract_end_date] [datetime] NULL,
+		[pers_pos_contract_init_date] [datetime] NULL,
+		[pers_pos_contract_status] [bit] NULL,
+		[pers_pos_contract_turno] [varchar](255) NULL,
+		[contract_id] [bigint] NULL,
+		[personal_id] [bigint] NULL,
+		[position_id] [bigint] NULL);
+
+	PRINT 'Table personal_position_contract created!';
+END
+ELSE
+BEGIN
+	PRINT 'Table personal_position_contract already exist.';
+END
+GO
+
+-- Foreing key
+IF NOT EXISTS(SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID('FK_PersPosContr_Position') 
+AND parent_object_id = OBJECT_ID('dbo.personal_position_contract'))
+BEGIN
+	ALTER TABLE dbo.personal_position_contract  WITH CHECK ADD  CONSTRAINT FK_PersPosContr_Position FOREIGN KEY(position_id)
+	REFERENCES dbo.position (position_id)
+
+	ALTER TABLE dbo.personal_position_contract CHECK CONSTRAINT FK_PersPosContr_Position
+END
+GO
+
+-- Foreing key
+IF NOT EXISTS(SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID('FK_PersPosContr_Personal') 
+AND parent_object_id = OBJECT_ID('dbo.personal_position_contract'))
+BEGIN
+	ALTER TABLE dbo.personal_position_contract WITH CHECK ADD  CONSTRAINT FK_PersPosContr_Personal FOREIGN KEY([personal_id])
+	REFERENCES dbo.personals (personal_id)
+
+	ALTER TABLE dbo.personal_position_contract CHECK CONSTRAINT FK_PersPosContr_Personal
+END
+GO
+
+-- Foreing key
+IF NOT EXISTS(SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID('FK_PersPosContr_Contract') 
+AND parent_object_id = OBJECT_ID('dbo.personal_position_contract'))
+BEGIN
+	ALTER TABLE dbo.personal_position_contract WITH CHECK ADD  CONSTRAINT FK_PersPosContr_Contract FOREIGN KEY([contract_id])
+	REFERENCES dbo.contracts (contract_id)
+
+	ALTER TABLE dbo.personal_position_contract CHECK CONSTRAINT FK_PersPosContr_Contract
+END
+GO
