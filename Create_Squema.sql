@@ -561,6 +561,140 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		PRINT 'Table Kardex_equipment already exists into the database';
 	END
 
+
+-- Create Table program_sso_trainer
+/******************************************************************************
+**  Table Name: program_sso_trainer
+**  Desc: Table for program_sso_trainer
+** 
+**  Called by: ssi
+**
+**  Author: Marcos Bustos
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Marcos Bustos   Initial version
+*******************************************************************************/
+PRINT 'Creating the program_sso_trainer table....';
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]') 
+		       AND type in (N'U'))
+	BEGIN
+		CREATE TABLE [dbo].[program_sso_trainer](
+		[sso_trainer_id] [BIGINT] IDENTITY(1,1) NOT NULL
+		,[created_on] DATETIME NOT NULL
+		,[updated_on] DATETIME NULL
+		,[version] [bigint] NOT NULL
+		,[sso_trainer_skills] [varchar](255) NULL
+		,[sso_trainer_ci] [varchar](10) NULL
+		,[sso_trainer_image] [varbinary](max) NULL
+		,[sso_trainer_name] [varchar](100) NULL
+		,[sso_trainer_specialty] [varchar](255) NULL
+		, CONSTRAINT [PK_ProgSSOTrainer] PRIMARY KEY
+		(
+			sso_trainer_id ASC
+		));
+		PRINT 'Table program_sso_trainer created!';
+	END
+ELSE 
+	BEGIN
+		PRINT 'Table program_sso_trainer already exists into the database';
+	END
+GO
+
+
+-- Create Table program_sso
+/******************************************************************************
+**  Table Name: program_sso
+**  Desc: Table for program_sso
+** 
+**  Called by: ssi
+**
+**  Author: Marcos Bustos
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Marcos Bustos   Initial version
+*******************************************************************************/
+PRINT 'Creating the program_sso table....';
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[program_sso]') 
+		       AND type in (N'U'))
+	BEGIN
+		CREATE TABLE [dbo].[program_sso](
+		[sso_id] [bigint] IDENTITY(1,1) NOT NULL
+		,[created_on] DATETIME NOT NULL
+		,[updated_on] DATETIME NULL
+		,[version] [bigint] NOT NULL
+		,[sso_execution_time] [varchar](250) NULL
+		,[sso_goal] [varchar](250) NULL
+		,[sso_indicator] [varchar](250) NULL
+		,[sso_objetive] [varchar](250) NULL
+		,[sso_responsable] [varchar](250) NULL
+		,[sso_total_cost] [float] NULL
+		, CONSTRAINT [PK_program_sso] PRIMARY KEY
+		(
+			sso_id ASC
+		));
+		PRINT 'Table program_sso created!';
+	END
+ELSE 
+	BEGIN
+		PRINT 'Table program_sso already exists into the database';
+	END
+GO
+
+
+-- Create Table detail_personal_sso
+/******************************************************************************
+**  Table Name: detail_personal_sso
+**  Desc: Table for detail_personal_sso
+** 
+**  Called by: ssi
+**
+**  Author: Marcos Bustos
+**
+**  Date: 05/21/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/21/2018 Marcos Bustos   Initial version
+*******************************************************************************/
+PRINT 'Creating the detail_personal_sso table....';
+
+IF NOT EXISTS (SELECT 1 FROM sys.objects 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[detail_personal_sso]') 
+		       AND type in (N'U'))
+	BEGIN
+		CREATE TABLE [dbo].[detail_personal_sso](
+			[sso_detail_id] [bigint] NOT NULL
+			,[personal_id] [bigint] NOT NULL
+		, CONSTRAINT [PK_DetailPersonSso] PRIMARY KEY
+		(
+			[sso_detail_id] ASC,
+			[personal_id] ASC
+		));
+		PRINT 'Table detail_personal_sso created!';
+	END
+ELSE 
+	BEGIN
+		PRINT 'Table detail_personal_sso already exists into the database';
+	END
+GO
+
+
 -- Create Table Inventory
 /******************************************************************************
 **  Table Name: Inventory
