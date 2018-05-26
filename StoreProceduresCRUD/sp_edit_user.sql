@@ -1,3 +1,21 @@
+-- Drop User CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: users
+**  Desc: Table for sp_edit_user
+** 
+**  Called by: ssi
+**
+**  Author: Gilmer Daniel Fernandez Pinto
+**
+**  Date: 05/26/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/26/2018 Gilmer Daniel Fernandez Pinto   Initial version
+*******************************************************************************/
+
 CREATE PROCEDURE [dbo].[sp_edit_user](
     @user_id INT
    ,@user_name VARCHAR(100) 
