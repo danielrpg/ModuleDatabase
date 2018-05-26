@@ -1,0 +1,48 @@
+DIMENSIONES
+a) Personal
+	- PersonalID
+	- Nonbre Personal
+	- Edad
+b) Area
+	- AreaId
+	- Nombre
+
+c) Cargo
+	- CargoId
+	- NombreCargo
+
+d) Departamento
+	- DepartamentoId
+	- NombreDepartamento
+
+e) IncidenteDetalle
+	- DetalleId
+	- Descripcion
+	- Estado
+
+-- Opcional dimension opcional
+d) Capacitaciones
+	- CapacitacionId
+	- FechaCapacitacion
+	- NombreCapacitacion 
+
+HECHOS
+a)Incidentes
+	- PersonalID
+	- AreaId
+	- CargoId
+	- DepartamentoId
+	- DetalleId
+	- FechaIncidente
+	- TipoIncidente
+
+
+Reportes a generar
+-----------------------------------------
+- Tipos de incidente por dia
+- Incidentes por Area
+- Incidentes por Departamento
+- Incidentes por Cargo
+- Incidentes recurrentes por meses 
+- Personal que sufrio mas inicidentes
+
