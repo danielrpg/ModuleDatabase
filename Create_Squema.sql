@@ -190,7 +190,8 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 										,[incident_area] VARCHAR(50) CONSTRAINT NN_IncidentArea NOT NULL
 										,[incident_reincident] BIT CONSTRAINT NN_IncidentReincident NOT NULL
 										,[incident_treatment] BIT CONSTRAINT NN_IncidentTreatment NOT NULL
-		CONSTRAINT [PK_Incident] PRIMARY KEY
+										,[incident_type_id] INT
+		 CONSTRAINT [PK_Incident] PRIMARY KEY
 		(
 			[incident_id] ASC
 		));
@@ -201,7 +202,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	BEGIN
 		PRINT 'Table Incident already exists into the database';
 	END
-	GO
+GO
 /******************************************************************************
 ** ALTER Incident Added Audit columns
 *******************************************************************************/
@@ -239,6 +240,79 @@ IF NOT EXISTS (SELECT 1
 	BEGIN
 		ALTER TABLE [dbo].[Incident] ADD ModifiedDate DATETIME NOT NULL
 	END
+GO
+
+-- Create Foreign key Incident_Incident_Type
+/******************************************************************************
+**  Constraint Name: Incident_Incident_Type
+**  Desc: Constraint for Foreign Key between Incident and Incident_Type
+** 
+**  Called by: ssi
+**
+**  Author: Christian Tola
+**
+**  Date: 05/22/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/22/2018 Christian Tola   Initial version
+*******************************************************************************/
+
+PRINT 'Creating the Foreign key Incident_Incident_Type ....';
+IF NOT EXISTS(SELECT 1
+            FROM sys.foreign_keys
+            WHERE object_id = OBJECT_ID('FK_Inc_IncType')
+            AND parent_object_id = OBJECT_ID('dbo.Incident'))
+    BEGIN
+        ALTER TABLE dbo.Incident 
+        ADD CONSTRAINT FK_Inc_IncType
+        FOREIGN KEY(incident_type_id)
+        REFERENCES Incident_Type(incident_type_id);
+
+        PRINT 'Foreign key created';
+    END
+ELSE
+    BEGIN
+        PRINT 'Foreign key already exist';
+    END
+GO
+-- Create Foreign key Incident_Incident_Detail
+/******************************************************************************
+**  Constraint Name: Incident_Incident_Detail
+**  Desc: Constraint for Foreign Key between Incident and Incident_Detail
+** 
+**  Called by: ssi
+**
+**  Author: Christian Tola
+**
+**  Date: 05/22/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/22/2018 Christian Tola   Initial version
+*******************************************************************************/
+
+PRINT 'Creating the Foreign key Incident_Incident_Detail ....';
+IF NOT EXISTS(SELECT 1
+            FROM sys.foreign_keys
+            WHERE object_id = OBJECT_ID('FK_Inc_IncDetail')
+            AND parent_object_id = OBJECT_ID('dbo.Incident'))
+    BEGIN
+        ALTER TABLE dbo.Incident 
+        ADD CONSTRAINT FK_Inc_IncDetail
+        FOREIGN KEY(incident_detail_id)
+        REFERENCES Incident_Type(incident_detail_id);
+
+        PRINT 'Foreign key created';
+    END
+ELSE
+    BEGIN
+        PRINT 'Foreign key already exist';
+    END
 GO
 
 -- Create Table Area
