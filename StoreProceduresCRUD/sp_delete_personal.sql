@@ -1,7 +1,7 @@
 -- Drop User CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: personal
-**  Desc: Table for sp_edit_personal
+**  Table Name: personals
+**  Desc: Table for sp_delete_personal
 ** 
 **  Called by: ssi
 **
@@ -15,31 +15,19 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Gilmer Daniel Fernandez Pinto   Initial version
 *******************************************************************************/
-
-CREATE PROCEDURE [dbo].[sp_edit_personal](
+CREATE PROCEDURE [dbo].[sp_delete_personal](
     @personal_id INT
-    @personal_name VARCHAR(100)
-   ,@personal_last_name VARCHAR(100)
-   ,@personal_email VARCHAR(200)
-   ,@personal_direction VARCHAR(200)
-   ,@personal_cellphone VARCHAR(100)
-   ,@personal_telephone VARCHAR(100)
-   ,@personal_active INT
+   ,@result BIT OUTPUT
 )
-AS 
+AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
-BEGIN
+BEGIN 
+    
+    DELETE FROM [dbo].[personals]
+    WHERE personal_id = @personal_id;
 
-    UPDATE [dbo].[personals]
-    SET user_name      = @user_name
-        ,user_password = @user_password
-        ,user_active   = @user_active
-        ,updated_on    =  GETDATE()
-    WHERE user_id = @user_id;
-
-    SELECT *
-    FROM [dbo].[personals]
-    WHERE user_id = @user_id;
-
+    SET @result = 1;
+    
+    RETURN @result; 
 END

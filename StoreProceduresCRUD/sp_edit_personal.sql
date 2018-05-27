@@ -18,7 +18,7 @@
 
 CREATE PROCEDURE [dbo].[sp_edit_personal](
     @personal_id INT
-    @personal_name VARCHAR(100)
+   ,@personal_name VARCHAR(100)
    ,@personal_last_name VARCHAR(100)
    ,@personal_email VARCHAR(200)
    ,@personal_direction VARCHAR(200)
@@ -32,14 +32,18 @@ SET NOCOUNT ON;
 BEGIN
 
     UPDATE [dbo].[personals]
-    SET user_name      = @user_name
-        ,user_password = @user_password
-        ,user_active   = @user_active
+    SET personal_name       = @personal_name
+        ,personal_last_name = @personal_last_name
+        ,personal_email     = @personal_email
+        ,personal_direction = @personal_direction
+        ,personal_cellphone = @personal_cellphone
+        ,personal_telephone = @personal_telephone
+        ,personal_active    = @personal_active
         ,updated_on    =  GETDATE()
-    WHERE user_id = @user_id;
+    WHERE personal_id = @personal_id;
 
     SELECT *
     FROM [dbo].[personals]
-    WHERE user_id = @user_id;
+    WHERE personal_id = @personal_id;
 
 END
