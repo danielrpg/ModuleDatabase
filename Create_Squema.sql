@@ -16,6 +16,7 @@ GO
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Christian Tola   Initial version
+** 05/26/2018 Christian Tola   Add Audit Columns
 *******************************************************************************/
 PRINT 'Creating the Incident_type table....';
 
@@ -28,10 +29,6 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 										,[incident_type_description] VARCHAR(50) CONSTRAINT NN_IncidentTypeDesc NOT NULL
 										,[incident_type_type] VARCHAR(50) CONSTRAINT NN_IncidentType NOT NULL
 										,[incident_type_subtype] VARCHAR(50) CONSTRAINT NN_IncidentTypeSubType NOT NULL
-										,[CreatedBy] INT         NOT NULL
-									    ,[CreatedDate] DATETIME  NOT NULL
-									    ,[ModifiedBy] DATETIME   NOT NULL
-									    ,[ModifiedDate] DATETIME NOT NULL
 		,CONSTRAINT [PK_IncidentType] PRIMARY KEY
 		(
 			[incident_type_id] ASC
@@ -41,7 +38,45 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	END
  ELSE 
 	BEGIN
-*		PRINT 'Table Incident_type already exists into the database';
+		PRINT 'Table Incident_type already exists into the database';
+	END
+GO
+/******************************************************************************
+** ALTER Incident_type Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_type] ADD CreatedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_type] ADD CreatedDate DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_type] ADD ModifiedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_type] ADD ModifiedDate DATETIME NOT NULL
 	END
 GO
 
@@ -61,6 +96,7 @@ GO
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Christian Tola   Initial version
+** 05/26/2018 Christian Tola   Add Audit Columns
 *******************************************************************************/
 PRINT 'Creating the Incident_detail table....';
 
@@ -72,10 +108,6 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 										,[incident_detail_status] BIT CONSTRAINT NN_IncidentDetailStatus NOT NULL
 										,[incident_detail_name] VARCHAR(50) CONSTRAINT NN_IncidentDetailName NOT NULL
 										,[incident_detail_description] VARCHAR(200) CONSTRAINT NN_IncidentDetailDescription NOT NULL
-										,[CreatedBy] INT         NOT NULL
-									    ,[CreatedDate] DATETIME  NOT NULL
-									    ,[ModifiedBy] DATETIME   NOT NULL
-									    ,[ModifiedDate] DATETIME NOT NULL
 		 CONSTRAINT [PK_IncidentDetail] PRIMARY KEY
 		(
 			[incident_detail_id] ASC
@@ -88,6 +120,45 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		PRINT 'Table Incident_detail already exists into the database';
 	END
 GO
+/******************************************************************************
+** ALTER Incident_detail Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_detail] ADD CreatedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_detail] ADD CreatedDate DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_detail] ADD ModifiedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident_detail] ADD ModifiedDate DATETIME NOT NULL
+	END
+GO
+
 -- Create Table Incident
 /******************************************************************************
 **  Table Name: Incident
@@ -104,6 +175,7 @@ GO
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Christian Tola   Initial version
+** 05/26/2018 Christian Tola   Add Audit Columns
 *******************************************************************************/
 PRINT 'Creating the Incident table....';
 
@@ -118,10 +190,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 										,[incident_area] VARCHAR(50) CONSTRAINT NN_IncidentArea NOT NULL
 										,[incident_reincident] BIT CONSTRAINT NN_IncidentReincident NOT NULL
 										,[incident_treatment] BIT CONSTRAINT NN_IncidentTreatment NOT NULL
-										,[CreatedBy] INT         NOT NULL
-									    ,[CreatedDate] DATETIME  NOT NULL
-									    ,[ModifiedBy] DATETIME   NOT NULL
-									    ,[ModifiedDate] DATETIME NOT NULL
+										,[incident_type_id] INT
 		 CONSTRAINT [PK_Incident] PRIMARY KEY
 		(
 			[incident_id] ASC
@@ -133,9 +202,118 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 	BEGIN
 		PRINT 'Table Incident already exists into the database';
 	END
-	GO
+GO
+/******************************************************************************
+** ALTER Incident Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident] ADD CreatedBy INT NOT NULL
+	END
+GO
 
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident] ADD CreatedDate DATETIME NOT NULL
+	END
+GO
 
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident] ADD ModifiedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
+	BEGIN
+		ALTER TABLE [dbo].[Incident] ADD ModifiedDate DATETIME NOT NULL
+	END
+GO
+
+-- Create Foreign key Incident_Incident_Type
+/******************************************************************************
+**  Constraint Name: Incident_Incident_Type
+**  Desc: Constraint for Foreign Key between Incident and Incident_Type
+** 
+**  Called by: ssi
+**
+**  Author: Christian Tola
+**
+**  Date: 05/22/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/22/2018 Christian Tola   Initial version
+*******************************************************************************/
+
+PRINT 'Creating the Foreign key Incident_Incident_Type ....';
+IF NOT EXISTS(SELECT 1
+            FROM sys.foreign_keys
+            WHERE object_id = OBJECT_ID('FK_Inc_IncType')
+            AND parent_object_id = OBJECT_ID('dbo.Incident'))
+    BEGIN
+        ALTER TABLE dbo.Incident 
+        ADD CONSTRAINT FK_Inc_IncType
+        FOREIGN KEY(incident_type_id)
+        REFERENCES Incident_Type(incident_type_id);
+
+        PRINT 'Foreign key created';
+    END
+ELSE
+    BEGIN
+        PRINT 'Foreign key already exist';
+    END
+GO
+-- Create Foreign key Incident_Incident_Detail
+/******************************************************************************
+**  Constraint Name: Incident_Incident_Detail
+**  Desc: Constraint for Foreign Key between Incident and Incident_Detail
+** 
+**  Called by: ssi
+**
+**  Author: Christian Tola
+**
+**  Date: 05/22/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/22/2018 Christian Tola   Initial version
+*******************************************************************************/
+
+PRINT 'Creating the Foreign key Incident_Incident_Detail ....';
+IF NOT EXISTS(SELECT 1
+            FROM sys.foreign_keys
+            WHERE object_id = OBJECT_ID('FK_Inc_IncDetail')
+            AND parent_object_id = OBJECT_ID('dbo.Incident'))
+    BEGIN
+        ALTER TABLE dbo.Incident 
+        ADD CONSTRAINT FK_Inc_IncDetail
+        FOREIGN KEY(incident_detail_id)
+        REFERENCES Incident_Type(incident_detail_id);
+
+        PRINT 'Foreign key created';
+    END
+ELSE
+    BEGIN
+        PRINT 'Foreign key already exist';
+    END
+GO
 
 -- Create Table Area
 /******************************************************************************
@@ -243,6 +421,7 @@ GO
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
 ** 05/22/2018 Daniel Fernandez   Initial version
+** 05/26/2018 Christian Tola     Add Audit columns
 *******************************************************************************/
 
 PRINT 'Creating the user table....';
@@ -265,6 +444,45 @@ IF NOT EXISTS(SELECT 1
 ELSE 
 	BEGIN
 		PRINT 'Table user already exists into the database';
+	END
+GO
+
+/******************************************************************************
+** ALTER User Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[User]'))
+	BEGIN
+		ALTER TABLE [dbo].[User] ADD CreatedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[User]'))
+	BEGIN
+		ALTER TABLE [dbo].[User] ADD CreatedDate DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[User]'))
+	BEGIN
+		ALTER TABLE [dbo].[User] ADD ModifiedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[User]'))
+	BEGIN
+		ALTER TABLE [dbo].[User] ADD ModifiedDate DATETIME NOT NULL
 	END
 GO
 
@@ -491,6 +709,7 @@ GO
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Ivan Misericordia E.   Initial version
+** 05/26/2018 Christian Tola	     Add Audit Columns
 *******************************************************************************/
 PRINT 'Creating the Equipment table....';
 
@@ -517,6 +736,44 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		PRINT 'Table Equipment already exists into the database';
 	END
 	GO
+/******************************************************************************
+** ALTER Equipment Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+	BEGIN
+		ALTER TABLE [dbo].[Equipment] ADD CreatedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+	BEGIN
+		ALTER TABLE [dbo].[Equipment] ADD CreatedDate DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+	BEGIN
+		ALTER TABLE [dbo].[Equipment] ADD ModifiedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'ModifiedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+	BEGIN
+		ALTER TABLE [dbo].[Equipment] ADD ModifiedDate DATETIME NOT NULL
+	END
+GO
 
 -- Create Table Kardex_equipment
 /******************************************************************************
@@ -858,7 +1115,7 @@ GO
 ** 
 **  Called by: SSI-D
 **
-**  Author: Jesús David Piérola Alvarado
+**  Author: Jesï¿½s David Piï¿½rola Alvarado
 **
 **  Date: 22/05/2018
 *******************************************************************************
@@ -866,7 +1123,7 @@ GO
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+** 22/05/2018 Jesï¿½s David Piï¿½rola Alvarado   Initial version
 *******************************************************************************/
 PRINT 'Creating the Department table....';
 IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.department'))
@@ -923,7 +1180,7 @@ GO
 ** 
 **  Called by: SSI-D
 **
-**  Author: Jesús David Piérola Alvarado
+**  Author: Jesï¿½s David Piï¿½rola Alvarado
 **
 **  Date: 22/05/2018
 *******************************************************************************
@@ -931,7 +1188,7 @@ GO
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+** 22/05/2018 Jesï¿½s David Piï¿½rola Alvarado   Initial version
 *******************************************************************************/
 PRINT 'Creating the Position table....';
 IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.position'))
@@ -973,7 +1230,7 @@ GO
 ** 
 **  Called by: SSI-D
 **
-**  Author: Jesús David Piérola Alvarado
+**  Author: Jesï¿½s David Piï¿½rola Alvarado
 **
 **  Date: 22/05/2018
 *******************************************************************************
@@ -981,7 +1238,7 @@ GO
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+** 22/05/2018 Jesï¿½s David Piï¿½rola Alvarado   Initial version
 *******************************************************************************/
 PRINT 'Creating the department_position table....';
 IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.department_position'))
@@ -1032,7 +1289,7 @@ GO
 ** 
 **  Called by: SSI-D
 **
-**  Author: Jesús David Piérola Alvarado
+**  Author: Jesï¿½s David Piï¿½rola Alvarado
 **
 **  Date: 22/05/2018
 *******************************************************************************
@@ -1040,7 +1297,7 @@ GO
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 22/05/2018 Jesús David Piérola Alvarado   Initial version
+** 22/05/2018 Jesï¿½s David Piï¿½rola Alvarado   Initial version
 *******************************************************************************/
 PRINT 'Creating the department_position table....';
 IF NOT EXISTS(SELECT * FROM sys.objects WHERE Type = 'U' AND object_id = OBJECT_ID('dbo.department_position'))
