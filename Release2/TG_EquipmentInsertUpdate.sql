@@ -1,7 +1,7 @@
---Trigger of Equipment table
+--Trigger of Equipaments table
 /******************************************************************************
 **  Name: TG_Equipment(Audit)_InsertUpdate
-**  Desc: Audit History for equipment table
+**  Desc: Audit History for equipaments table
 ** 
 **  Called by: ssi
 **
@@ -16,7 +16,7 @@
 ** 05/26/2018 Christian Tola   Initial version
 *******************************************************************************/
 CREATE TRIGGER [dbo].[TG_Equipment(Audit)_InsertUpdate]
-ON [dbo].[Equipment]
+ON [dbo].[Equipaments]
 FOR INSERT, UPDATE
 AS
 BEGIN
@@ -28,7 +28,7 @@ BEGIN
  
   DECLARE @CurrDate DATETIME = GETUTCDATE();
   
-  IF UPDATE(equipment_name)
+  IF UPDATE(equipament_name)
   BEGIN
     INSERT INTO dbo.AuditHistory(TableName, 
                                  ColumnName, 
@@ -37,18 +37,18 @@ BEGIN
                                  OldValue, 
                                  NewValue,
 								 ModifiedBy) 
-    SELECT TableName    = 'Equipment', 
-           ColumnName   = 'equipment_name',
-           ID1          = i.equipment_id, 
+    SELECT TableName    = 'Equipaments', 
+           ColumnName   = 'equipament_name',
+           ID1          = i.equipament_id, 
            Date         = @CurrDate, 
-           OldValue     = d.[equipment_name], 
-           NewValue     = i.[equipment_name],
+           OldValue     = d.[equipament_name], 
+           NewValue     = i.[equipament_name],
            ModifiedBy   = i.ModifiedBy 
     FROM deleted d 
-    FULL OUTER JOIN inserted i ON (d.equipment_id = i.equipment_id)
-    WHERE ISNULL(d.equipment_name, '') != ISNULL(i.equipment_name, '');
+    FULL OUTER JOIN inserted i ON (d.equipament_id = i.equipament_id)
+    WHERE ISNULL(d.equipament_name, '') != ISNULL(i.equipament_name, '');
   END
-  IF UPDATE(equipment_type)
+  IF UPDATE(equipament_type)
   BEGIN
     INSERT INTO dbo.AuditHistory(TableName, 
                                  ColumnName, 
@@ -57,18 +57,18 @@ BEGIN
                                  OldValue, 
                                  NewValue,
 								 ModifiedBy) 
-    SELECT TableName    = 'Equipment', 
-           ColumnName   = 'equipment_type',
-           ID1          = i.equipment_id,
+    SELECT TableName    = 'Equipaments', 
+           ColumnName   = 'equipament_type',
+           ID1          = i.equipament_id,
            Date         = @CurrDate,
-           OldValue     = d.[equipment_type], 
-           NewValue     = i.[equipment_type],
+           OldValue     = d.[equipament_type], 
+           NewValue     = i.[equipament_type],
            ModifiedBy   = i.ModifiedBy
     FROM deleted d 
-    FULL OUTER JOIN inserted i ON (d.equipment_id = i.equipment_id)
-    WHERE ISNULL(d.equipment_type, '') != ISNULL(i.equipment_type, '');
+    FULL OUTER JOIN inserted i ON (d.equipament_id = i.equipament_id)
+    WHERE ISNULL(d.equipament_type, '') != ISNULL(i.equipament_type, '');
   END
-  IF UPDATE(equipment_description)
+  IF UPDATE(equipament_description)
   BEGIN
     INSERT INTO dbo.AuditHistory(TableName, 
                                  ColumnName, 
@@ -77,15 +77,15 @@ BEGIN
                                  OldValue, 
                                  NewValue,
 								 ModifiedBy) 
-    SELECT TableName    = 'Equipment', 
-           ColumnName   = 'equipment_description',
-           ID1          = i.equipment_id,
+    SELECT TableName    = 'Equipaments', 
+           ColumnName   = 'equipament_description',
+           ID1          = i.equipament_id,
            Date         = @CurrDate,
-           OldValue     = d.[equipment_description], 
-           NewValue     = i.[equipment_description],
+           OldValue     = d.[equipament_description], 
+           NewValue     = i.[equipament_description],
            ModifiedBy   = i.ModifiedBy
     FROM deleted d 
-    FULL OUTER JOIN inserted i ON (d.equipment_id = i.equipment_id)
-    WHERE ISNULL(d.equipment_description, '') != ISNULL(i.equipment_description, '');
+    FULL OUTER JOIN inserted i ON (d.equipament_id = i.equipament_id)
+    WHERE ISNULL(d.equipament_description, '') != ISNULL(i.equipament_description, '');
   END
 END;

@@ -118,41 +118,41 @@ IF NOT EXISTS (SELECT 1
 GO
 
 /******************************************************************************
-** ALTER Equipment Added Audit columns
+** ALTER Equipaments Added Audit columns
 *******************************************************************************/
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'CreatedBy'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD CreatedBy INT NOT NULL
+		ALTER TABLE [dbo].[Equipaments] ADD CreatedBy INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'CreatedDate'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD CreatedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[Equipaments] ADD CreatedDate DATETIME NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'ModifiedBy'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD ModifiedBy INT NOT NULL
+		ALTER TABLE [dbo].[Equipaments] ADD ModifiedBy INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'ModifiedDate'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD ModifiedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[Equipaments] ADD ModifiedDate DATETIME NOT NULL
 	END
 GO
 
