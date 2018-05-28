@@ -1,7 +1,7 @@
--- Drop User CRUD PROCEDURES
+-- Personal CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: contract
-**  Desc: Table for sp_delete_contract
+**  Table Name: contracts
+**  Desc: Table for sp_get_all_contracts
 ** 
 **  Called by: ssi
 **
@@ -15,19 +15,12 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/27/2018 Gilmer Daniel Fernandez Pinto   Initial version
 *******************************************************************************/
-CREATE PROCEDURE [dbo].[sp_delete_contract](
-    @contract_id INT
-   ,@result BIT OUTPUT
-)
+
+CREATE PROCEDURE [dbo].[sp_get_all_contracts]
 AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
-BEGIN 
-    
-    DELETE FROM [dbo].[contracts]
-    WHERE contract_id = @contract_id;
-
-    SET @result = 1;
-    
-    RETURN @result; 
+BEGIN
+    SELECT * FROM [dbo].[contracts];
 END
+GO
