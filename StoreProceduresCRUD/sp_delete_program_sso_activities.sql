@@ -1,22 +1,29 @@
--- Drop Equipament CRUD PROCEDURES
+-- DELETE Program_sso_activities stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_program_sso_activities]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_delete_program_sso_activities]
+END
+GO
 /******************************************************************************
-**  Table Name: Equipaments
-**  Desc: delete an equipament
+**  Name: sp_delete_program_sso_activities
+**  Desc: delete an Program_sso_activities
 ** 
 **  Called by: ssi
 **
-**  Author: Ivan Misericordia Eulate
+**  Author: Ivan Misericordia E.
 **
-**  Date: 05/27/2018
+**  Date: 28/05/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 05/27/2018 Ivan Misericordia Eulate   Initial version
+** 28/05/2018 Ivan Misericordia E.   Initial version
 *******************************************************************************/
-CREATE PROCEDURE [dbo].[sp_delete_equipament](
-    @equipament_id INT
+CREATE PROCEDURE [dbo].[sp_delete_program_sso_activities](
+    @sso_detail_id BIGINT
    ,@result BIT OUTPUT
 )
 AS
@@ -24,8 +31,8 @@ SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN 
     
-    DELETE FROM [dbo].[equipaments]
-    WHERE equipament_id = @equipament_id;
+    DELETE FROM [dbo].[program_sso_activities]
+    WHERE sso_detail_id = @sso_detail_id;
 
     SET @result = 1;
     
