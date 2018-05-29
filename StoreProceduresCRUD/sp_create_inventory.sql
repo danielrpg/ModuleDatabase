@@ -1,3 +1,11 @@
+-- UPDATE Inventory stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_inventory]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_inventory]
+END
+GO
 -- Create Inventory CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Inventory
@@ -20,7 +28,8 @@ CREATE PROCEDURE [dbo].[sp_create_inventory](
 				@active_asignament BIT
 			   ,@status_asignament VARCHAR(50)
 			   ,@date_asignament DATETIME
-			   ,@result BIT OUTPUT
+			   ,@equipament_id BIGINT
+			   ,@personal_id BIGINT
 )
 AS 
 SET XACT_ABORT ON;
@@ -28,17 +37,19 @@ SET NOCOUNT ON;
 BEGIN
 
     INSERT INTO [dbo].[inventory](
-			    active_asignament
-			   ,status_asignament
-			   ,date_asignament
-			   ,created_on)
+			    active_assignament
+			   ,status_assignament
+			   ,date_assignament
+			   ,created_on
+			   ,equipament_id
+			   ,personal_id)
     VALUES ( 
 				@active_asignament
 			   ,@status_asignament
 			   ,@date_asignament
-			   ,GETDATE());
+			   ,GETDATE()
+			   ,@equipament_id
+			   ,@personal_id);
 
-    SET @result = 1;
-
-    RETURN @result; 
+	SELECT @@IDENTITY AS inventory_id;
 END

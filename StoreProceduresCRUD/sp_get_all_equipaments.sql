@@ -1,3 +1,4 @@
+--GET Equipaments store procedure
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_depertament]') 
 		AND type in (N'P', N'PC'))
@@ -5,7 +6,7 @@ BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_depertament]
 END
 GO
--- Personal CRUD PROCEDURES
+-- Equipments CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Equipaments
 **  Desc: Table for sp_get_all_equipament
@@ -24,11 +25,19 @@ GO
 ** 05/26/2018 Ivan Misericordia Eulate   Initial version
 *******************************************************************************/
 
-CREATE PROCEDURE [dbo].[sp_get_all_equipament]
+CREATE PROCEDURE [dbo].[sp_get_all_equipament](
+	@equipament_id BIGINT = null
+)
 AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT * FROM [dbo].[department]; -- Nombre de la tabla
+    SELECT   equi.equipament_id
+			,equi.equipament_name
+			,equi.equipament_type
+			,equi.equipament_description
+			,equi.equipament_image 
+	FROM [dbo].[equipaments] as equi
+	WHERE equi.equipament_id = ISNULL(@equipament_id, equi.equipament_id);
 END
 GO

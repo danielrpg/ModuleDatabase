@@ -1,3 +1,11 @@
+-- UPDATE Kardex_equipament stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_kardex_equipament]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_edit_kardex_equipament]
+END
+GO
 -- Update Kardex_equipaments CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Kardex_equipaments
@@ -39,5 +47,7 @@ BEGIN
     SELECT *
     FROM [dbo].[kardex_equipaments]
     WHERE equipament_kardex_id = @kardex_id;
+
+	SELECT @@IDENTITY AS kardex_id;
 
 END
