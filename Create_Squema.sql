@@ -1,5 +1,16 @@
-USE ssidev;
+-- Creamos o usamos DB
+IF NOT EXISTS(
+	SELECT *
+	FROM sys.databases
+	WHERE name = 'SSID')
+BEGIN
+	CREATE DATABASE [SSID]
+END
 GO
+
+USE [SSID]
+GO
+
 -- Create Table Incident_type
 /******************************************************************************
 **  Table Name: Incident_type
@@ -26,7 +37,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
  BEGIN
 		CREATE TABLE [dbo].[Incident_type]([incident_type_id] INT IDENTITY(1,1) NOT NULL
 										,[incident_type_name] VARCHAR(50) CONSTRAINT NN_IncidentTypeName NOT NULL
-										,[incident_type_description] VARCHAR(50) CONSTRAINT NN_IncidentTypeDesc NOT NULL
+										,[incident_type_description] VARCHAR(MAX) CONSTRAINT NN_IncidentTypeDesc NOT NULL
 										,[incident_type_type] VARCHAR(50) CONSTRAINT NN_IncidentType NOT NULL
 										,[incident_type_subtype] VARCHAR(50) CONSTRAINT NN_IncidentTypeSubType NOT NULL
 		,CONSTRAINT [PK_IncidentType] PRIMARY KEY
