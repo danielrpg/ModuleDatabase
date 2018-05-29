@@ -1,49 +1,43 @@
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_user]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_department]') 
 		AND type in (N'P', N'PC'))
 BEGIN
-	DROP PROCEDURE [dbo].[sp_edit_user]
+	DROP PROCEDURE [dbo].[sp_delete_department]
 END
 GO
-
 -- Drop User CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: User
-**  Desc: Table for sp_edit_user
+**  Table Name: department
+**  Desc: Table for sp_delete_department
 ** 
 **  Called by: ssi
 **
 **  Author: Gilmer Daniel Fernandez Pinto
 **
-**  Date: 05/26/2018
+**  Date: 05/28/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 05/26/2018 Gilmer Daniel Fernandez Pinto   Initial version
+** 05/28/2018 Gilmer Daniel Fernandez Pinto   Initial version
 *******************************************************************************/
-
-CREATE PROCEDURE [dbo].[sp_edit_user](
-    @user_id INT
-   ,@user_name VARCHAR(100) 
-   ,@user_password VARCHAR(200)
-   ,@user_active INT
+CREATE PROCEDURE [dbo].[sp_delete_department](
+    @department_id INT
+   ,@result BIT OUTPUT
 )
-AS 
+AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
-BEGIN
+BEGIN 
+    
+    DELETE FROM [dbo].[department_position]
+    WHERE department_id = @department_id
 
-    UPDATE [dbo].[users]
-    SET user_name      = @user_name
-        ,user_password = @user_password
-        ,user_active   = @user_active
-        ,updated_on    =  GETDATE()
-    WHERE user_id = @user_id;
+    DELETE FROM [dbo].[department]
+    WHERE department_id = @department_id;
 
-    SELECT *
-    FROM [dbo].[users]
-    WHERE user_id = @user_id;
-
+    SET @result = 1;
+    
+    RETURN @result; 
 END
