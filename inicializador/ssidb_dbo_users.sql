@@ -1,0 +1,1 @@
+INSERT INTO ssidb.dbo.users (user_id, created_on, updated_on, user_password, user_active, user_name) VALUES (1, '2018-05-29 09:05:10.0590000', null, '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP.', null, 'admin');
