@@ -1,12 +1,12 @@
--- GET Equipament stored procedure.
+--GET Equipaments store procedure
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_equipament]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_depertament]') 
 		AND type in (N'P', N'PC'))
 BEGIN
-	DROP PROCEDURE [dbo].[sp_get_all_equipament]
+	DROP PROCEDURE [dbo].[sp_get_all_depertament]
 END
 GO
--- Equipament CRUD PROCEDURES
+-- Equipments CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Equipaments
 **  Desc: Table for sp_get_all_equipament
@@ -16,6 +16,7 @@ GO
 **  Author: Ivan Misericordia Eulate
 **
 **  Date: 05/26/2018
+
 *******************************************************************************
 **                            Change History
 *******************************************************************************
