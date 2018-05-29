@@ -1,4 +1,14 @@
-USE [DW_SSI_DB];
+-- Creamos o usamos DB para DW
+IF NOT EXISTS(
+	SELECT *
+	FROM sys.databases
+	WHERE name = 'DW_SSID_DB')
+BEGIN
+	CREATE DATABASE [DW_SSID_DB]
+END
+GO
+
+USE [DW_SSID_DB]
 GO
 
 IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'ETL')
