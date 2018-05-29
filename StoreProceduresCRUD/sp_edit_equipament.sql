@@ -1,3 +1,11 @@
+-- UPDATE Equipament stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_equipament]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_edit_equipament]
+END
+GO
 -- Update Equipament CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Equipaments
@@ -12,7 +20,7 @@
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
-** --------   --------        ---------------------------------------------------
+** --------   --------        -------------------------------------------------
 ** 05/27/2018 Ivan Misericordia Eulate   Initial version
 *******************************************************************************/
 
@@ -39,5 +47,7 @@ BEGIN
     SELECT *
     FROM [dbo].[equipaments]
     WHERE equipament_id = @equipament_id;
+
+	SELECT @@IDENTITY AS equipament_id;
 
 END
