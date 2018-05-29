@@ -693,10 +693,10 @@ ELSE
     END
 GO
 
--- Create Table Equipment
+-- Create Table Equipments
 /******************************************************************************
-**  Table Name: Equipment
-**  Desc: Table for Equipment
+**  Table Name: Equipments
+**  Desc: Table for Equipments
 ** 
 **  Called by: SSI-D
 **
@@ -711,21 +711,21 @@ GO
 ** 05/21/2018 Ivan Misericordia E.   Initial version
 ** 05/26/2018 Christian Tola	     Add Audit Columns
 *******************************************************************************/
-PRINT 'Creating the Equipment table....';
+PRINT 'Creating the Equipments table....';
 
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[dbo].[Equipment]') 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[Equipaments]') 
 		       AND type in (N'U'))
  BEGIN
-		CREATE TABLE [dbo].[Equipment](
-						 [equipment_id][int] IDENTITY not null
-						,[equipment_name][varchar](50) CONSTRAINT NN_EquipmentName not null
-						,[equipment_type][int] CONSTRAINT NN_EquipmentType not null
-						,[equipment_description][varchar](200) CONSTRAINT NN_EquipmentDescription null
-						,[equipment_image][varbinary](max) CONSTRAINT NN_EquipmentImage not null
-			,CONSTRAINT [PK_Equipment] PRIMARY KEY
+		CREATE TABLE [dbo].[Equipaments](
+						 [equipament_id][int] IDENTITY not null
+						,[equipament_name][varchar](50) CONSTRAINT NN_EquipmentName not null
+						,[equipament_type][int] CONSTRAINT NN_EquipmentType not null
+						,[equipament_description][varchar](200) CONSTRAINT NN_EquipmentDescription null
+						,[equipament_image][varbinary](max)  null
+			,CONSTRAINT [PK_Equipament] PRIMARY KEY
 			(
-				[equipment_id] ASC
+				[equipament_id] ASC
 			)
 		);
 
@@ -742,43 +742,43 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'CreatedBy'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD CreatedBy INT NOT NULL
+		ALTER TABLE [dbo].[Equipments] ADD CreatedBy INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'CreatedDate'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD CreatedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[Equipments] ADD CreatedDate DATETIME NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'ModifiedBy'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD ModifiedBy INT NOT NULL
+		ALTER TABLE [dbo].[Equipments] ADD ModifiedBy INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'ModifiedDate'
-				AND object_id = OBJECT_ID(N'[dbo].[Equipment]'))
+				AND object_id = OBJECT_ID(N'[dbo].[Equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[Equipment] ADD ModifiedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[Equipments] ADD ModifiedDate DATETIME NOT NULL
 	END
 GO
 
--- Create Table Kardex_equipment
+-- Create Table Kardex_equipments
 /******************************************************************************
-**  Table Name: Kardex_equipment
-**  Desc: Table for Kardex_equipment
+**  Table Name: Kardex_equipments
+**  Desc: Table for Kardex_equipments
 ** 
 **  Called by: ssi
 **
@@ -792,32 +792,52 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Ivan Misericordia E.   Initial version
 *******************************************************************************/
-PRINT 'Creating the Kardex_equipment table....';
+PRINT 'Creating the Kardex_equipments table....';
 
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[dbo].[Kardex_equipment]') 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[Kardex_equipaments]') 
 		       AND type in (N'U'))
  BEGIN
-		CREATE TABLE [dbo].[Kardex_equipment](
-						 [equipment_kardex_id][int] IDENTITY not null
+		CREATE TABLE [dbo].[Kardex_equipaments](
+						 [equipament_kardex_id][int] IDENTITY not null
 						,[date_kardex][datetime] CONSTRAINT NN_DateKardex not null
 						,[entry_kardex][int] CONSTRAINT NN_EntryKardex not null
 						,[outlay_kardex][int] CONSTRAINT NN_OutlayKardex not null
 						,[balance_kardex][int] CONSTRAINT NN_BalanceKardex not null
 						,[equipment_id][int] not null
-			,CONSTRAINT [PK_equipment_kardex] PRIMARY KEY
+			,CONSTRAINT [PK_equipament_kardex] PRIMARY KEY
 			(
-				[equipment_kardex_id] ASC
+				[equipament_kardex_id] ASC
 			)
 		);
 
-			PRINT 'Table Kardex_equipments created!';
+			PRINT 'Table Kardex_equipaments created!';
  END
  ELSE 
 	BEGIN
-		PRINT 'Table Kardex_equipment already exists into the database';
+		PRINT 'Table Kardex_equipaments already exists into the database';
 	END
 	GO
+/******************************************************************************
+** ALTER Kardex_equipament Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns0
+				WHERE Name = 'CreatedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Kardex_equipaments]'))
+	BEGIN
+		ALTER TABLE [dbo].[Kardex_equipaments] ADD CreatedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Kardex_equipaments]'))
+	BEGIN
+		ALTER TABLE [dbo].[Kardex_equipaments] ADD CreatedDate DATETIME NOT NULL
+	END
+GO
 
 
 -- Create Table program_sso_trainer
@@ -978,10 +998,10 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
  BEGIN
 		CREATE TABLE [dbo].[Inventory](
 						 [inventory_id][int] IDENTITY not null
-						,[active_assigment][bit] CONSTRAINT NN_ActiveAssigment not null
-						,[date_assigment][datetime] CONSTRAINT NN_DateAssigmnet not null
-						,[status_assigment][varchar](50) CONSTRAINT NN_StatusAssigment not null
-						,[equipment_id][int] not null
+						,[active_assignament][bit] CONSTRAINT NN_ActiveAssigment not null
+						,[date_assignament][datetime] CONSTRAINT NN_DateAssigmnet not null
+						,[status_assignament][varchar](50) CONSTRAINT NN_StatusAssigment not null
+						,[equipament_id][int] not null
 						,[personal_id][int] not null
 			,CONSTRAINT [PK_inventory] PRIMARY KEY
 			(
@@ -996,6 +1016,27 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		PRINT 'Table Inventory already exists into the database';
 	END
 	GO
+
+/******************************************************************************
+** ALTER Inventory Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedBy'
+				AND object_id = OBJECT_ID(N'[dbo].[Inventory]'))
+	BEGIN
+		ALTER TABLE [dbo].[Inventory] ADD CreatedBy INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'CreatedDate'
+				AND object_id = OBJECT_ID(N'[dbo].[Inventory]'))
+	BEGIN
+		ALTER TABLE [dbo].[Inventory] ADD CreatedDate DATETIME NOT NULL
+	END
+GO
 
 -- Define the relationship between Kardex_equipment and Equipment.
 /******************************************************************************
@@ -1014,29 +1055,29 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Ivan Misericordia E.   Initial version
 *******************************************************************************/
-PRINT 'Creating FK_kardex_equipment to Kardex_equipment';
+PRINT 'Creating FK_kardex_equipament to Kardex_equipament';
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
-       WHERE object_id = OBJECT_ID(N'[dbo].[FK_kardex_equipment]')
-       AND parent_object_id = OBJECT_ID(N'[dbo].[Kardex_equipment]'))
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_kardex_equipament]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[Kardex_equipaments]'))
 	   BEGIN
-			ALTER TABLE [dbo].[Kardex_equipment]  WITH CHECK ADD  
-				   CONSTRAINT [FK_kardex_equipment] FOREIGN KEY([equipment_id])
-			REFERENCES [dbo].[equipment] ([equipment_id]);
+			ALTER TABLE [dbo].[Kardex_equipaments]  WITH CHECK ADD  
+				   CONSTRAINT [FK_kardex_equipament] FOREIGN KEY([equipament_id])
+			REFERENCES [dbo].[equipament] ([equipament_id]);
 			
-			ALTER TABLE [dbo].[Kardex_equipment] CHECK 
-				   CONSTRAINT [FK_kardex_equipment];
+			ALTER TABLE [dbo].[Kardex_equipaments] CHECK 
+				   CONSTRAINT [FK_kardex_equipaments];
 			
-			PRINT 'FK_kardex_equipment done ....';
+			PRINT 'FK_kardex_equipaments one ....';
 	   END
 ELSE
 	BEGIN
-		PRINT 'Foreing key: FK_kardex_equipment already exists into the database';
+		PRINT 'Foreing key: FK_kardex_equipaments already exists into the database';
 	END
 	GO
 
 -- Define the relationship between Inventory and Equipment.
 /******************************************************************************
-**  Table Name: FK_inventory_equipment
+**  Table Name: FK_inventory_equiapment
 **  Desc: Foreing key for Inventory
 ** 
 **  Called by: SSI-D
@@ -1051,23 +1092,23 @@ ELSE
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Ivan Misericordia E.   Initial version
 *******************************************************************************/
-PRINT 'Creating FK_inventory_equipment to Inventory';
+PRINT 'Creating FK_inventory_equipament to Inventory';
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
-       WHERE object_id = OBJECT_ID(N'[dbo].[FK_inventory_equipment]')
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_inventory_equipament]')
        AND parent_object_id = OBJECT_ID(N'[dbo].[Inventory]'))
 	   BEGIN
 			ALTER TABLE [dbo].[Inventory]  WITH CHECK ADD  
-				   CONSTRAINT [FK_inventory_equipment] FOREIGN KEY([equipment_id])
-			REFERENCES [dbo].[equipment] ([equipment_id]);
+				   CONSTRAINT [FK_inventory_equipament] FOREIGN KEY([equipament_id])
+			REFERENCES [dbo].[equipament] ([equipament_id]);
 
 			ALTER TABLE [dbo].[Inventory] CHECK 
-				   CONSTRAINT [FK_inventory_equipment];
+				   CONSTRAINT [FK_inventory_equipament];
 			
-			PRINT 'FK_inventory_equipment done ....';
+			PRINT 'FK_inventory_equipament done ....';
 	   END
 ELSE
 	BEGIN
-		PRINT 'Foreing key: FK_inventory_equipment already exists into the database';
+		PRINT 'Foreing key: FK_inventory_equipament already exists into the database';
 	END
 	GO
 

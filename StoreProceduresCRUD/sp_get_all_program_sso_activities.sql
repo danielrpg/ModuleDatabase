@@ -1,34 +1,34 @@
+-- GET Program_sso_activities stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_depertament]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_program_sso_activities]') 
 		AND type in (N'P', N'PC'))
 BEGIN
-	DROP PROCEDURE [dbo].[sp_get_all_depertament]
+	DROP PROCEDURE [dbo].[sp_get_all_program_sso_activities]
 END
 GO
--- Personal CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: Equipaments
-**  Desc: Table for sp_get_all_equipament
+**  Name: sp_get_all_program_sso_activities
+**  Desc: Table for sp_get_all_program_sso_activities
 ** 
 **  Called by: ssi
 **
-**  Author: Ivan Misericordia Eulate
+**  Author: Ivan Misericordia E.
 **
-**  Date: 05/26/2018
-
+**  Date: 28/05/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 05/26/2018 Ivan Misericordia Eulate   Initial version
+** 28/05/2018 Ivan Misericordia E.   Initial version
 *******************************************************************************/
-
-CREATE PROCEDURE [dbo].[sp_get_all_equipament]
+CREATE PROCEDURE [dbo].[sp_get_all_program_sso_activities]
 AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
-BEGIN
-    SELECT * FROM [dbo].[department]; -- Nombre de la tabla
+BEGIN 
+    
+    SELECT * FROM [dbo].[program_sso_activities];
+	 
 END
 GO

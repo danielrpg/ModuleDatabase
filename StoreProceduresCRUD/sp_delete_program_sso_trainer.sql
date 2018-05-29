@@ -1,34 +1,40 @@
+-- DELETE Program_sso_trainer stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_depertament]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_program_sso_trainer]') 
 		AND type in (N'P', N'PC'))
 BEGIN
-	DROP PROCEDURE [dbo].[sp_get_all_depertament]
+	DROP PROCEDURE [dbo].[sp_delete_program_sso_trainer]
 END
 GO
--- Personal CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: Equipaments
-**  Desc: Table for sp_get_all_equipament
+**  Name: sp_delete_program_sso_trainer
+**  Desc: delete an Program_sso_trainer
 ** 
 **  Called by: ssi
 **
-**  Author: Ivan Misericordia Eulate
+**  Author: Ivan Misericordia E.
 **
-**  Date: 05/26/2018
-
+**  Date: 28/05/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 05/26/2018 Ivan Misericordia Eulate   Initial version
+** 28/05/2018 Ivan Misericordia E.   Initial version
 *******************************************************************************/
-
-CREATE PROCEDURE [dbo].[sp_get_all_equipament]
+CREATE PROCEDURE [dbo].[sp_delete_program_sso_trainer](
+    @sso_trainer_id BIGINT
+   ,@result BIT OUTPUT
+)
 AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
-BEGIN
-    SELECT * FROM [dbo].[department]; -- Nombre de la tabla
+BEGIN 
+    
+    DELETE FROM [dbo].[program_sso_trainer]
+    WHERE sso_trainer_id = @sso_trainer_id;
+
+    SET @result = 1;
+    
+    RETURN @result; 
 END
-GO
