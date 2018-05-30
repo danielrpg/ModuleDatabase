@@ -623,6 +623,8 @@ BEGIN
 
 END    
 GO
+PRINT 'Creando TRIGGER [dbo].[TG_Areas(Audit)_InsertUpdate]...';
+GO
 
 CREATE TRIGGER [dbo].[TG_Areas(Audit)_InsertUpdate]
 ON [dbo].[areas]
@@ -681,6 +683,8 @@ BEGIN
   
 END;
 GO
+PRINT '[dbo].[TG_Areas(Audit)_InsertUpdate] ha sido creado';
+GO
 --Trigger of ContractsTable
 /******************************************************************************
 **  Name: TG_Contracts(Audit)_InsertUpdate
@@ -704,7 +708,10 @@ IF EXISTS (SELECT 1 FROM sys.triggers
 		DROP TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]
 		PRINT 'EL TRIGGER TG_Contracts(Audit)_InsertUpdate SE ELIMINO '
 
-	END    
+	END
+
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]...';
 GO
 --Creando Trigger TG_Contracts(Audit)_InsertUpdate
 CREATE TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]
@@ -844,6 +851,8 @@ BEGIN
   
 END;
 GO
+PRINT '[dbo].[TG_Contracts(Audit)_InsertUpdate] ha sido creado';
+GO
 --Trigger of DepartmentTable
 /******************************************************************************
 **  Name: TG_Department(Audit)_InsertUpdate
@@ -868,6 +877,8 @@ BEGIN
 		PRINT 'EL TRIGGER TG_Department(Audit)_InsertUpdate SE ELIMINO '
 
 END    
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Department(Audit)_InsertUpdate]...';
 GO
 CREATE TRIGGER [dbo].[TG_Department(Audit)_InsertUpdate]
 ON [dbo].[department]
@@ -925,6 +936,8 @@ BEGIN
   
 END;
 GO
+PRINT '[dbo].[TG_Department(Audit)_InsertUpdate] ha sido creado';
+GO
 --Trigger of FunctionsTable
 /******************************************************************************
 **  Name: TG_Functions(Audit)_InsertUpdate
@@ -949,6 +962,8 @@ BEGIN
 		PRINT 'EL TRIGGER TG_Functions(Audit)_InsertUpdate SE ELIMINO '
 
 END    
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Functions(Audit)_InsertUpdate]...';
 GO
 CREATE TRIGGER [dbo].[TG_Functions(Audit)_InsertUpdate]
 ON [dbo].[functions]
@@ -1028,6 +1043,8 @@ BEGIN
   
 END;
 GO
+PRINT '[dbo].[TG_Functions(Audit)_InsertUpdate] ha sido creado';
+GO
 --Trigger of PersonalsTable
 /******************************************************************************
 **  Name: TG_Personals(Audit)_InsertUpdate
@@ -1052,6 +1069,8 @@ BEGIN
 		PRINT 'EL TRIGGER TG_Personals(Audit)_InsertUpdate SE ELIMINO '
 
 END    
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]...';
 GO
 CREATE TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]
 ON [dbo].[personals]
@@ -1231,6 +1250,8 @@ BEGIN
    
 END;
 GO
+PRINT '[dbo].[TG_Personals(Audit)_InsertUpdate] ha sido creado';
+GO
 --Trigger of PositionTable
 /******************************************************************************
 **  Name: TG_Position(Audit)_InsertUpdate
@@ -1255,6 +1276,8 @@ BEGIN
 		PRINT 'EL TRIGGER TG_Position(Audit)_InsertUpdate SE ELIMINO '
 
 END    
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Position(Audit)_InsertUpdate]...';
 GO
 CREATE TRIGGER [dbo].[TG_Position(Audit)_InsertUpdate]
 ON [dbo].[position]
@@ -1351,6 +1374,8 @@ BEGIN
   END
 END;
 GO
+PRINT '[dbo].[TG_Position(Audit)_InsertUpdate] ha sido creado';
+GO
 --Trigger of RequirementsTable
 /******************************************************************************
 **  Name: TG_Requirements(Audit)_InsertUpdate
@@ -1375,6 +1400,8 @@ BEGIN
 		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO1 '
 
 END    
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]...';
 GO
 CREATE TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]
 ON [dbo].[requirements]
@@ -1452,13 +1479,7 @@ BEGIN
   END
 END;
 GO
-IF EXISTS (SELECT 1 FROM sys.triggers
-    WHERE  NAME = 'TG_Program_sso_activities(Audit)_InsertUpdate')
-BEGIN
-		DROP TRIGGER [TG_Program_sso_activities(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Program_sso_activities(Audit)_InsertUpdate SE ELIMINO '
-
-END
+PRINT '[dbo].[TG_Requirements(Audit)_InsertUpdate] ha sido creado';
 GO
 
 --Trigger of Program_sso_activities Table
@@ -1482,9 +1503,11 @@ IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Program_sso_activities(Audit)_InsertUpdate')
 BEGIN
 		DROP TRIGGER [dbo].[TG_Program_sso_activities(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO '
+		PRINT 'EL TRIGGER TG_Program_sso_activities(Audit)_InsertUpdate SE ELIMINO '
 
 END    
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Program_sso_activities(Audit)_InsertUpdate]...';
 GO
 CREATE TRIGGER [dbo].[TG_Program_sso_activities(Audit)_InsertUpdate]
 ON [dbo].[program_sso_activities]
@@ -1606,13 +1629,7 @@ BEGIN
 
 END;
 GO
-IF EXISTS (SELECT 1 FROM sys.triggers
-    WHERE  NAME = 'TG_Program_sso(Audit)_InsertUpdate')
-BEGIN
-		DROP TRIGGER [TG_Program_sso(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Program_sso(Audit)_InsertUpdate SE ELIMINO '
-
-END
+PRINT '[dbo].[TG_Program_sso_activities(Audit)_InsertUpdate] ha sido creado';
 GO
 
 --Trigger of Program_sso Table
@@ -1632,6 +1649,17 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/28/2018 Vanessa Alcocer   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Program_sso(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Program_sso(Audit)_InsertUpdate SE ELIMINO '
+
+END
+
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Program_sso(Audit)_InsertUpdate]...';
+GO
 CREATE TRIGGER [dbo].[TG_Program_sso(Audit)_InsertUpdate]
 ON [dbo].[program_sso]
 FOR INSERT, UPDATE
@@ -1773,13 +1801,7 @@ BEGIN
 
 END;
 GO
-IF EXISTS (SELECT 1 FROM sys.triggers
-    WHERE  NAME = 'TG_Program_sso_resource(Audit)_InsertUpdate')
-BEGIN
-		DROP TRIGGER [TG_Program_sso_resource(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Program_sso_resource(Audit)_InsertUpdate SE ELIMINO '
-
-END
+PRINT '[dbo].[TG_Program_sso(Audit)_InsertUpdate] ha sido creado';
 GO
 
 --Trigger of Program_sso_resource Table
@@ -1799,6 +1821,17 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/29/2018 Vanessa Alcocer   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso_resource(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Program_sso_resource(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Program_sso_resource(Audit)_InsertUpdate SE ELIMINO '
+
+END
+
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Program_sso_resource(Audit)_InsertUpdate]...';
+GO
 CREATE TRIGGER [dbo].[TG_Program_sso_resource(Audit)_InsertUpdate]
 ON [dbo].[program_sso_resource]
 FOR INSERT, UPDATE
@@ -1856,13 +1889,7 @@ BEGIN
 
 END;
 GO
-IF EXISTS (SELECT 1 FROM sys.triggers
-    WHERE  NAME = 'TG_Program_sso_trainer(Audit)_InsertUpdate')
-BEGIN
-		DROP TRIGGER [TG_Program_sso_trainer(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Program_sso_trainer(Audit)_InsertUpdate SE ELIMINO '
-
-END
+PRINT '[dbo].[TG_Program_sso_resource(Audit)_InsertUpdate] ha sido creado';
 GO
 
 --Trigger of Program_sso_trainer Table
@@ -1882,6 +1909,18 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/29/2018 Vanessa Alcocer   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso_trainer(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Program_sso_trainer(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Program_sso_trainer(Audit)_InsertUpdate SE ELIMINO '
+
+END
+
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Program_sso_trainer(Audit)_InsertUpdate]...';
+GO
+
 CREATE TRIGGER [dbo].[TG_Program_sso_trainer(Audit)_InsertUpdate]
 ON [dbo].[program_sso_trainer]
 FOR INSERT, UPDATE
@@ -1981,13 +2020,7 @@ BEGIN
 
 END;
 GO
-IF EXISTS (SELECT 1 FROM sys.triggers
-    WHERE  NAME = 'TG_Roles(Audit)_InsertUpdate')
-BEGIN
-		DROP TRIGGER [dbo].[TG_Roles(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Roles(Audit)_InsertUpdate SE ELIMINO '
-
-END
+PRINT '[dbo].[TG_Program_sso_trainer(Audit)_InsertUpdate] ha sido creado';
 GO
 
 --Trigger of roles Table
@@ -2007,6 +2040,18 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/29/2018 Vanessa Alcocer   Initial version
 *******************************************************************************/
+
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Roles(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Roles(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Roles(Audit)_InsertUpdate SE ELIMINO '
+
+END
+
+GO
+PRINT 'Creando TRIGGER [dbo].[TG_Roles(Audit)_InsertUpdate]...';
+GO
 CREATE TRIGGER [dbo].[TG_Roles(Audit)_InsertUpdate]
 ON [dbo].[roles]
 FOR INSERT, UPDATE
@@ -2041,4 +2086,6 @@ BEGIN
     WHERE ISNULL(d.role_name, '') != ISNULL(i.role_name, '');
   END
 END;
+GO
+PRINT '[dbo].[TG_Roles(Audit)_InsertUpdate] ha sido creado';
 GO
