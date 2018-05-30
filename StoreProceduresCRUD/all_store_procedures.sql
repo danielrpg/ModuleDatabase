@@ -197,11 +197,11 @@ BEGIN
       ,[personal_email]
       ,[personal_last_name]
       ,[personal_name]
-      ,[personal_photo]
+    --  ,[personal_photo]
       ,[personal_telephone]
       ,[area_area_id]
-      ,[assign_equipament_assign_id]
-  FROM [dbo].[personals]
+     -- ,[assign_equipament_assign_id]
+  FROM [dbo].[personals] as p
     WHERE p.personal_id = @personal_id
 
 END
@@ -331,8 +331,8 @@ SET NOCOUNT ON;
 BEGIN
 
 	SELECT [incident_id]
-      ,[code]
-      ,[date_at]
+      ,[incident_code]
+      --,[incident_date_at]
       ,[incident_number]
       ,[recurrence]
       ,[reincident]
@@ -601,10 +601,10 @@ BEGIN
       ,[personal_email]
       ,[personal_last_name]
       ,[personal_name]
-      ,[personal_photo]
+    --  ,[personal_photo]
       ,[personal_telephone]
       ,[area_area_id]
-      ,[assign_equipament_assign_id]
+     -- ,[assign_equipament_assign_id]
   FROM [dbo].[personals]
 END
 GO
@@ -772,12 +772,66 @@ END
 GO
 
 
---GET Equipaments store procedure
+
+-- Create Equipament stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_depertament]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_equipament]') 
 		AND type in (N'P', N'PC'))
 BEGIN
-	DROP PROCEDURE [dbo].[sp_get_all_depertament]
+	DROP PROCEDURE [dbo].[sp_create_equipament]
+END
+GO
+-- Create Equipament CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: Equipaments
+**  Desc: Table for sp_create_equipament
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/27/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/27/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+
+CREATE PROCEDURE [dbo].[sp_create_equipament](
+				@equipament_name VARCHAR(50)
+			   ,@equipament_type INT
+			   ,@equipament_description VARCHAR(200)
+			   ,@equipament_image VARBINARY(MAX)
+)
+AS 
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+
+    INSERT INTO [dbo].[equipaments](equipament_name
+								  ,equipament_type
+								  ,equipament_description
+								  ,equipament_image
+								  ,created_on)
+    VALUES ( @equipament_name
+			,@equipament_type
+			,@equipament_description
+			,@equipament_image
+			,GETDATE());
+
+  SELECT @@IDENTITY AS equipament_id;
+END
+GO
+
+
+--GET Equipaments store procedure
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_equipament]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_get_all_equipament]
 END
 GO
 -- Equipments CRUD PROCEDURES
@@ -815,6 +869,8 @@ BEGIN
 	WHERE equi.equipament_id = ISNULL(@equipament_id, equi.equipament_id);
 END
 GO
+
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_departments]') 
@@ -1299,10 +1355,10 @@ BEGIN
       ,[personal_email]
       ,[personal_last_name]
       ,[personal_name]
-      ,[personal_photo]
+    --  ,[personal_photo]
       ,[personal_telephone]
       ,[area_area_id]
-      ,[assign_equipament_assign_id]
+  --    ,[assign_equipament_assign_id]
   FROM [dbo].[personals]
     WHERE personal_id = @personal_id;
 
@@ -1362,7 +1418,7 @@ BEGIN
 	      ,[date_kardex]
 	      ,[entry_kardex]
 	      ,[outlay_kardex]
-	      ,[equipament_equipament_id]
+	     -- ,[equipament_equipament_id]
 	  FROM [dbo].[kardex_equipaments]
     WHERE equipament_kardex_id = @kardex_id;
 
@@ -1419,11 +1475,11 @@ BEGIN
     SELECT  [inventory_id]
 	      ,[created_on]
 	      ,[updated_on]
-	      ,[active_asignament]
-	      ,[date_asignament]
-	      ,[status_asignament]
-	      ,[equipament_equipament_id]
-	      ,[personal_personal_id]
+	     -- ,[active_asignament]
+	     -- ,[date_asignament]
+	     -- ,[status_asignament]
+	     -- ,[equipament_equipament_id]
+	     -- ,[personal_personal_id]
     FROM [dbo].[inventory]
     WHERE inventory_id = @inventory_id;
 	SELECT @@IDENTITY AS inventory_id;
@@ -1585,7 +1641,7 @@ BEGIN
       ,[equipament_image]
       ,[equipament_name]
       ,[equipament_type]
-      ,[assign_equipament_assign_id]
+    --  ,[assign_equipament_assign_id]
   FROM [dbo].[equipaments]
     WHERE equipament_id = @equipament_id;
 
@@ -1762,6 +1818,18 @@ BEGIN
 
 END
 GO
+
+
+
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_user]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_delete_user]
+END
+GO
+
+
 
 -- Drop User CRUD PROCEDURES
 /******************************************************************************
