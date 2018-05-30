@@ -680,6 +680,7 @@ BEGIN
   END
   
 END;
+GO
 --Trigger of ContractsTable
 /******************************************************************************
 **  Name: TG_Contracts(Audit)_InsertUpdate
@@ -842,6 +843,7 @@ BEGIN
  
   
 END;
+GO
 --Trigger of DepartmentTable
 /******************************************************************************
 **  Name: TG_Department(Audit)_InsertUpdate
@@ -922,6 +924,7 @@ BEGIN
   END
   
 END;
+GO
 --Trigger of FunctionsTable
 /******************************************************************************
 **  Name: TG_Functions(Audit)_InsertUpdate
@@ -1024,6 +1027,7 @@ BEGIN
 
   
 END;
+GO
 --Trigger of PersonalsTable
 /******************************************************************************
 **  Name: TG_Personals(Audit)_InsertUpdate
@@ -1226,6 +1230,7 @@ BEGIN
   END
    
 END;
+GO
 --Trigger of PositionTable
 /******************************************************************************
 **  Name: TG_Position(Audit)_InsertUpdate
@@ -1345,7 +1350,7 @@ BEGIN
     WHERE ISNULL(d.parent_position_position_id, '') != ISNULL(i.parent_position_position_id, '');
   END
 END;
-
+GO
 --Trigger of RequirementsTable
 /******************************************************************************
 **  Name: TG_Requirements(Audit)_InsertUpdate
@@ -1367,7 +1372,7 @@ IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Requirements(Audit)_InsertUpdate')
 BEGIN
 		DROP TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO '
+		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO1 '
 
 END    
 GO
@@ -1384,7 +1389,7 @@ BEGIN
  
   DECLARE @CurrDate DATETIME = GETUTCDATE();
   
-  IF UPDATE(requirement_description)
+  IF UPDATE(requiriment_description)
   BEGIN
     INSERT INTO dbo.AuditHistory(TableName, 
                                  ColumnName, 
@@ -1394,17 +1399,17 @@ BEGIN
                                  NewValue,
 								 ModifiedBy) 
     SELECT TableName    = 'requirements', 
-           ColumnName   = 'requirement_description',
-           ID1          = i.requirements_id, 
+           ColumnName   = 'requiriment_description',
+           ID1          = i.requiriment_id, 
            Date         = @CurrDate, 
-           OldValue     = d.[requirement_description], 
-           NewValue     = i.[requirement_description],
+           OldValue     = d.[requiriment_description], 
+           NewValue     = i.[requiriment_description],
            ModifiedBy   = i.modified_by 
     FROM deleted d 
-    FULL OUTER JOIN inserted i ON (d.requirements_id = i.requirements_id)
-    WHERE ISNULL(d.requirement_description, '') != ISNULL(i.requirement_description, '');
+    FULL OUTER JOIN inserted i ON (d.requiriment_id = i.requiriment_id)
+    WHERE ISNULL(d.requiriment_description, '') != ISNULL(i.requiriment_description, '');
   END
-  IF UPDATE(requirement_name)
+  IF UPDATE(requiriment_name)
   BEGIN
     INSERT INTO dbo.AuditHistory(TableName, 
                                  ColumnName, 
@@ -1414,15 +1419,15 @@ BEGIN
                                  NewValue,
 								 ModifiedBy) 
     SELECT TableName    = 'requirements', 
-           ColumnName   = 'requirement_name',
-           ID1          = i.requirements_id, 
+           ColumnName   = 'requiriment_name',
+           ID1          = i.requiriment_id, 
            Date         = @CurrDate, 
-           OldValue     = d.[requirement_name], 
-           NewValue     = i.[requirement_name],
+           OldValue     = d.[requiriment_name], 
+           NewValue     = i.[requiriment_name],
            ModifiedBy   = i.modified_by 
     FROM deleted d 
-    FULL OUTER JOIN inserted i ON (d.requirements_id = i.requirements_id)
-    WHERE ISNULL(d.requirement_name, '') != ISNULL(i.requirement_name, '');
+    FULL OUTER JOIN inserted i ON (d.requiriment_id = i.requiriment_id)
+    WHERE ISNULL(d.requiriment_name, '') != ISNULL(i.requiriment_name, '');
   END
 
    IF UPDATE(position_position_id)
@@ -1436,16 +1441,17 @@ BEGIN
 								 ModifiedBy) 
     SELECT TableName    = 'requirements', 
            ColumnName   = 'position_position_id',
-           ID1          = i.requirements_id, 
+           ID1          = i.requiriment_id, 
            Date         = @CurrDate, 
            OldValue     = d.[position_position_id], 
            NewValue     = i.[position_position_id],
            ModifiedBy   = i.modified_by 
     FROM deleted d 
-    FULL OUTER JOIN inserted i ON (d.requirements_id = i.requirements_id)
+    FULL OUTER JOIN inserted i ON (d.requiriment_id = i.requiriment_id)
     WHERE ISNULL(d.position_position_id, '') != ISNULL(i.position_position_id, '');
   END
 END;
+GO
 IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Program_sso_activities(Audit)_InsertUpdate')
 BEGIN
@@ -1472,6 +1478,14 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/29/2018 Vanessa Alcocer   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso_activities(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Program_sso_activities(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
 CREATE TRIGGER [dbo].[TG_Program_sso_activities(Audit)_InsertUpdate]
 ON [dbo].[program_sso_activities]
 FOR INSERT, UPDATE
@@ -1591,6 +1605,7 @@ BEGIN
   END
 
 END;
+GO
 IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Program_sso(Audit)_InsertUpdate')
 BEGIN
@@ -1757,6 +1772,7 @@ BEGIN
   END
 
 END;
+GO
 IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Program_sso_resource(Audit)_InsertUpdate')
 BEGIN
@@ -1839,6 +1855,7 @@ BEGIN
   END
 
 END;
+GO
 IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Program_sso_trainer(Audit)_InsertUpdate')
 BEGIN
@@ -1963,6 +1980,7 @@ BEGIN
   END
 
 END;
+GO
 IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Roles(Audit)_InsertUpdate')
 BEGIN
@@ -2023,3 +2041,4 @@ BEGIN
     WHERE ISNULL(d.role_name, '') != ISNULL(i.role_name, '');
   END
 END;
+GO
