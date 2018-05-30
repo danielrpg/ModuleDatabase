@@ -1,3 +1,5 @@
+USE SSID
+GO
 -- Create Table AuditHistory
 /******************************************************************************
 **  Table Name: AuditHistory

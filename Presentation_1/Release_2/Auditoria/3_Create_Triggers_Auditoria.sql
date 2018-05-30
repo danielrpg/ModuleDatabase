@@ -1,3 +1,6 @@
+USE SSID
+GO
+
 --Trigger of Incident_detail
 /******************************************************************************
 **  Name: TG_IncidentDetail(Audit)_InsertUpdate
