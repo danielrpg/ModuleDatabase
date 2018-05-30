@@ -1,19 +1,18 @@
--- Data initialization
-/******************************************************************************
+/*****************************************************************************
 **  DataBase: ssidb
 **  Desc: Initialization of basic data
 ** 
 **  Called by: ssi
 **
-**  Author: Ivan Misericordia Eulate
+**  Author: Franz A. Lopez Choque
 **
 **  Date: 05/28/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
-** --------   --------        ---------------------------------------------------
-** 05/28/2018 Ivan Misericordia Eulate   Initial version
+** --------   -------------------        --------------------------------------
+** 05/28/2018 Ivan Misericordia Eulate   Initial version last version
 ** 05/29/2018 Franz A. Lopez Choque		  Update schema version
 *******************************************************************************/
 use SSID;
@@ -21,7 +20,6 @@ set xact_abort on;
 set nocount on;
 
 BEGIN TRANSACTION;
-
 print 'insert data into the roles table';
 if(select count(*) from dbo.roles)=0
 begin
@@ -48,27 +46,16 @@ begin
 	print 'user_role table done';
 end
 
-
-
-
-
-
-
 -- PROGRAMA SSO
 print 'insert data into the program_sso table';
 if(select count(*) from dbo.program_sso)=0
 begin
 	set identity_insert dbo.program_sso on;
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (1, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Pedro Fernandez', 500.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (2, '2018-05-27 23:56:44', null, '3 semanas', 'Actualizar normas en seguridad industrial', 'Mejora en actualizacion de normas', 'Capacitar a todos los trabajadores', 'Jorge Eduardo', 300.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (3, '2018-05-27 23:56:44', null, '1 semana', 'Conocer accionar frente a un accidente', 'Incrementar el conocimiento sobre accidentes', 'Capacitar a todos los trabajadores', 'Olga Mercado', 100.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (4, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Angela Perez', 500.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (5, '2018-05-27 23:56:44', null, '3 semanas', 'Incrementar el conocimiento sobre peligros maquinarios', 'Mejora del uso de maquinarias', 'Capacitar a todos los trabajadores', 'Maria Fanola', 540.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (1, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Pedro Fernandez', 500.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (2, '2018-05-27 23:56:44', null, '3 semanas', 'Actualizar normas en seguridad industrial', 'Mejora en actualizacion de normas', 'Capacitar a todos los trabajadores', 'Jorge Eduardo', 300.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (3, '2018-05-27 23:56:44', null, '1 semana', 'Conocer accionar frente a un accidente', 'Incrementar el conocimiento sobre accidentes', 'Capacitar a todos los trabajadores', 'Olga Mercado', 100.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (4, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Angela Perez', 500.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (5, '2018-05-27 23:56:44', null, '3 semanas', 'Incrementar el conocimiento sobre peligros maquinarios', 'Mejora del uso de maquinarias', 'Capacitar a todos los trabajadores', 'Maria Fanola', 540.5);
 	set identity_insert dbo.program_sso off;
 	print 'program_sso done';
 end
@@ -77,20 +64,13 @@ print 'insert data into the program_sso_trainer table';
 if(select count(*) from dbo.program_sso_trainer)=0
 begin
 	set identity_insert dbo.program_sso_trainer on;
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (1, '20120618 10:34:09 AM', null, 'Experto en seguridad industrial', '123456789', null, 'Juan Perez', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (2, '2018-05-27 23:56:44', null, 'Experto en Accidentes maquinarios', '343423456', null, 'Gabriel Moreno', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (3, '2018-05-27 23:56:44', null, 'Experto en Accidentes con Maquinaria pesada', '545454545', null, 'Rafael Terrazas', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (4, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '323123434', null, 'Nicolas Marquez', 'Ing. Ambiental');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (5, '2018-05-27 23:56:44', null, 'Experto en salud ocupacional', '678987678', null, 'Florinda Mesa', 'Medico');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (6, '2018-05-27 23:56:44', null, 'Experto en accidentes', '567876567', null, 'Fernando Flores', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (7, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '6767676767', null, 'Karina Marasi', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (1, '20120618 10:34:09 AM', null, 'Experto en seguridad industrial', '123456789', null, 'Juan Perez', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (2, '2018-05-27 23:56:44', null, 'Experto en Accidentes maquinarios', '343423456', null, 'Gabriel Moreno', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (3, '2018-05-27 23:56:44', null, 'Experto en Accidentes con Maquinaria pesada', '545454545', null, 'Rafael Terrazas', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (4, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '323123434', null, 'Nicolas Marquez', 'Ing. Ambiental');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (5, '2018-05-27 23:56:44', null, 'Experto en salud ocupacional', '678987678', null, 'Florinda Mesa', 'Medico');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (6, '2018-05-27 23:56:44', null, 'Experto en accidentes', '567876567', null, 'Fernando Flores', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (7, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '6767676767', null, 'Karina Marasi', 'Ing. Industrial');
 	set identity_insert dbo.program_sso_trainer off;
 	print 'program_sso_trainer done';
 end
@@ -99,12 +79,9 @@ print 'insert data into the program_sso_activities table';
 if(select count(*) from program_sso_activities)=0
 begin
 	set identity_insert program_sso_activities on;
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) 
-		VALUES (134,'2018-05-27 23:56:44', null, 'Identificar los riesgos a los que estan expuestos los empleados', 'Los empleados identifique por su cuenta los riesgos en sus areas de trabajo', 20, '3 días', 'Capacitación', 1, 1);
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) 
-		VALUES (135,'2018-05-27 23:56:44', null, 'Identificar nuevas normas', 'Los empleados deben estar actualizados con las nuevas normas', 20, '1 día', 'Capacitación', null, null);
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) 
-		VALUES (136,'2018-05-27 23:56:44', null, 'Identificar acciones a tomar en caso de accidentes', 'Los empleados deben estar conscientes de las acciones que deben ejecutar frente a un accidente', 20, '2 día', 'Capacitación', null, null);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (134,'2018-05-27 23:56:44', null, 'Identificar los riesgos a los que estan expuestos los empleados', 'Los empleados identifique por su cuenta los riesgos en sus areas de trabajo', 20, '3 días', 'Capacitación', 1, 1);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (135,'2018-05-27 23:56:44', null, 'Identificar nuevas normas', 'Los empleados deben estar actualizados con las nuevas normas', 20, '1 día', 'Capacitación', null, null);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (136,'2018-05-27 23:56:44', null, 'Identificar acciones a tomar en caso de accidentes', 'Los empleados deben estar conscientes de las acciones que deben ejecutar frente a un accidente', 20, '2 día', 'Capacitación', null, null);
 	set identity_insert program_sso_activities off;
 	print 'program_sso_activities done';
 end
@@ -113,14 +90,10 @@ print 'insert data into the program_sso_resource table';
 if(select count(*) from dbo.program_sso_resource)=0
 begin
 	set identity_insert dbo.program_sso_resource on;
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (1, '2018-05-27 23:56:44', null, 200, 'Hojas tamaño carta', 134);
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (2, '2018-05-27 23:56:44', null, 300, 'Pliegos de cartulina', 135);
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (3, '2018-05-27 23:56:44', null, 100, 'Marcadores', 136);
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (4, '2018-05-27 23:56:44', null, 200, 'Pliegos de cartulina', 136);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (1, '2018-05-27 23:56:44', null, 200, 'Hojas tamaño carta', 134);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (2, '2018-05-27 23:56:44', null, 300, 'Pliegos de cartulina', 135);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (3, '2018-05-27 23:56:44', null, 100, 'Marcadores', 136);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (4, '2018-05-27 23:56:44', null, 200, 'Pliegos de cartulina', 136);
 	set identity_insert dbo.program_sso_resource off;
 	print 'program_sso_resource done';
 end
@@ -129,22 +102,14 @@ print 'insert data into the area table';
 if(select count(*) from dbo.areas)=0
 begin
 	set identity_insert dbo.areas on;
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (1, '2018-05-27 23:56:43', null, 'Diseños de casas, habitaciones, otros ambientes.', 'Diseño');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (2, '2018-05-27 23:56:43', null, 'Remodelaciones de ambientes de casas, habitaciones, etc.', 'Remodelaciones');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (3, '2018-05-27 23:56:43', null, 'Ampliaciones de habitaciones, espacios recreativos, cocinas, areas comunes, etc.', 'Ampliaciones');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (4, '2018-05-27 23:56:43', null, 'Trabajos en metal para adaptación de Galpones  y Carpintería metálica para puertas, barandas, otros.', 'Galpones  y Carpintería metálica');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (5, '2018-05-27 23:56:43', null, 'Instalaciones hídricas para ambientes como cocinas, baños, lavandería, duchas, piscinas, jardines, etc.', 'Instalaciones hídricas');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (6, '2018-05-27 23:56:43', null, 'Instalaciones eléctricas en los diferentes ambientes donde se trabaje.', 'Instalaciones eléctricas');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (7, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra gruesa en la construcción, como ser estructura en las edificaciones, muros, pisos, pavimentos, techado, etc.', 'Obra gruesa');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (8, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra fina en la construcción, como ser revoque de paredes, cielo raso, cerámica, etc. para puertas, barandas, otros.', 'Obra fina');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (1, '2018-05-27 23:56:43', null, 'Diseños de casas, habitaciones, otros ambientes.', 'Diseño');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (2, '2018-05-27 23:56:43', null, 'Remodelaciones de ambientes de casas, habitaciones, etc.', 'Remodelaciones');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (3, '2018-05-27 23:56:43', null, 'Ampliaciones de habitaciones, espacios recreativos, cocinas, areas comunes, etc.', 'Ampliaciones');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (4, '2018-05-27 23:56:43', null, 'Trabajos en metal para adaptación de Galpones  y Carpintería metálica para puertas, barandas, otros.', 'Galpones  y Carpintería metálica');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (5, '2018-05-27 23:56:43', null, 'Instalaciones hídricas para ambientes como cocinas, baños, lavandería, duchas, piscinas, jardines, etc.', 'Instalaciones hídricas');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (6, '2018-05-27 23:56:43', null, 'Instalaciones eléctricas en los diferentes ambientes donde se trabaje.', 'Instalaciones eléctricas');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (7, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra gruesa en la construcción, como ser estructura en las edificaciones, muros, pisos, pavimentos, techado, etc.', 'Obra gruesa');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (8, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra fina en la construcción, como ser revoque de paredes, cielo raso, cerámica, etc. para puertas, barandas, otros.', 'Obra fina');
 	set identity_insert dbo.areas off;
 	print 'areas table done';
 end
@@ -164,14 +129,10 @@ print 'insert data into the equipament table';
 if(select count(*) from dbo.equipaments)=0
 begin
 	set identity_insert dbo.equipaments on;
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (1, '2018-05-28 15:13:25', null, 'Casco tipo Jokey', 0x, 'Helmmet', 1);
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (2, '2018-05-28 15:13:25', null, 'Taladro electrico portatil bosch', 0x, 'Electric Drill', 2);
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (3, '2018-05-28 15:13:25', null, 'Casco tipo Jokey de ala Ancha', 0x, 'Helmmet2', 1);
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (4, '2018-05-28 15:13:25', null, 'Taladro electrico de banca bosch', 0x, 'Drill', 2);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (1, '2018-05-28 15:13:25', null, 'Casco tipo Jokey', 0x, 'Helmmet', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (2, '2018-05-28 15:13:25', null, 'Taladro electrico portatil bosch', 0x, 'Electric Drill', 2);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (3, '2018-05-28 15:13:25', null, 'Casco tipo Jokey de ala Ancha', 0x, 'Helmmet2', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (4, '2018-05-28 15:13:25', null, 'Taladro electrico de banca bosch', 0x, 'Drill', 2);
 	set identity_insert dbo.equipaments off;
 	print 'equipament done';
 end
@@ -180,14 +141,10 @@ print 'insert data into the kardex_equipaments table';
 if(select count(*) from dbo.kardex_equipaments)=0
 begin
 	set identity_insert dbo.kardex_equipaments on;
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (1, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 1);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (2, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:13:25', 0, 5, 2);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (3, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 3);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (4, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:13:25', 0, 0, 4);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (1, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 1);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (2, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:13:25', 0, 5, 2);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (3, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 3);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (4, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:13:25', 0, 0, 4);
 	set identity_insert dbo.kardex_equipaments off;
 	print 'kardex done';
 end 
@@ -241,12 +198,9 @@ print 'insert data into the incident table';
 if(select count(*) from dbo.incident)=0
 begin
 	set identity_insert dbo.incident on;
-	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id)
-		VALUES (140, 'ACC-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'alta', 0, 141, 137,1);
-	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id)
-		VALUES (142, 'ENF-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'baja', 0, 143, 138,2);
-	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id)
-		VALUES (144, 'INC-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'media', 0, 145, 139,3);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (140, 'ACC-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'alta', 0, 141, 137,1);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (142, 'ENF-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'baja', 0, 143, 138,2);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (144, 'INC-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'media', 0, 145, 139,3);
 	set identity_insert dbo.incident off;
 	print 'incident done';
 end
@@ -433,6 +387,14 @@ begin
 	print 'functions done';
 end
 
-
+print 'insert data into the personal_position_contract table';
+if(select count(*) from dbo.[personal_position_contract])=0
+begin
+	set identity_insert dbo.[personal_position_contract] on;
+	INSERT INTO [dbo].[personal_position_contract]([pers_pos_contract_id],[created_on],[updated_on],[pers_pos_contract_end_date],[pers_pos_contract_init_date],[pers_pos_contract_status],[pers_pos_contract_turno],[contract_id],[personal_id],[position_id])VALUES(1,'2015-05-27 23:56:44',null,null,'2015-05-27 23:56:44',1,'dia',1,1,11);
+	INSERT INTO [dbo].[personal_position_contract]([pers_pos_contract_id],[created_on],[updated_on],[pers_pos_contract_end_date],[pers_pos_contract_init_date],[pers_pos_contract_status],[pers_pos_contract_turno],[contract_id],[personal_id],[position_id]) VALUES(2,'2015-05-27 23:56:44',null,null,'2015-05-27 23:56:44',1,'dia',1,2,12);
+	INSERT INTO [dbo].[personal_position_contract]([pers_pos_contract_id],[created_on],[updated_on],[pers_pos_contract_end_date],[pers_pos_contract_init_date],[pers_pos_contract_status],[pers_pos_contract_turno],[contract_id],[personal_id],[position_id]) VALUES(3,'2015-05-27 23:56:44',null,null,'2015-05-27 23:56:44',1,'dia',1,3,13);
+	set identity_insert dbo.[personal_position_contract] off;
+	print 'personal_position_contract done';
+end
 COMMIT TRANSACTION;
-
