@@ -475,37 +475,37 @@ GO
 *******************************************************************************/
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedBy'
+				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso] ADD CreatedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso] ADD created_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedDate'
+				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso] ADD CreatedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso] ADD created_date DATETIME NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedBy'
+				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso] ADD ModifiedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso] ADD modified_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedDate'
+				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso] ADD ModifiedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso] ADD modified_date DATETIME NOT NULL
 	END
 GO
 
@@ -514,37 +514,37 @@ GO
 *******************************************************************************/
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedBy'
+				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_activities] ADD CreatedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso_activities] ADD created_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedDate'
+				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_activities] ADD CreatedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso_activities] ADD created_date DATETIME NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedBy'
+				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_activities] ADD ModifiedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso_activities] ADD modified_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedDate'
+				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_activities] ADD ModifiedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso_activities] ADD modified_date DATETIME NOT NULL
 	END
 GO
 
@@ -553,37 +553,37 @@ GO
 *******************************************************************************/
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedBy'
+				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
-	BEGINt_
-		ALTER TABLE [dbo].[program_sso_resource] ADD CreatedBy INT NOT NULL
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_resource] ADD created_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedDate'
+				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_resource] ADD CreatedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso_resource] ADD created_date DATETIME NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedBy'
+				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_resource] ADD ModifiedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso_resource] ADD modified_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedDate'
+				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_resource] ADD ModifiedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso_resource] ADD modified_date DATETIME NOT NULL
 	END
 GO
 
@@ -592,37 +592,37 @@ GO
 *******************************************************************************/
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedBy'
+				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_trainer] ADD CreatedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso_trainer] ADD created_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedDate'
+				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_trainer] ADD CreatedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso_trainer] ADD created_date DATETIME NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedBy'
+				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_trainer] ADD ModifiedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso_trainer] ADD modified_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedDate'
+				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
 	BEGIN
-		ALTER TABLE [dbo].[program_sso_trainer] ADD ModifiedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[program_sso_trainer] ADD modified_date DATETIME NOT NULL
 	END
 GO
 
@@ -631,40 +631,36 @@ GO
 *******************************************************************************/
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedBy'
+				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
 	BEGIN
-		ALTER TABLE [dbo].[roles] ADD CreatedBy INT NOT NULL
+		ALTER TABLE [dbo].[roles] ADD created_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'CreatedDate'
+				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
 	BEGIN
-		ALTER TABLE [dbo].[roles] ADD CreatedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[roles] ADD created_date DATETIME NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedBy'
+				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
 	BEGIN
-		ALTER TABLE [dbo].[roles] ADD ModifiedBy INT NOT NULL
+		ALTER TABLE [dbo].[roles] ADD modified_by INT NOT NULL
 	END
 GO
 
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
-				WHERE Name = 'ModifiedDate'
+				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
 	BEGIN
-		ALTER TABLE [dbo].[roles] ADD ModifiedDate DATETIME NOT NULL
+		ALTER TABLE [dbo].[roles] ADD modified_date DATETIME NOT NULL
 	END
 GO
-
-
-
-

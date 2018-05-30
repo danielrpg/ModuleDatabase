@@ -1372,7 +1372,7 @@ IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Requirements(Audit)_InsertUpdate')
 BEGIN
 		DROP TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]
-		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO '
+		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO1 '
 
 END    
 GO
@@ -1451,6 +1451,7 @@ BEGIN
     WHERE ISNULL(d.position_position_id, '') != ISNULL(i.position_position_id, '');
   END
 END;
+GO
 IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Program_sso_activities(Audit)_InsertUpdate')
 BEGIN
@@ -2040,3 +2041,4 @@ BEGIN
     WHERE ISNULL(d.role_name, '') != ISNULL(i.role_name, '');
   END
 END;
+GO
