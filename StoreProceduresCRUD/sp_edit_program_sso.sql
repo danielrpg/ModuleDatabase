@@ -46,10 +46,18 @@ BEGIN
 			,sso_total_cost = @total_cost
 	WHERE sso_id = @sso_id;
 
-	SELECT * 
-	FROM [dbo].[program_sso]
+	SELECT  [sso_id]
+	      ,[created_on]
+	      ,[updated_on]
+	      ,[sso_execution_time]
+	      ,[sso_goal]
+	      ,[sso_indicator]
+	      ,[sso_objetive]
+	      ,[sso_responsable]
+	      ,[sso_total_cost]
+	  FROM [dbo].[program_sso]
 	WHERE sso_id = @sso_id;
 
 	PRINT 'Procedure [dbo].[sp_edit_program_sso] created';
 END
-
+GO

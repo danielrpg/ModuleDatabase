@@ -28,6 +28,15 @@ AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT * FROM [dbo].[contracts];
+    SELECT  [contract_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[contract_city]
+      ,[contract_code]
+      ,[contract_date]
+      ,[contract_description]
+      ,[contract_salary]
+      ,[contract_type]
+  FROM [dbo].[contracts]
 END
 GO

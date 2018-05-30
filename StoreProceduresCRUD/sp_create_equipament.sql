@@ -48,3 +48,4 @@ BEGIN
 
   SELECT @@IDENTITY AS equipament_id;
 END
+GO

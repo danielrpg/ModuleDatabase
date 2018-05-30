@@ -39,10 +39,15 @@ BEGIN
 			,sso_resource_detail = @resource_detail
 	WHERE sso_resource_id = @sso_resource_id;
 
-	SELECT * 
-	FROM [dbo].[program_sso_resource]
+	SELECT  [sso_resource_id]
+	      ,[created_on]
+	      ,[updated_on]
+	      ,[sso_resource_cost]
+	      ,[sso_resource_detail]
+	      ,[sso_detail_id]
+	  FROM [dbo].[program_sso_resource]
 	WHERE sso_resource_id = @sso_resource_id;
 
 	PRINT 'Procedure [dbo].[sp_edit_program_sso_resource] created';
 END
-
+GO

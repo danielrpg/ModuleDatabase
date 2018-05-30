@@ -44,10 +44,19 @@ BEGIN
 			,soo_detail_type = @detail_type
 	WHERE sso_detail_id = @sso_detail_id;
 
-	SELECT * 
-	FROM [dbo].[program_sso_activities]
+	SELECT [sso_detail_id]
+	      ,[created_on]
+	      ,[updated_on]
+	      ,[sso_detail_activities]
+	      ,[sso_detail_goal]
+	      ,[so_detail_number]
+	      ,[sso_detail_time]
+	      ,[soo_detail_type]
+	      ,[sso_id]
+	      ,[sso_trainer_id]
+	  FROM [dbo].[program_sso_activities]
 	WHERE sso_detail_id = @sso_detail_id;
 
 	PRINT 'Procedure [dbo].[sp_edit_program_sso_activities] created';
 END
-
+GO

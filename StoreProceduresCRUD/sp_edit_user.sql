@@ -42,8 +42,14 @@ BEGIN
         ,updated_on    =  GETDATE()
     WHERE user_id = @user_id;
 
-    SELECT *
-    FROM [dbo].[users]
+    SELECT [user_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[user_password]
+      ,[user_active]
+      ,[user_name]
+  FROM [dbo].[users]
     WHERE user_id = @user_id;
 
 END
+GO

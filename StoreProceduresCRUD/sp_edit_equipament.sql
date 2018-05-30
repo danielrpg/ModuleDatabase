@@ -44,10 +44,18 @@ BEGIN
 	   ,created_on = GETDATE()
     WHERE equipament_id = @equipament_id;
 
-    SELECT *
-    FROM [dbo].[equipaments]
+    SELECT [equipament_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[equipament_description]
+      ,[equipament_image]
+      ,[equipament_name]
+      ,[equipament_type]
+      ,[assign_equipament_assign_id]
+  FROM [dbo].[equipaments]
     WHERE equipament_id = @equipament_id;
 
 	SELECT @@IDENTITY AS equipament_id;
 
 END
+GO

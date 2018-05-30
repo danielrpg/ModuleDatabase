@@ -53,3 +53,4 @@ BEGIN
 
 	SELECT @@IDENTITY AS inventory_id;
 END
+GO
