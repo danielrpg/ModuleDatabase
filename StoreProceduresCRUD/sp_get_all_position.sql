@@ -1,43 +1,43 @@
---GET Equipaments store procedure
+--GET positions store procedure
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_equipament]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_position]') 
 		AND type in (N'P', N'PC'))
 BEGIN
-	DROP PROCEDURE [dbo].[sp_get_all_equipament]
+	DROP PROCEDURE [dbo].[sp_get_all_position]
 END
 GO
 -- Equipments CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: Equipaments
-**  Desc: Table for sp_get_all_equipament
+**  Table Name: position
+**  Desc: Table for sp_get_all_position
 ** 
 **  Called by: ssi
 **
 **  Author: Ivan Misericordia Eulate
 **
-**  Date: 05/26/2018
+**  Date: 05/28/2018
 
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 05/2/2018 Ivan Misericordia Eulate   Initial version
+** 05/28/2018 Ivan Misericordia Eulate   Initial version
 *******************************************************************************/
 
-CREATE PROCEDURE [dbo].[sp_get_all_equipament](
-	@equipament_id BIGINT = null
+CREATE PROCEDURE [dbo].[sp_get_all_position](
+	@position_id BIGINT = null
 )
 AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT   equi.equipament_id
-			,equi.equipament_name
-			,equi.equipament_type
-			,equi.equipament_description
-			,equi.equipament_image 
-	FROM [dbo].[equipaments] as equi
-	WHERE equi.equipament_id = ISNULL(@equipament_id, equi.equipament_id);
+    SELECT   position_id
+			,position_name
+			,position_level
+			,position_description
+			,parent_position_position_id 
+	FROM [dbo].[position] as posi
+	WHERE posi.position_id = ISNULL(@position_id, posi.position_id);
 END
 GO
