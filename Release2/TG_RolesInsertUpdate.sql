@@ -1,6 +1,11 @@
---====================================
---  Create database trigger template
---====================================
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Roles(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER TG_Roles(Audit)_InsertUpdate
+		PRINT 'EL TRIGGER TG_Roles(Audit)_InsertUpdate SE ELIMINO '
+
+END
+GO
 
 --Trigger of roles Table
 /******************************************************************************
