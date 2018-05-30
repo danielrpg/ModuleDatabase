@@ -28,7 +28,16 @@ SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN 
     
-    SELECT * FROM [dbo].[program_sso];
+    SELECT [sso_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[sso_execution_time]
+      ,[sso_goal]
+      ,[sso_indicator]
+      ,[sso_objetive]
+      ,[sso_responsable]
+      ,[sso_total_cost]
+  FROM [dbo].[program_sso]
 	 
 END
 GO

@@ -34,3 +34,4 @@ BEGIN
     DELETE FROM [dbo].[equipaments]
     WHERE equipament_id = @equipament_id;
 END
+GO

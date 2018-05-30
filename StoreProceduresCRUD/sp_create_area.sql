@@ -1,90 +1,46 @@
 IF EXISTS (SELECT * FROM sys.objects 
-
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_functions]') 
-
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_area]') 
 		AND type in (N'P', N'PC'))
-
 BEGIN
-
-	DROP PROCEDURE [dbo].[sp_create_functions]
-
+	DROP PROCEDURE [dbo].[sp_create_area]
 END
-
 GO
 
 
-
-
-
--- Functions CRUD PROCEDURES
-
+-- Drop AREA CRUD PROCEDURES
 /******************************************************************************
-
-**  Table Name: functions
-
-**  Desc: Table for sp_create_functions
-
+**  Table Name: area
+**  Desc: Table for sp_create_area
 ** 
-
 **  Called by: ssi
-
 **
-
-**  Author: Boris Gonzalo Medrano Guzman
-
+**  Author: Gilmer Daniel Fernandez Pinto
 **
-
 **  Date: 05/29/2018
-
 *******************************************************************************
-
 **                            Change History
-
 *******************************************************************************
-
 **   Date:     Author:                            Description:
-
 ** --------   --------        ---------------------------------------------------
-
-** 05/29/2018 Boris Gonzalo Medrano Guzman   Initial version
-
+** 05/29/2018 Gilmer Daniel Fernandez Pinto   Initial version
 *******************************************************************************/
 
-
-
-CREATE PROCEDURE [dbo].[sp_create_functions](
-
-    @func_name VARCHAR(50)
-   ,@func_description VARCHAR(100)
-   ,@position_position_id INT
-
+CREATE PROCEDURE [dbo].[sp_create_area](
+    @area_name VARCHAR(50)
+   ,@area_description VARCHAR(100)
    ,@result BIT OUTPUT  --resultado
-
 )
-
 AS 
-
 SET XACT_ABORT ON;
-
 SET NOCOUNT ON;
-
 BEGIN
 
-
-
-    INSERT INTO [dbo].[functions]
-
-    (func_name, func_description,position_position_id, created_on)
-
-    VALUES (@func_name, @func_description,@position_position_id,GETDATE());
-
-
+    INSERT INTO [dbo].[areas]
+    (area_name, area_description, created_on)
+    VALUES (@area_name, @area_description, GETDATE());
 
     SET @result = @@IDENTITY;
 
-
-
     RETURN @result; 
-
 END
 GO

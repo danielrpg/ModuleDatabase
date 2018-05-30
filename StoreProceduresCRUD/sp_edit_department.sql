@@ -39,8 +39,13 @@ BEGIN
         ,updated_on             = GETDATE()
     WHERE department_id         = @department_id;
 
-    SELECT *
+    SELECT  [department_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[department_description]
+      ,[department_name]
     FROM [dbo].[department]
     WHERE department_id = @department_id;
 
 END
+GO

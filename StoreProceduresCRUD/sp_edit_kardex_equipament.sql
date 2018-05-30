@@ -44,10 +44,18 @@ BEGIN
 	       ,created_on = GETDATE()
     WHERE equipament_kardex_id = @kardex_id;
 
-    SELECT *
-    FROM [dbo].[kardex_equipaments]
+   SELECT  [equipament_kardex_id]
+	      ,[created_on]
+	      ,[updated_on]
+	      ,[balance_kardex]
+	      ,[date_kardex]
+	      ,[entry_kardex]
+	      ,[outlay_kardex]
+	      ,[equipament_equipament_id]
+	  FROM [dbo].[kardex_equipaments]
     WHERE equipament_kardex_id = @kardex_id;
 
 	SELECT @@IDENTITY AS kardex_id;
 
 END
+GO

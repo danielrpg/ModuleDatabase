@@ -1,42 +1,52 @@
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_contracts]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_area]') 
 		AND type in (N'P', N'PC'))
 BEGIN
-	DROP PROCEDURE [dbo].[sp_get_all_contracts]
+	DROP PROCEDURE [dbo].[sp_edit_area]
 END
 GO
--- Personal CRUD PROCEDURES
+-- Drop AREA CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: contracts
-**  Desc: Table for sp_get_all_contracts
+**  Table Name: AREA
+**  Desc: Table for sp_edit_area
 ** 
 **  Called by: ssi
 **
 **  Author: Gilmer Daniel Fernandez Pinto
 **
-**  Date: 05/27/2018
+**  Date: 05/28/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 05/27/2018 Gilmer Daniel Fernandez Pinto   Initial version
+** 05/28/2018 Gilmer Daniel Fernandez Pinto   Initial version
 *******************************************************************************/
 
-CREATE PROCEDURE [dbo].[sp_get_all_contracts]
-AS
+CREATE PROCEDURE [dbo].[sp_edit_area](
+    @area_id INT
+   ,@area_description VARCHAR(200)
+   ,@area_name VARCHAR(50)
+   
+)
+AS 
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT  [contract_id]
+
+    UPDATE [dbo].[areas]
+    SET  area_description = @area_description
+        ,area_name        = @area_name
+        ,updated_on       = GETDATE()
+    WHERE area_id         = @area_id;
+
+    SELECT  [area_id]
       ,[created_on]
       ,[updated_on]
-      ,[contract_city]
-      ,[contract_code]
-      ,[contract_date]
-      ,[contract_description]
-      ,[contract_salary]
-      ,[contract_type]
-  FROM [dbo].[contracts]
+      ,[area_description]
+      ,[area_name]
+    FROM [dbo].[areas]
+    WHERE area_id = @area_id;
+
 END
 GO

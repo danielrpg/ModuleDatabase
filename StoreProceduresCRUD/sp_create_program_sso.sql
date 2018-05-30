@@ -54,4 +54,4 @@ BEGIN
     RETURN @result; 
 	PRINT 'Procedure [dbo].[sp_create_program_sso] created';
 END
-
+GO

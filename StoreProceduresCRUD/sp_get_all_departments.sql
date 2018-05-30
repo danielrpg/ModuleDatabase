@@ -29,6 +29,11 @@ AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT * FROM [dbo].[department]; -- Nombre de la tabla
+    SELECT [department_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[department_description]
+      ,[department_name]
+  FROM [dbo].[department]
 END
 GO

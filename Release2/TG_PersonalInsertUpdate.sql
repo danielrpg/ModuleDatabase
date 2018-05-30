@@ -15,6 +15,14 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/28/2018 Boris Medrano   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Personals(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Personals(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
 CREATE TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]
 ON [dbo].[personals]
 FOR INSERT, UPDATE
