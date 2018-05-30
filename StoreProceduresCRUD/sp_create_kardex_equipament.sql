@@ -51,3 +51,4 @@ BEGIN
 			 ,@equipament_id);
 	SELECT @@IDENTITY AS kardex_id;
 END
+GO

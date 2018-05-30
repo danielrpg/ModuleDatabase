@@ -55,13 +55,14 @@ BEGIN
 END 
 GO
 
-PRINT 'Alter tables for add Rowversion timestamp in assign_equipament table....'; 
-IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE Name = 'Rowversion' AND object_id = OBJECT_ID(N'dbo.assign_equipament')) 
-BEGIN 
-	ALTER TABLE dbo.assign_equipament ADD [Rowversion] [timestamp] NOT NULL; 
-	PRINT 'Table altered....'; 
-END 
-GO
+--Tabla eliminada
+--PRINT 'Alter tables for add Rowversion timestamp in assign_equipament table....'; 
+--IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE Name = 'Rowversion' AND object_id = OBJECT_ID(N'dbo.assign_equipament')) 
+--BEGIN 
+--	ALTER TABLE dbo.assign_equipament ADD [Rowversion] [timestamp] NOT NULL; 
+--	PRINT 'Table altered....'; 
+--END 
+--GO
 
 PRINT 'Alter tables for add Rowversion timestamp in causing_agents table....'; 
 IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE Name = 'Rowversion' AND object_id = OBJECT_ID(N'dbo.causing_agents')) 

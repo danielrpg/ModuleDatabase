@@ -42,8 +42,16 @@ BEGIN
 	       ,created_on = GETDATE()
     WHERE inventory_id = @inventory_id;
 
-    SELECT *
-    FROM [dbo].[Inventory]
+    SELECT  [inventory_id]
+	      ,[created_on]
+	      ,[updated_on]
+	      ,[active_asignament]
+	      ,[date_asignament]
+	      ,[status_asignament]
+	      ,[equipament_equipament_id]
+	      ,[personal_personal_id]
+    FROM [dbo].[inventory]
     WHERE inventory_id = @inventory_id;
 	SELECT @@IDENTITY AS inventory_id;
 END
+GO

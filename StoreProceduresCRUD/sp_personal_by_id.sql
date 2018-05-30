@@ -31,10 +31,21 @@ AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT * 
-    FROM [dbo].[personals] AS p
+   SELECT [personal_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[personal_active]
+      ,[personal_direction]
+      ,[personal_cellphone]
+      ,[personal_email]
+      ,[personal_last_name]
+      ,[personal_name]
+      ,[personal_photo]
+      ,[personal_telephone]
+      ,[area_area_id]
+      ,[assign_equipament_assign_id]
+  FROM [dbo].[personals]
     WHERE p.personal_id = @personal_id
 
 END
-
 GO

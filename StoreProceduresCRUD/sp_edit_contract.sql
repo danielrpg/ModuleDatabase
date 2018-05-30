@@ -47,8 +47,17 @@ BEGIN
         ,updated_on    =  GETDATE()
     WHERE contract_id = @contract_id;
 
-    SELECT *
-    FROM [dbo].[contracts]
+    SELECT  [contract_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[contract_city]
+      ,[contract_code]
+      ,[contract_date]
+      ,[contract_description]
+      ,[contract_salary]
+      ,[contract_type]
+  FROM [dbo].[contracts]
     WHERE contract_id = @contract_id;
 
 END
+GO

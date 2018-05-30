@@ -15,6 +15,14 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/28/2018 Boris Medrano   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Personals(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Personals(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
 CREATE TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]
 ON [dbo].[personals]
 FOR INSERT, UPDATE
@@ -190,25 +198,5 @@ BEGIN
     FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
     WHERE ISNULL(d.area_area_id, '') != ISNULL(i.area_area_id, '');
   END
-  IF UPDATE(assign_equipament_assign_id)
-  BEGIN
-    INSERT INTO dbo.AuditHistory(TableName, 
-                                 ColumnName, 
-                                 ID, 
-                                 Date, 
-                                 OldValue, 
-                                 NewValue,
-								 ModifiedBy) 
-    SELECT TableName    = 'personal', 
-           ColumnName   = 'assign_equipament_assign_id',
-           ID1          = i.personal_id, 
-           Date         = @CurrDate, 
-           OldValue     = d.[assign_equipament_assign_id], 
-           NewValue     = i.[assign_equipament_assign_id],
-           ModifiedBy   = i.ModifiedBy 
-    FROM deleted d 
-    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
-    WHERE ISNULL(d.assign_equipament_assign_id, '') != ISNULL(i.assign_equipament_assign_id, '');
-  END
-  
+   
 END;

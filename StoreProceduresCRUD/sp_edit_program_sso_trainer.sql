@@ -44,10 +44,17 @@ BEGIN
 			,sso_trainer_specialty = @trainer_specialty
 	WHERE sso_trainer_id = @sso_trainer_id;
 
-	SELECT * 
-	FROM [dbo].[program_sso_trainer]
+	SELECT [sso_trainer_id]
+	      ,[created_on]
+	      ,[updated_on]
+	      ,[sso_trainer_skills]
+	      ,[sso_trainer_ci]
+	      ,[sso_trainer_image]
+	      ,[sso_trainer_name]
+	      ,[sso_trainer_specialty]
+	  FROM [dbo].[program_sso_trainer]
 	WHERE sso_trainer_id = @sso_trainer_id;
 
 	PRINT 'Procedure [dbo].[sp_edit_program_sso_trainer] created';
 END
-
+GO

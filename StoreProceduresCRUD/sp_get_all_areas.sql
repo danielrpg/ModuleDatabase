@@ -28,6 +28,11 @@ AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT * FROM [dbo].[areas];
+    SELECT [area_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[area_description]
+      ,[area_name]
+  FROM [dbo].[areas]
 END
 GO

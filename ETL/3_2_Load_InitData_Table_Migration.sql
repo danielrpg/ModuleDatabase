@@ -19,6 +19,9 @@
 USE ssid
 GO
 
+SET NOCOUNT ON;
+GO
+
 PRINT 'Adding init data to the Migration table....';
 GO
 
