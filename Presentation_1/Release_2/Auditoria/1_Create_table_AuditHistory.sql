@@ -15,7 +15,11 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/21/2018 Christian Tola   Initial version
 *******************************************************************************/
-
+PRINT 'Creating the AuditHistory table....';
+IF NOT EXISTS (SELECT 1 FROM sys.objects 
+		       WHERE object_id = OBJECT_ID(N'dbo.AuditHistory') 
+		       AND type in (N'U'))
+BEGIN
 CREATE TABLE [dbo].[AuditHistory]
 (
 	[AuditHistoryId] INT IDENTITY(1,1) NOT NULL CONSTRAINT [PK_AuditHistory] PRIMARY KEY,
