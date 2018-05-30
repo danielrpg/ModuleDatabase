@@ -4,316 +4,243 @@ SET XACT_ABORT ON;
 GO
 /******************************************************************************
 ** ALTER Incident_type Added Audit columns
+** Author: Christian Tola
 *******************************************************************************/
+PRINT 'Start to Modify Incident_type table';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_type] ADD created_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-		PRINT 'ALTER TABLE [dbo].[Incident_type] ADD created_by DONE';
+		ALTER TABLE [dbo].[Incident_type] ADD created_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_type] ADD created_by EXIST';
-END
 GO
-	
+PRINT 'created_by column added into [dbo].[Incident_type]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_type] ADD created_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[Incident_type] ADD created_date DONE';
+		ALTER TABLE [dbo].[Incident_type] ADD created_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_type] ADD created_date EXIST';
-END
 GO
-
+PRINT 'created_date column added into [dbo].[Incident_type]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_type] ADD modified_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-		PRINT 'ALTER TABLE [dbo].[Incident_type] ADD modified_by DONE';
+		ALTER TABLE [dbo].[Incident_type] ADD modified_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_type] ADD modified_by EXIST';
-END
 GO
-
+PRINT 'modified_by column added into [dbo].[Incident_type]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_type]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_type] ADD modified_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[Incident_type] ADD modified_date DONE';
+		ALTER TABLE [dbo].[Incident_type] ADD modified_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_type] ADD modified_date EXIST';
-END
 GO
-
+PRINT 'modified_date column added into [dbo].[Incident_type]';
+GO
+PRINT 'Incident_type modified success...';
+GO
 /******************************************************************************
 ** ALTER Incident Added Audit columns
+** Author: Christian Tola
 *******************************************************************************/
+PRINT 'Start to Modify Incident table';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident] ADD created_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-
-		PRINT 'ALTER TABLE [dbo].[Incident] ADD created_by DONE';
+		ALTER TABLE [dbo].[Incident] ADD created_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident] ADD created_by EXIST';
-END
 GO
-
+PRINT 'created_by column added into [dbo].[Incident]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident] ADD created_date DATETIME NOT NULL DEFAULT GETDATE()
-	PRINT 'ALTER TABLE [dbo].[Incident] ADD created_date DONE';
+		ALTER TABLE [dbo].[Incident] ADD created_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident] ADD created_date EXIST';
-END
+GO
+PRINT 'created_date column added into [dbo].[Incident]';
 GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident] ADD modified_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-	PRINT 'ALTER TABLE [dbo].[Incident] ADD modified_by DONE';
+		ALTER TABLE [dbo].[Incident] ADD modified_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident] ADD modified_by EXIST';
-END
 GO
-
+PRINT 'modified_by column added into [dbo].[Incident]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident] ADD modified_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[Incident] ADD modified_date DONE';
+		ALTER TABLE [dbo].[Incident] ADD modified_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident] ADD modified_date EXIST';
-END
 GO
-
+PRINT 'modified_date column added into [dbo].[Incident]';
+GO
+PRINT 'Incident modified success...';
+GO
 /******************************************************************************
 ** ALTER Incident_detail Added Audit columns
+** Author: Christian Tola
 *******************************************************************************/
+PRINT 'Start to Modify Incident_detail table';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_detail] ADD created_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-	PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD created_by  DONE';
+		ALTER TABLE [dbo].[Incident_detail] ADD created_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD created_by  EXIST';
-END
 GO
-
+PRINT 'created_by column added into [dbo].[Incident_detail]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_detail] ADD created_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD created_date  DONE';
+		ALTER TABLE [dbo].[Incident_detail] ADD created_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD created_date  EXIST';
-END
 GO
-
+PRINT 'created_date column added into [dbo].[Incident_detail]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_detail] ADD modified_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-		PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD modified_by  DONE';
+		ALTER TABLE [dbo].[Incident_detail] ADD modified_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD modified_by  EXIST';
-END
 GO
-
+PRINT 'modified_by column added into [dbo].[Incident_detail]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Incident_detail]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_detail] ADD modified_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD modified_date  DONE';
+		ALTER TABLE [dbo].[Incident_detail] ADD modified_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Incident_detail] ADD modified_date  EXIST';
-END
 GO
-
+PRINT 'modified_date column added into [dbo].[Incident_detail]';
+GO
+PRINT 'Incident_detail modified success...';
+GO
 /******************************************************************************
 ** ALTER Equipaments Added Audit columns
+** Author: Christian Tola
 *******************************************************************************/
+PRINT 'Start to Modify equipaments table';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[equipaments] ADD created_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-		PRINT 'ALTER TABLE [dbo].[equipaments] ADD created_by  DONE';
+		ALTER TABLE [dbo].[equipaments] ADD created_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[equipaments] ADD created_by  EXIST';
-END
 GO
-
+PRINT 'created_by column added into [dbo].[equipaments]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[equipaments] ADD created_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[equipaments] ADD created_date  DONE';
+		ALTER TABLE [dbo].[equipaments] ADD created_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[equipaments] ADD created_date  EXIST';
-END
+GO
+PRINT 'created_date column added into [dbo].[equipaments]';
 GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[equipaments] ADD modified_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-		PRINT 'ALTER TABLE [dbo].[equipaments] ADD modified_by  DONE';
+		ALTER TABLE [dbo].[equipaments] ADD modified_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[equipaments] ADD modified_by  EXIST';
-END
+GO
+PRINT 'modified_by column added into [dbo].[equipaments]';
 GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[equipaments]'))
 	BEGIN
-		ALTER TABLE [dbo].[equipaments] ADD modified_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[equipaments] ADD modified_date  DONE';
+		ALTER TABLE [dbo].[equipaments] ADD modified_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[equipaments] ADD modified_date  EXIST';
-END
 GO
-
+PRINT 'modified_date column added into [dbo].[equipaments]';
+GO
+PRINT 'equipaments modified success...';
+GO
 /******************************************************************************
 ** ALTER User Added Audit columns
+** Author: Christian Tola
 *******************************************************************************/
+PRINT 'Start to Modify Users table';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Users]'))
 	BEGIN
-		ALTER TABLE [dbo].[Users] ADD created_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-		PRINT 'ALTER TABLE [dbo].[Users] ADD created_by   DONE';
+		ALTER TABLE [dbo].[Users] ADD created_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Users] ADD created_by   EXIST';
-END
 GO
-
+PRINT 'created_by column added into [dbo].[Users]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'created_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Users]'))
 	BEGIN
-		ALTER TABLE [dbo].[Users] ADD created_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[Users] ADD created_date   DONE';
+		ALTER TABLE [dbo].[Users] ADD created_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Users] ADD created_date EXIST';
-END
 GO
-	
-
+PRINT 'created_date column added into [dbo].[Users]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_by'
 				AND object_id = OBJECT_ID(N'[dbo].[Users]'))
 	BEGIN
-		ALTER TABLE [dbo].[Users] ADD modified_by VARCHAR(50) NOT NULL DEFAULT 'admin'
-		PRINT 'ALTER TABLE[dbo].[Users] ADD modified_by  DONE';
+		ALTER TABLE [dbo].[Users] ADD modified_by VARCHAR(50) DEFAULT 'admin' NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Users] ADD modified_by EXIST';
-END
 GO
-
+PRINT 'modified_by column added into [dbo].[Users]';
+GO
 IF NOT EXISTS (SELECT 1
 				FROM sys.columns
 				WHERE Name = 'modified_date'
 				AND object_id = OBJECT_ID(N'[dbo].[Users]'))
 	BEGIN
-		ALTER TABLE [dbo].[Users] ADD modified_date DATETIME NOT NULL DEFAULT GETDATE()
-		PRINT 'ALTER TABLE [dbo].[Users] ADD modified_date  DONE';
+		ALTER TABLE [dbo].[Users] ADD modified_date DATETIME DEFAULT GETDATE() NOT NULL
 	END
-
-ELSE 
-BEGIN
-	PRINT 'ALTER TABLE [dbo].[Users] ADD modified_date EXIST';
-END
+GO
+PRINT 'modified_date column added into [dbo].[Users]';
+GO
+PRINT 'Users modified success...';
 GO
 
 /******************************************************************************
