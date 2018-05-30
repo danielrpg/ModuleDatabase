@@ -1,3 +1,11 @@
+-- DELETE Equipament stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_equipament]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_delete_equipament]
+END
+GO
 -- Drop Equipament CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Equipaments
@@ -17,7 +25,6 @@
 *******************************************************************************/
 CREATE PROCEDURE [dbo].[sp_delete_equipament](
     @equipament_id INT
-   ,@result BIT OUTPUT
 )
 AS
 SET XACT_ABORT ON;
@@ -26,8 +33,4 @@ BEGIN
     
     DELETE FROM [dbo].[equipaments]
     WHERE equipament_id = @equipament_id;
-
-    SET @result = 1;
-    
-    RETURN @result; 
 END

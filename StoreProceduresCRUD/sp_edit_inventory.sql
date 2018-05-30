@@ -1,3 +1,11 @@
+-- UPDATE Inventory stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_inventory]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_edit_inventory]
+END
+GO
 -- Update Inventory CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Inventory
@@ -28,14 +36,14 @@ SET NOCOUNT ON;
 BEGIN
 
     UPDATE [dbo].[Inventory]
-    SET		active_asignament = @active_asignament
-		   ,status_asignament = @status_asignament
-		   ,date_asignament = @date_asignament
+    SET		active_assignament = @active_asignament
+		   ,status_assignament = @status_asignament
+		   ,date_assignament = @date_asignament
 	       ,created_on = GETDATE()
     WHERE inventory_id = @inventory_id;
 
     SELECT *
     FROM [dbo].[Inventory]
     WHERE inventory_id = @inventory_id;
-
+	SELECT @@IDENTITY AS inventory_id;
 END

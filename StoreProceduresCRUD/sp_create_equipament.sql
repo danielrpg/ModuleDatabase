@@ -1,3 +1,11 @@
+-- Create Equipament stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_equipament]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_equipament]
+END
+GO
 -- Create Equipament CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Equipaments
@@ -21,7 +29,6 @@ CREATE PROCEDURE [dbo].[sp_create_equipament](
 			   ,@equipament_type INT
 			   ,@equipament_description VARCHAR(200)
 			   ,@equipament_image VARBINARY(MAX)
-			   ,@result BIT OUTPUT
 )
 AS 
 SET XACT_ABORT ON;
@@ -39,7 +46,5 @@ BEGIN
 			,@equipament_image
 			,GETDATE());
 
-    SET @result = 1;
-
-    RETURN @result; 
+  SELECT @@IDENTITY AS equipament_id;
 END

@@ -1,3 +1,10 @@
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_personal_by_id]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_personal_by_id]
+END
+GO
 -- Personal CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: personal

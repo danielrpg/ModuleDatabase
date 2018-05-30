@@ -1,3 +1,12 @@
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_contract]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_contract]
+END
+GO
+
+
 -- Drop User CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: contract
@@ -7,13 +16,13 @@
 **
 **  Author: Gilmer Daniel Fernandez Pinto
 **
-**  Date: 05/27/2018
+**  Date: 05/28/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
 ** --------   --------        ---------------------------------------------------
-** 05/27/2018 Gilmer Daniel Fernandez Pinto   Initial version
+** 05/28/2018 Gilmer Daniel Fernandez Pinto   Initial version
 *******************************************************************************/
 
 CREATE PROCEDURE [dbo].[sp_create_contract](
@@ -23,7 +32,7 @@ CREATE PROCEDURE [dbo].[sp_create_contract](
    ,@contract_date DATETIME
    ,@contract_salary FLOAT
    ,@contract_description VARCHAR(100)
-   ,@result BIT OUTPUT
+   ,@result BIT OUTPUT  --resultado
 )
 AS 
 SET XACT_ABORT ON;
@@ -36,7 +45,7 @@ BEGIN
     VALUES (@contract_code, @contract_city, @contract_type, @contract_date
            , @contract_salary, @contract_description ,GETDATE());
 
-    SET @result = 1;
+    SET @result = @@IDENTITY;
 
     RETURN @result; 
 END
