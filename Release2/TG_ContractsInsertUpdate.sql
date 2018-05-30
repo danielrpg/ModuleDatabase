@@ -15,6 +15,15 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/28/2018 Boris Medrano   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT * FROM sys.triggers
+    WHERE  NAME = 'TG_Contracts(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Contracts(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
+--Creando Trigger TG_Contracts(Audit)_InsertUpdate
 CREATE TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]
 ON [dbo].[contracts]
 FOR INSERT, UPDATE
