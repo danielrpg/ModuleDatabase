@@ -1,3 +1,10 @@
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_contracts]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_get_all_contracts]
+END
+GO
 -- Personal CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: contracts
@@ -21,6 +28,15 @@ AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT * FROM [dbo].[contracts];
+    SELECT  [contract_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[contract_city]
+      ,[contract_code]
+      ,[contract_date]
+      ,[contract_description]
+      ,[contract_salary]
+      ,[contract_type]
+  FROM [dbo].[contracts]
 END
 GO

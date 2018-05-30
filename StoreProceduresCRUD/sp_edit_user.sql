@@ -1,7 +1,15 @@
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_user]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_edit_user]
+END
+GO
+
 -- Drop User CRUD PROCEDURES
 /******************************************************************************
-**  Table Name: personal
-**  Desc: Table for sp_edit_personal
+**  Table Name: User
+**  Desc: Table for sp_edit_user
 ** 
 **  Called by: ssi
 **
@@ -16,30 +24,32 @@
 ** 05/26/2018 Gilmer Daniel Fernandez Pinto   Initial version
 *******************************************************************************/
 
-CREATE PROCEDURE [dbo].[sp_edit_personal](
-    @personal_id INT
-    @personal_name VARCHAR(100)
-   ,@personal_last_name VARCHAR(100)
-   ,@personal_email VARCHAR(200)
-   ,@personal_direction VARCHAR(200)
-   ,@personal_cellphone VARCHAR(100)
-   ,@personal_telephone VARCHAR(100)
-   ,@personal_active INT
+CREATE PROCEDURE [dbo].[sp_edit_user](
+    @user_id INT
+   ,@user_name VARCHAR(100) 
+   ,@user_password VARCHAR(200)
+   ,@user_active INT
 )
 AS 
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
 
-    UPDATE [dbo].[personals]
+    UPDATE [dbo].[users]
     SET user_name      = @user_name
         ,user_password = @user_password
         ,user_active   = @user_active
         ,updated_on    =  GETDATE()
     WHERE user_id = @user_id;
 
-    SELECT *
-    FROM [dbo].[personals]
+    SELECT [user_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[user_password]
+      ,[user_active]
+      ,[user_name]
+  FROM [dbo].[users]
     WHERE user_id = @user_id;
 
 END
+GO

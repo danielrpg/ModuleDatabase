@@ -1,3 +1,11 @@
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_personal]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_personal]
+END
+GO
+
 -- Drop User CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: personals
@@ -37,7 +45,8 @@ BEGIN
     VALUES (@personal_name, @personal_last_name, @personal_email, @personal_direction
            , @personal_cellphone, @personal_telephone ,@personal_active, GETDATE());
 
-    SET @result = 1;
+    SET @result = @@IDENTITY;
 
     RETURN @result; 
 END
+GO
