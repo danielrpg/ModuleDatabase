@@ -1,6 +1,11 @@
---====================================
---  Create database trigger template
---====================================
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER TG_Program_sso(Audit)_InsertUpdate
+		PRINT 'EL TRIGGER TG_Program_sso(Audit)_InsertUpdate SE ELIMINO '
+
+END
+GO
 
 --Trigger of Program_sso Table
 /******************************************************************************
