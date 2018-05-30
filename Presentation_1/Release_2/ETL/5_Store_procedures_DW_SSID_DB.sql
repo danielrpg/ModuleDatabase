@@ -29,7 +29,7 @@ GO
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_MergeArea') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.DW_MergeArea
-	PRINT 'Store procedure deleted - ETL.DW_MergeArea';
+	PRINT 'Store procedure deleted -  ETL.DW_MergeArea';
 END
 GO
 
@@ -82,7 +82,7 @@ GO
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_MergeEventIncident') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.DW_MergeEventIncident
-	PRINT 'Store procedure deleted - ETL.DW_MergeEventIncident';
+	PRINT 'Store procedure deleted -  ETL.DW_MergeEventIncident';
 END
 GO
 
@@ -141,7 +141,7 @@ GO
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_MergeFactIncident') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.DW_MergeFactIncident
-	PRINT 'Store procedure deleted - ETL.DW_MergeFactIncident';
+	PRINT 'Store procedure deleted -  ETL.DW_MergeFactIncident';
 END
 GO
 
@@ -206,7 +206,7 @@ GO
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_MergePersonal') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.DW_MergePersonal
-	PRINT 'Store procedure deleted - ETL.DW_MergePersonal';
+	PRINT 'Store procedure deleted -  ETL.DW_MergePersonal';
 END
 GO
 
@@ -268,7 +268,7 @@ GO
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_MergePosition') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.DW_MergePosition
-	PRINT 'Store procedure deleted - ETL.DW_MergePosition';
+	PRINT 'Store procedure deleted -  ETL.DW_MergePosition';
 END
 GO
 
