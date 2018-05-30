@@ -16,7 +16,7 @@
 ** 27/05/2018 Jesús David Piérola Alvarado   Release 3.0 - DW
 *******************************************************************************/
 
-USE ssid
+USE SSID
 GO
 
 IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'ETL')
