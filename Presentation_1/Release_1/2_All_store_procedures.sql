@@ -1137,9 +1137,9 @@ BEGIN
 	      ,[sso_trainer_specialty]
 	  FROM [dbo].[program_sso_trainer]
 	WHERE sso_trainer_id = @sso_trainer_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso_trainer] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso_trainer] created';
 GO
 
 -- UPDATE Program_sso_resource stored procedure.
@@ -1192,9 +1192,9 @@ BEGIN
 	      ,[sso_detail_id]
 	  FROM [dbo].[program_sso_resource]
 	WHERE sso_resource_id = @sso_resource_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso_resource] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso_resource] created';
 GO
 
 -- UPDATE Program_sso_activities stored procedure.
@@ -1256,9 +1256,9 @@ BEGIN
 	      ,[sso_trainer_id]
 	  FROM [dbo].[program_sso_activities]
 	WHERE sso_detail_id = @sso_detail_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso_activities] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso_activities] created';
 GO
 
 -- UPDATE Program_sso stored procedure.
@@ -1321,9 +1321,9 @@ BEGIN
 	      ,[sso_total_cost]
 	  FROM [dbo].[program_sso]
 	WHERE sso_id = @sso_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso] created';
 GO
 
 
@@ -3459,9 +3459,8 @@ BEGIN
     SELECT @result; 
 END
 GO
-<<<<<<< HEAD
 PRINT 'Store procedure Created! -  [sp_create_area]';
-=======
+GO
 
 -- Create Position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3515,6 +3514,9 @@ BEGIN
   SELECT @@IDENTITY AS position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_create_position]';
+GO
+
 
 -- DELETE position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3554,6 +3556,9 @@ BEGIN
     WHERE position_id = @position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_delete_position]';
+GO
+
 
 -- UPDATE position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3614,6 +3619,9 @@ BEGIN
   SELECT @@IDENTITY AS position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_edit_position]';
+GO
+
 
 --GET positions store procedure
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3658,6 +3666,8 @@ BEGIN
 	FROM [dbo].[position] as posi
 	WHERE posi.position_id = ISNULL(@position_id, posi.position_id);
 END
+GO
+PRINT 'Create procedure: [dbo].[sp_get_all_position]';
 GO
 
 -- Create department_position stored procedure.
@@ -3705,6 +3715,8 @@ BEGIN
   SELECT @@IDENTITY AS department_position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_create_department_position]';
+GO
 
 -- DELETE department_position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3746,6 +3758,9 @@ BEGIN
 		  position_id = @position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_delete_department_position]';
+GO
+
 
 -- UPDATE department_position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3796,8 +3811,10 @@ BEGIN
 	SELECT @@IDENTITY AS department_position_id;
 
 END
->>>>>>> 1385d2f76b2a3153a00c28ccf331a786c335203d
 GO
+PRINT 'Create procedure: [dbo].[sp_edit_department_position]';
+GO
+
 
 --GET department_position store procedure
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3840,7 +3857,5 @@ BEGIN
 	WHERE de_po.department_id = ISNULL(@department_id, de_po.department_id);
 END
 GO
-
-
-
-
+PRINT 'Create procedure: [dbo].[sp_get_all_department_position]';
+GO
