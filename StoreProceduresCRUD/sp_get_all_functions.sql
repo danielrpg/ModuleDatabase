@@ -1,36 +1,65 @@
--- DELETE Equipament stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_equipament]') 
+
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_functions]') 
+
 		AND type in (N'P', N'PC'))
+
 BEGIN
-	DROP PROCEDURE [dbo].[sp_delete_equipament]
+
+	DROP PROCEDURE [dbo].[sp_get_all_functions]
+
 END
+
 GO
--- Drop Equipament CRUD PROCEDURES
+
+-- Functions CRUD PROCEDURES
+
 /******************************************************************************
-**  Table Name: Equipaments
-**  Desc: delete an equipament
+
+**  Table Name: functions
+
+**  Desc: Table for sp_get_all_functions
+
 ** 
+
 **  Called by: ssi
+
 **
-**  Author: Ivan Misericordia Eulate
+
+**  Author: Boris Gonzalo Medrano Guzman
+
 **
-**  Date: 05/27/2018
+
+**  Date: 05/29/2018
+
 *******************************************************************************
+
 **                            Change History
+
 *******************************************************************************
+
 **   Date:     Author:                            Description:
+
 ** --------   --------        ---------------------------------------------------
-** 05/27/2018 Ivan Misericordia Eulate   Initial version
+
+** 05/29/2018 Boris Gonzalo Medrano Guzman   Initial version
+
 *******************************************************************************/
-CREATE PROCEDURE [dbo].[sp_delete_equipament](
-    @equipament_id INT
-)
+
+
+
+CREATE PROCEDURE [dbo].[sp_get_all_functions]
+
 AS
+
 SET XACT_ABORT ON;
+
 SET NOCOUNT ON;
-BEGIN 
-    
-    DELETE FROM [dbo].[equipaments]
-    WHERE equipament_id = @equipament_id;
+
+BEGIN
+
+    SELECT * FROM [dbo].[functions];
+
 END
+
+GO

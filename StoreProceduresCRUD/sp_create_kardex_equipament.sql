@@ -1,3 +1,11 @@
+-- CREATE Kardex_equipament stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_kardex_equipament]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_kardex_equipament]
+END
+GO
 -- Create Kardex_equipaments CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: Kardex_equipaments
@@ -21,7 +29,7 @@ CREATE PROCEDURE [dbo].[sp_create_kardex_equipament](
 			   ,@entry_kardex INT
 			   ,@outlay_kardex INT
 			   ,@date_kardex DATETIME
-			   ,@result BIT OUTPUT
+			   ,@equipament_id BIGINT
 )
 AS 
 SET XACT_ABORT ON;
@@ -33,14 +41,13 @@ BEGIN
 						 ,entry_kardex
 						 ,outlay_kardex
 						 ,date_kardex
-						 ,created_on)
+						 ,created_on
+						 ,equipament_id)
     VALUES (  @balance_kardex
 			 ,@entry_kardex
 			 ,@outlay_kardex
 			 ,@date_kardex
-			 ,GETDATE());
-
-    SET @result = 1;
-
-    RETURN @result; 
+			 ,GETDATE()
+			 ,@equipament_id);
+	SELECT @@IDENTITY AS kardex_id;
 END

@@ -1,0 +1,3 @@
+INSERT INTO ssidb.dbo.incident_type (incident_type_id, incident_sub_type, incident_type, incident_type_description, incident_type_name) VALUES (132, '', null, 'Este es el registro de accidentes', 'accidente');
+INSERT INTO ssidb.dbo.incident_type (incident_type_id, incident_sub_type, incident_type, incident_type_description, incident_type_name) VALUES (133, 'gripe', null, 'Enfermedad muy contagiosa', 'enfermedad');
+INSERT INTO ssidb.dbo.incident_type (incident_type_id, incident_sub_type, incident_type, incident_type_description, incident_type_name) VALUES (134, '', null, 'Perdida de material', 'incidente');
