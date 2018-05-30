@@ -598,3 +598,1428 @@ END;
 GO
 PRINT '[dbo].[TG_Equipament(Audit)_InsertUpdate] ha sido creado';
 GO
+--Trigger of AreasTable
+/******************************************************************************
+**  Name: TG_Areas(Audit)_InsertUpdate
+**  Desc: Audit History for User table
+** 
+**  Called by: ssi
+**
+**  Author: Boris Medrano
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Boris Medrano   Initial version
+*******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Areas(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Areas(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Areas(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
+
+CREATE TRIGGER [dbo].[TG_Areas(Audit)_InsertUpdate]
+ON [dbo].[areas]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1 
+    RETURN
+ 
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+ 
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+  
+  IF UPDATE(area_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'areas', 
+           ColumnName   = 'area_name',
+           ID1          = i.area_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[area_name], 
+           NewValue     = i.[area_name],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.area_id = i.area_id)
+    WHERE ISNULL(d.area_name, '') != ISNULL(i.area_name, '');
+  END
+
+  IF UPDATE(area_description)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'areas', 
+           ColumnName   = 'area_description',
+           ID1          = i.area_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[area_description], 
+           NewValue     = i.[area_description],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.area_id = i.area_id)
+    WHERE ISNULL(d.area_description, '') != ISNULL(i.area_description, '');
+  END
+  
+END;
+--Trigger of ContractsTable
+/******************************************************************************
+**  Name: TG_Contracts(Audit)_InsertUpdate
+**  Desc: Audit History for User table
+** 
+**  Called by: ssi
+**
+**  Author: Boris Medrano
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Boris Medrano   Initial version
+*******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Contracts(Audit)_InsertUpdate')
+	BEGIN
+		DROP TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Contracts(Audit)_InsertUpdate SE ELIMINO '
+
+	END    
+GO
+--Creando Trigger TG_Contracts(Audit)_InsertUpdate
+CREATE TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]
+ON [dbo].[contracts]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1 
+    RETURN
+ 
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+ 
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+  
+  IF UPDATE(contract_code)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'contracts', 
+           ColumnName   = 'contract_code',
+           ID1          = i.contract_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[contract_code], 
+           NewValue     = i.[contract_code],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.contract_id = i.contract_id)
+    WHERE ISNULL(d.contract_code, '') != ISNULL(i.contract_code, '');
+  END
+  IF UPDATE(contract_city)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'contracts', 
+           ColumnName   = 'contract_city',
+           ID1          = i.contract_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[contract_city], 
+           NewValue     = i.[contract_city],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.contract_id = i.contract_id)
+    WHERE ISNULL(d.contract_city, '') != ISNULL(i.contract_city, '');
+  END
+ IF UPDATE(contract_type)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'contracts', 
+           ColumnName   = 'contract_type',
+           ID1          = i.contract_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[contract_type], 
+           NewValue     = i.[contract_type],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.contract_id = i.contract_id)
+    WHERE ISNULL(d.contract_type, '') != ISNULL(i.contract_type, '');
+  END
+ IF UPDATE(contract_date)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'contracts', 
+           ColumnName   = 'contract_date',
+           ID1          = i.contract_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[contract_date], 
+           NewValue     = i.[contract_date],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.contract_id = i.contract_id)
+    WHERE ISNULL(d.contract_date, '') != ISNULL(i.contract_date, '');
+  END
+  IF UPDATE(contract_salary)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'contracts', 
+           ColumnName   = 'contract_salary',
+           ID1          = i.contract_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[contract_salary], 
+           NewValue     = i.[contract_salary],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.contract_id = i.contract_id)
+    WHERE ISNULL(d.contract_salary, '') != ISNULL(i.contract_salary, '');
+  END
+ IF UPDATE(contract_description)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'contracts', 
+           ColumnName   = 'contract_description',
+           ID1          = i.contract_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[contract_description], 
+           NewValue     = i.[contract_description],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.contract_id = i.contract_id)
+    WHERE ISNULL(d.contract_description, '') != ISNULL(i.contract_description, '');
+  END
+ 
+  
+END;
+--Trigger of DepartmentTable
+/******************************************************************************
+**  Name: TG_Department(Audit)_InsertUpdate
+**  Desc: Audit History for User table
+** 
+**  Called by: ssi
+**
+**  Author: Boris Medrano
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Boris Medrano   Initial version
+*******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Department(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Department(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Department(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
+CREATE TRIGGER [dbo].[TG_Department(Audit)_InsertUpdate]
+ON [dbo].[department]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1 
+    RETURN
+ 
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+ 
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+  
+  IF UPDATE(department_description)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'department', 
+           ColumnName   = 'department_description',
+           ID1          = i.department_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[department_description], 
+           NewValue     = i.[department_description],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.department_id = i.department_id)
+    WHERE ISNULL(d.department_description, '') != ISNULL(i.department_description, '');
+  END
+  IF UPDATE(department_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'department', 
+           ColumnName   = 'department_name',
+           ID1          = i.department_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[department_name], 
+           NewValue     = i.[department_name],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.department_id = i.department_id)
+    WHERE ISNULL(d.department_name, '') != ISNULL(i.department_name, '');
+  END
+  
+END;
+--Trigger of FunctionsTable
+/******************************************************************************
+**  Name: TG_Functions(Audit)_InsertUpdate
+**  Desc: Audit History for User table
+** 
+**  Called by: ssi
+**
+**  Author: Boris Medrano
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Boris Medrano   Initial version
+*******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Functions(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Functions(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Functions(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
+CREATE TRIGGER [dbo].[TG_Functions(Audit)_InsertUpdate]
+ON [dbo].[functions]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1 
+    RETURN
+ 
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+ 
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+  
+  IF UPDATE(func_description)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'functions', 
+           ColumnName   = 'func_description',
+           ID1          = i.func_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[func_description], 
+           NewValue     = i.[func_description],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.func_id = i.func_id)
+    WHERE ISNULL(d.func_description, '') != ISNULL(i.func_description, '');
+  END
+  IF UPDATE(func_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'functions', 
+           ColumnName   = 'func_name',
+           ID1          = i.func_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[func_name], 
+           NewValue     = i.[func_name],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.func_id = i.func_id)
+    WHERE ISNULL(d.func_name, '') != ISNULL(i.func_name, '');
+  END
+
+   IF UPDATE(position_position_id)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'functions', 
+           ColumnName   = 'position_position_id',
+           ID1          = i.func_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[position_position_id], 
+           NewValue     = i.[position_position_id],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.func_id = i.func_id)
+    WHERE ISNULL(d.position_position_id, '') != ISNULL(i.position_position_id, '');
+  END
+
+  
+END;
+--Trigger of PersonalsTable
+/******************************************************************************
+**  Name: TG_Personals(Audit)_InsertUpdate
+**  Desc: Audit History for User table
+** 
+**  Called by: ssi
+**
+**  Author: Boris Medrano
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Boris Medrano   Initial version
+*******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Personals(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Personals(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
+CREATE TRIGGER [dbo].[TG_Personals(Audit)_InsertUpdate]
+ON [dbo].[personals]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1 
+    RETURN
+ 
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+ 
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+  
+  IF UPDATE(personal_active)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'personal_active',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[personal_active], 
+           NewValue     = i.[personal_active],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.personal_active, '') != ISNULL(i.personal_active, '');
+  END
+   
+  IF UPDATE(personal_direction)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'personal_direction',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[personal_direction], 
+           NewValue     = i.[personal_direction],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.personal_direction, '') != ISNULL(i.personal_direction, '');
+  END
+  IF UPDATE(personal_cellphone)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'personal_cellphone',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[personal_cellphone], 
+           NewValue     = i.[personal_cellphone],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.personal_cellphone, '') != ISNULL(i.personal_cellphone, '');
+  END
+  IF UPDATE(personal_email)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'personal_email',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[personal_email], 
+           NewValue     = i.[personal_email],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.personal_email, '') != ISNULL(i.personal_email, '');
+  END
+  IF UPDATE(personal_last_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'personal_last_name',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[personal_last_name], 
+           NewValue     = i.[personal_last_name],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.personal_last_name, '') != ISNULL(i.personal_last_name, '');
+  END
+   IF UPDATE(personal_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'personal_name',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[personal_name], 
+           NewValue     = i.[personal_name],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.personal_name, '') != ISNULL(i.personal_name, '');
+  END
+
+   IF UPDATE(personal_telephone)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'personal_telephone',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[personal_telephone], 
+           NewValue     = i.[personal_telephone],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.personal_telephone, '') != ISNULL(i.personal_telephone, '');
+  END
+  IF UPDATE(area_area_id)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'personal', 
+           ColumnName   = 'area_area_id',
+           ID1          = i.personal_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[area_area_id], 
+           NewValue     = i.[area_area_id],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.personal_id = i.personal_id)
+    WHERE ISNULL(d.area_area_id, '') != ISNULL(i.area_area_id, '');
+  END
+   
+END;
+--Trigger of PositionTable
+/******************************************************************************
+**  Name: TG_Position(Audit)_InsertUpdate
+**  Desc: Audit History for User table
+** 
+**  Called by: ssi
+**
+**  Author: Boris Medrano
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Boris Medrano   Initial version
+*******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Position(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Position(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Position(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
+CREATE TRIGGER [dbo].[TG_Position(Audit)_InsertUpdate]
+ON [dbo].[position]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1 
+    RETURN
+ 
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+ 
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+  
+  IF UPDATE(position_description)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'position', 
+           ColumnName   = 'position_description',
+           ID1          = i.position_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[position_description], 
+           NewValue     = i.[position_description],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.position_id = i.position_id)
+    WHERE ISNULL(d.position_description, '') != ISNULL(i.position_description, '');
+  END
+  IF UPDATE(position_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'position', 
+           ColumnName   = 'position_name',
+           ID1          = i.position_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[position_name], 
+           NewValue     = i.[position_name],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.position_id = i.position_id)
+    WHERE ISNULL(d.position_name, '') != ISNULL(i.position_name, '');
+  END
+  IF UPDATE(position_level)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'position', 
+           ColumnName   = 'position_level',
+           ID1          = i.position_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[position_level], 
+           NewValue     = i.[position_level],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.position_id = i.position_id)
+    WHERE ISNULL(d.position_level, '') != ISNULL(i.position_level, '');
+  END
+  IF UPDATE(parent_position_position_id)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'position', 
+           ColumnName   = 'parent_position_position_id',
+           ID1          = i.position_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[parent_position_position_id], 
+           NewValue     = i.[parent_position_position_id],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.position_id = i.position_id)
+    WHERE ISNULL(d.parent_position_position_id, '') != ISNULL(i.parent_position_position_id, '');
+  END
+END;
+
+--Trigger of RequirementsTable
+/******************************************************************************
+**  Name: TG_Requirements(Audit)_InsertUpdate
+**  Desc: Audit History for User table
+** 
+**  Called by: ssi
+**
+**  Author: Boris Medrano
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Boris Medrano   Initial version
+*******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Requirements(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
+CREATE TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]
+ON [dbo].[requirements]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1 
+    RETURN
+ 
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+ 
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+  
+  IF UPDATE(requirement_description)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'requirements', 
+           ColumnName   = 'requirement_description',
+           ID1          = i.requirements_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[requirement_description], 
+           NewValue     = i.[requirement_description],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.requirements_id = i.requirements_id)
+    WHERE ISNULL(d.requirement_description, '') != ISNULL(i.requirement_description, '');
+  END
+  IF UPDATE(requirement_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'requirements', 
+           ColumnName   = 'requirement_name',
+           ID1          = i.requirements_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[requirement_name], 
+           NewValue     = i.[requirement_name],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.requirements_id = i.requirements_id)
+    WHERE ISNULL(d.requirement_name, '') != ISNULL(i.requirement_name, '');
+  END
+
+   IF UPDATE(position_position_id)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName, 
+                                 ColumnName, 
+                                 ID, 
+                                 Date, 
+                                 OldValue, 
+                                 NewValue,
+								 ModifiedBy) 
+    SELECT TableName    = 'requirements', 
+           ColumnName   = 'position_position_id',
+           ID1          = i.requirements_id, 
+           Date         = @CurrDate, 
+           OldValue     = d.[position_position_id], 
+           NewValue     = i.[position_position_id],
+           ModifiedBy   = i.modified_by 
+    FROM deleted d 
+    FULL OUTER JOIN inserted i ON (d.requirements_id = i.requirements_id)
+    WHERE ISNULL(d.position_position_id, '') != ISNULL(i.position_position_id, '');
+  END
+END;
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso_activities(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [TG_Program_sso_activities(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Program_sso_activities(Audit)_InsertUpdate SE ELIMINO '
+
+END
+GO
+
+--Trigger of Program_sso_activities Table
+/******************************************************************************
+**  Name: TG_Program_sso(Audit)_InsertUpdate
+**  Desc: Audit History for program_sso_activities table
+**
+**  Called by: ssi
+**
+**  Author: Patsy Vanessa Alcocer Iriarte
+**
+**  Date: 05/29/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/29/2018 Vanessa Alcocer   Initial version
+*******************************************************************************/
+CREATE TRIGGER [dbo].[TG_Program_sso_activities(Audit)_InsertUpdate]
+ON [dbo].[program_sso_activities]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1
+    RETURN
+
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+
+  IF UPDATE(sso_detail_activities)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_activities',
+           ColumnName   = 'sso_detail_activities',
+           ID1          = i.sso_detail_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_detail_activities,
+           NewValue     = i.[sso_detail_activities],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_detail_id = i.sso_detail_id)
+    WHERE ISNULL(d.sso_detail_activities, '') != ISNULL(i.sso_detail_activities, '');
+  END
+
+  IF UPDATE(sso_detail_goal)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_activities',
+           ColumnName   = 'sso_detail_goal',
+           ID1          = i.sso_detail_id,
+           Date         = @CurrDate,
+           OldValue     = d.[sso_detail_goal],
+           NewValue     = i.[sso_detail_goal],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_detail_id = i.sso_detail_id)
+    WHERE ISNULL(d.sso_detail_goal, '') != ISNULL(i.sso_detail_goal, '');
+  END
+
+   IF UPDATE(so_detail_number)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_activities',
+           ColumnName   = 'sso_detail_number',
+           ID1          = i.sso_detail_id,
+           Date         = @CurrDate,
+           OldValue     = d.[so_detail_number],
+           NewValue     = i.[so_detail_number],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_detail_id = i.sso_detail_id)
+    WHERE ISNULL(d.so_detail_number, '') != ISNULL(i.so_detail_number, '');
+  END
+
+    IF UPDATE(sso_detail_time)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_activities',
+           ColumnName   = 'sso_detail_time',
+           ID1          = i.sso_detail_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_detail_time,
+           NewValue     = i.[sso_detail_time],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_detail_id = i.sso_detail_id)
+    WHERE ISNULL(d.sso_detail_time, '') != ISNULL(i.sso_detail_time, '');
+  END
+
+       IF UPDATE(soo_detail_type)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_activities',
+           ColumnName   = 'soo_detail_type',
+           ID1          = i.sso_detail_id,
+           Date         = @CurrDate,
+           OldValue     = d.soo_detail_type,
+           NewValue     = i.[soo_detail_type],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_detail_id = i.sso_detail_id)
+    WHERE ISNULL(d.soo_detail_type, '') != ISNULL(i.soo_detail_type, '');
+  END
+
+END;
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [TG_Program_sso(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Program_sso(Audit)_InsertUpdate SE ELIMINO '
+
+END
+GO
+
+--Trigger of Program_sso Table
+/******************************************************************************
+**  Name: TG_Program_sso(Audit)_InsertUpdate
+**  Desc: Audit History for program_sso table
+**
+**  Called by: ssi
+**
+**  Author: Patsy Vanessa Alcocer Iriarte
+**
+**  Date: 05/29/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Vanessa Alcocer   Initial version
+*******************************************************************************/
+CREATE TRIGGER [dbo].[TG_Program_sso(Audit)_InsertUpdate]
+ON [dbo].[program_sso]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1
+    RETURN
+
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+
+  IF UPDATE(sso_execution_time)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso',
+           ColumnName   = 'sso_execution_time',
+           ID1          = i.sso_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_execution_time,
+           NewValue     = i.[sso_execution_time],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_id = i.sso_id)
+    WHERE ISNULL(d.sso_execution_time, '') != ISNULL(i.sso_execution_time, '');
+  END
+
+  IF UPDATE(sso_goal)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso',
+           ColumnName   = 'sso_goal',
+           ID1          = i.sso_id,
+           Date         = @CurrDate,
+           OldValue     = d.[sso_goal],
+           NewValue     = i.[sso_goal],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_id = i.sso_id)
+    WHERE ISNULL(d.sso_goal, '') != ISNULL(i.sso_goal, '');
+  END
+
+    IF UPDATE(sso_indicator)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso',
+           ColumnName   = 'sso_indicator',
+           ID1          = i.sso_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_indicator,
+           NewValue     = i.[sso_indicator],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_id = i.sso_id)
+    WHERE ISNULL(d.sso_indicator, '') != ISNULL(i.sso_indicator, '');
+  END
+
+    IF UPDATE(sso_objetive)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso',
+           ColumnName   = 'sso_objetive',
+           ID1          = i.sso_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_objetive,
+           NewValue     = i.[sso_objetive],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_id = i.sso_id)
+    WHERE ISNULL(d.sso_objetive, '') != ISNULL(i.sso_objetive, '');
+  END
+
+      IF UPDATE(sso_responsable)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso',
+           ColumnName   = 'sso_responsable',
+           ID1          = i.sso_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_responsable,
+           NewValue     = i.[sso_responsable],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_id = i.sso_id)
+    WHERE ISNULL(d.sso_responsable, '') != ISNULL(i.sso_responsable, '');
+  END
+
+        IF UPDATE(sso_total_cost)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso',
+           ColumnName   = 'sso_total_cost',
+           ID1          = i.sso_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_total_cost,
+           NewValue     = i.[sso_total_cost],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_id = i.sso_id)
+    WHERE ISNULL(d.sso_total_cost, '') != ISNULL(i.sso_total_cost, '');
+  END
+
+END;
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso_resource(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [TG_Program_sso_resource(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Program_sso_resource(Audit)_InsertUpdate SE ELIMINO '
+
+END
+GO
+
+--Trigger of Program_sso_resource Table
+/******************************************************************************
+**  Name: TG_Program_sso_resource(Audit)_InsertUpdate
+**  Desc: Audit History for program_sso_resource table
+**
+**  Called by: ssi
+**
+**  Author: Patsy Vanessa Alcocer Iriarte
+**
+**  Date: 05/29/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/29/2018 Vanessa Alcocer   Initial version
+*******************************************************************************/
+CREATE TRIGGER [dbo].[TG_Program_sso_resource(Audit)_InsertUpdate]
+ON [dbo].[program_sso_resource]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1
+    RETURN
+
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+
+  IF UPDATE(sso_resource_cost)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_resource',
+           ColumnName   = 'sso_resource_cost',
+           ID1          = i.sso_resource_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_resource_cost,
+           NewValue     = i.[sso_resource_cost],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_resource_id = i.sso_resource_id)
+    WHERE ISNULL(d.sso_resource_cost, '') != ISNULL(i.sso_resource_cost, '');
+  END
+
+  IF UPDATE(sso_resource_detail)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_resource',
+           ColumnName   = 'sso_resource_detail',
+           ID1          = i.sso_resource_id,
+           Date         = @CurrDate,
+           OldValue     = d.[sso_resource_detail],
+           NewValue     = i.[sso_resource_detail],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_detail_id = i.sso_detail_id)
+    WHERE ISNULL(d.sso_resource_detail, '') != ISNULL(i.sso_resource_detail, '');
+  END
+
+END;
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Program_sso_trainer(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [TG_Program_sso_trainer(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Program_sso_trainer(Audit)_InsertUpdate SE ELIMINO '
+
+END
+GO
+
+--Trigger of Program_sso_trainer Table
+/******************************************************************************
+**  Name: TG_Program_sso_trainer(Audit)_InsertUpdate
+**  Desc: Audit History for program_sso_trainer table
+**
+**  Called by: ssi
+**
+**  Author: Patsy Vanessa Alcocer Iriarte
+**
+**  Date: 05/29/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/29/2018 Vanessa Alcocer   Initial version
+*******************************************************************************/
+CREATE TRIGGER [dbo].[TG_Program_sso_trainer(Audit)_InsertUpdate]
+ON [dbo].[program_sso_trainer]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1
+    RETURN
+
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+
+  IF UPDATE(sso_trainer_skills)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_trainer',
+           ColumnName   = 'sso_trainer_skills',
+           ID1          = i.sso_trainer_id,
+           Date         = @CurrDate,
+           OldValue     = d.sso_trainer_skills,
+           NewValue     = i.[sso_trainer_skills],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_trainer_id = i.sso_trainer_id)
+    WHERE ISNULL(d.sso_trainer_skills, '') != ISNULL(i.sso_trainer_skills, '');
+  END
+
+  IF UPDATE(sso_trainer_ci)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_trainer',
+           ColumnName   = 'sso_trainer_ci',
+           ID1          = i.sso_trainer_id,
+           Date         = @CurrDate,
+           OldValue     = d.[sso_trainer_ci],
+           NewValue     = i.[sso_trainer_ci],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_trainer_id = i.sso_trainer_id)
+    WHERE ISNULL(d.sso_trainer_ci, '') != ISNULL(i.sso_trainer_ci, '');
+  END
+
+    IF UPDATE(sso_trainer_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_trainer',
+           ColumnName   = 'sso_trainer_name',
+           ID1          = i.sso_trainer_id,
+           Date         = @CurrDate,
+           OldValue     = d.[sso_trainer_name],
+           NewValue     = i.[sso_trainer_name],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_trainer_id = i.sso_trainer_id)
+    WHERE ISNULL(d.sso_trainer_name, '') != ISNULL(i.sso_trainer_name, '');
+  END
+
+      IF UPDATE(sso_trainer_specialty)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'program_sso_trainer',
+           ColumnName   = 'sso_trainer_specialty',
+           ID1          = i.sso_trainer_id,
+           Date         = @CurrDate,
+           OldValue     = d.[sso_trainer_specialty],
+           NewValue     = i.[sso_trainer_specialty],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.sso_trainer_id = i.sso_trainer_id)
+    WHERE ISNULL(d.sso_trainer_specialty, '') != ISNULL(i.sso_trainer_specialty, '');
+  END
+
+END;
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Roles(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Roles(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Roles(Audit)_InsertUpdate SE ELIMINO '
+
+END
+GO
+
+--Trigger of roles Table
+/******************************************************************************
+**  Name: TG_Roles(Audit)_InsertUpdate
+**  Desc: Audit History for roles table
+**
+**  Called by: ssi
+**
+**  Author: Patsy Vanessa Alcocer Iriarte
+**
+**  Date: 05/29/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/29/2018 Vanessa Alcocer   Initial version
+*******************************************************************************/
+CREATE TRIGGER [dbo].[TG_Roles(Audit)_InsertUpdate]
+ON [dbo].[roles]
+FOR INSERT, UPDATE
+AS
+BEGIN
+  IF TRIGGER_NESTLEVEL(@@ProcID) > 1
+    RETURN
+
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+
+  DECLARE @CurrDate DATETIME = GETUTCDATE();
+
+  IF UPDATE(role_name)
+  BEGIN
+    INSERT INTO dbo.AuditHistory(TableName,
+                                 ColumnName,
+                                 ID,
+                                 Date,
+                                 OldValue,
+                                 NewValue,
+								 ModifiedBy)
+    SELECT TableName    = 'roles',
+           ColumnName   = 'role_name',
+           ID1          = i.role_id,
+           Date         = @CurrDate,
+           OldValue     = d.role_name,
+           NewValue     = i.[role_name],
+           ModifiedBy   = i.modified_by
+    FROM deleted d
+    FULL OUTER JOIN inserted i ON (d.role_id = i.role_id)
+    WHERE ISNULL(d.role_name, '') != ISNULL(i.role_name, '');
+  END
+END;

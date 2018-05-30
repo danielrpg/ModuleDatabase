@@ -1,3 +1,6 @@
+USE [SSID]
+GO
+
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_update_incident_type]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_update_incident_type
@@ -25,10 +28,10 @@ GO
 CREATE PROCEDURE [dbo].[sp_update_incident_type]
 (
 	@incident_type_id bigint
-	,@incident_sub_type varchar(255)
-    ,@incident_type varchar(255)
-    ,@incident_type_description varchar(255)
-    ,@incident_type_name varchar(255)    
+	,@incident_sub_type varchar(50)
+    ,@incident_type varchar(50)
+    ,@incident_type_description varchar(max)
+    ,@incident_type_name varchar(50)    
 )
 AS
 SET XACT_ABORT ON;
@@ -36,8 +39,8 @@ SET NOCOUNT ON;
 BEGIN
 
 	UPDATE [dbo].[incident_type]
-   SET [incident_sub_type] = @incident_sub_type
-      ,[incident_type] = @incident_type
+   SET [incident_type_subtype] = @incident_sub_type
+      ,[incident_type_type] = @incident_type
       ,[incident_type_description] = @incident_type_description
       ,[incident_type_name] = @incident_type_name
  WHERE [incident_type_id] = @incident_type_id
@@ -72,10 +75,9 @@ GO
 CREATE PROCEDURE [dbo].[sp_update_incident_detail]
 (
 	@incident_detail_id bigint
-	,@incident_detail_name varchar(255)
-    ,@incident_detail_status varchar(255)
-    ,@incident_detail_subtype varchar(255)
-    ,@incident_detail_type varchar(255)    
+	,@incident_detail_name varchar(50)
+    ,@incident_detail_status varchar(15)
+    ,@incident_detail_description varchar(200)   
 )
 AS
 SET XACT_ABORT ON;
@@ -83,11 +85,9 @@ SET NOCOUNT ON;
 BEGIN
 
 	UPDATE [dbo].[incident_detail]
-   SET [incident_detail_id] = @incident_detail_id
-      ,[incident_detail_name] = @incident_detail_name
+   SET [incident_detail_name] = @incident_detail_name
       ,[incident_detail_status] = @incident_detail_status
-      ,[incident_detail_subtype] = @incident_detail_subtype
-      ,[incident_detail_type] = @incident_detail_type
+      ,[incident_detail_description] = @incident_detail_description
 	WHERE [incident_detail_id] = @incident_detail_id
 END
 GO
@@ -120,14 +120,13 @@ GO
 
 CREATE PROCEDURE [dbo].[sp_update_incident]
 (	@incident_id bigint
-	,@code nvarchar(255)
-    ,@date_at datetime
+	,@incident_code varchar(10)
+    ,@incident_registered_date datetime
     ,@incident_number int
-    ,@recurrence int
-    ,@reincident bit
-    ,@reported_by nvarchar(255)
-    ,@severity nvarchar(255)
-    ,@treatment bit
+    ,@incident_reincident bit
+    ,@incident_reported_by varchar(100)
+    ,@incident_severity varchar(100)
+    ,@incident_treatment bit
     ,@incident_detail_id bigint
     ,@incident_type_id bigint
 	,@personal_id bigint
@@ -138,14 +137,13 @@ SET NOCOUNT ON;
 BEGIN
 
 	UPDATE [dbo].[incident]
-   SET [code] = @code
-      ,[date_at] = @date_at
+   SET [incident_code] = @incident_code
+      ,[incident_registered_date] = @incident_registered_date
       ,[incident_number] = @incident_number
-      ,[recurrence] = @recurrence
-      ,[reincident] = @reincident
-      ,[reported_by] = @reported_by
-      ,[severity] = @severity
-      ,[treatment] = @treatment
+      ,[incident_reincident] = @incident_reincident
+      ,[incident_reported_by] = @incident_reported_by
+      ,[incident_severity] = @incident_severity
+      ,[incident_treatment] = @incident_treatment
       ,[incident_detail_id] = @incident_detail_id
       ,[incident_type_id] = @incident_type_id
       ,[personal_id] = @personal_id
@@ -243,10 +241,10 @@ SET NOCOUNT ON;
 BEGIN
 
 	SELECT [incident_type_id]
-      ,[incident_sub_type]
-      ,[incident_type]
-      ,[incident_type_description]
       ,[incident_type_name]
+      ,[incident_type_description]
+      ,[incident_type_type]
+      ,[incident_type_subtype]
   FROM [dbo].[incident_type]
   WHERE [incident_type_id] = ISNULL(@incident_type_id,[incident_type_id]) 
 END
@@ -287,10 +285,9 @@ SET NOCOUNT ON;
 BEGIN
 
 	SELECT [incident_detail_id]
-		,[incident_detail_name]
-		,[incident_detail_status]
-		,[incident_detail_subtype]
-		,[incident_detail_type]
+      ,[incident_detail_status]
+      ,[incident_detail_name]
+      ,[incident_detail_description]
 	FROM [dbo].[incident_detail]
 	WHERE [incident_detail_id] = ISNULL(@incident_detail_id, [incident_detail_id])
 END
@@ -332,13 +329,12 @@ BEGIN
 
 	SELECT [incident_id]
       ,[incident_code]
-      --,[incident_date_at]
       ,[incident_number]
-      ,[recurrence]
-      ,[reincident]
-      ,[reported_by]
-      ,[severity]
-      ,[treatment]
+      ,[incident_registered_date]
+      ,[incident_reincident]
+      ,[incident_treatment]
+      ,[incident_severity]
+      ,[incident_reported_by]
       ,[incident_detail_id]
       ,[incident_type_id]
       ,[personal_id]
@@ -2952,10 +2948,10 @@ GO
 
 CREATE PROCEDURE [dbo].[sp_create_incident_type]
 (
-	@incident_sub_type varchar(255)
-    ,@incident_type varchar(255)
-    ,@incident_type_description varchar(255)
-    ,@incident_type_name varchar(255)    
+	@incident_type_subtype varchar(50)
+    ,@incident_type_type varchar(50)
+    ,@incident_type_description varchar(max)
+    ,@incident_type_name varchar(50)    
 )
 AS
 SET XACT_ABORT ON;
@@ -2963,15 +2959,15 @@ SET NOCOUNT ON;
 BEGIN
 
 	INSERT INTO [dbo].[incident_type]
-           ([incident_sub_type]
-           ,[incident_type]
+           ([incident_type_name]
            ,[incident_type_description]
-           ,[incident_type_name])
+           ,[incident_type_type]
+           ,[incident_type_subtype])
      VALUES
-           (@incident_sub_type
-           ,@incident_type
-           ,@incident_type_description
-           ,@incident_type_name)
+           (@incident_type_name
+		   ,@incident_type_description
+           ,@incident_type_type
+           ,@incident_type_subtype)
 
 	SELECT @@IDENTITY AS incident_type_id;
 END
@@ -3004,10 +3000,9 @@ GO
 
 CREATE PROCEDURE [dbo].[sp_create_incident_detail]
 (
-	@incident_detail_name varchar(255)
-    ,@incident_detail_status varchar(255)
-    ,@incident_detail_subtype varchar(255)
-    ,@incident_detail_type varchar(255)    
+	@incident_detail_status varchar(15)
+    ,@incident_detail_name varchar(50)
+    ,@incident_detail_description varchar(200)  
 )
 AS
 SET XACT_ABORT ON;
@@ -3015,15 +3010,13 @@ SET NOCOUNT ON;
 BEGIN
 
 	INSERT INTO [dbo].[incident_detail]
-           ([incident_detail_name]
-           ,[incident_detail_status]
-           ,[incident_detail_subtype]
-           ,[incident_detail_type])
+           ([incident_detail_status]
+           ,[incident_detail_name]
+           ,[incident_detail_description])
      VALUES
-           (@incident_detail_name 
-           ,@incident_detail_status 
-           ,@incident_detail_subtype 
-           ,@incident_detail_type)
+           (@incident_detail_status
+           ,@incident_detail_name
+           ,@incident_detail_description)
 
 	SELECT @@IDENTITY AS incident_detail_id;
 END
@@ -3056,47 +3049,44 @@ GO
 
 CREATE PROCEDURE [dbo].[sp_create_incident]
 (	
-	@code nvarchar(255)
-    ,@date_at datetime
+	@incident_code varchar(10)
     ,@incident_number int
-    ,@recurrence int
-    ,@reincident bit
-    ,@reported_by nvarchar(255)
-    ,@severity nvarchar(255)
-    ,@treatment bit
+    ,@incident_registered_date datetime
+    ,@incident_reincident bit
+    ,@incident_treatment bit
+    ,@incident_severity varchar(100)
+    ,@incident_reported_by varchar(100)
     ,@incident_detail_id bigint
     ,@incident_type_id bigint
-	,@personal_id bigint
+    ,@personal_id bigint
 )
 AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
 
-	INSERT INTO [dbo].[incident]
-           ([code]
-           ,[date_at]
+INSERT INTO [dbo].[incident]
+           ([incident_code]
            ,[incident_number]
-           ,[recurrence]
-           ,[reincident]
-           ,[reported_by]
-           ,[severity]
-           ,[treatment]
+           ,[incident_registered_date]
+           ,[incident_reincident]
+           ,[incident_treatment]
+           ,[incident_severity]
+           ,[incident_reported_by]
            ,[incident_detail_id]
            ,[incident_type_id]
-		   ,[personal_id])
+           ,[personal_id])
      VALUES
-           (@code
-           ,@date_at
-           ,@incident_number
-           ,@recurrence
-           ,@reincident
-           ,@reported_by
-           ,@severity
-           ,@treatment
-           ,@incident_detail_id
-           ,@incident_type_id
-		   ,@personal_id)
+           (@incident_code 
+           ,@incident_number 
+           ,@incident_registered_date
+           ,@incident_reincident 
+           ,@incident_treatment 
+           ,@incident_severity 
+           ,@incident_reported_by 
+           ,@incident_detail_id 
+           ,@incident_type_id 
+           ,@personal_id)
 
 	SELECT @@IDENTITY AS incident_id;
 END

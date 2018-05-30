@@ -470,4 +470,197 @@ IF NOT EXISTS (SELECT 1
 	END
 GO
 
+/******************************************************************************
+** ALTER program_sso Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso] ADD created_by INT NOT NULL
+	END
+GO
 
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso] ADD created_date DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso] ADD modified_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso] ADD modified_date DATETIME NOT NULL
+	END
+GO
+
+/******************************************************************************
+** ALTER program_sso_activities Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_activities] ADD created_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_activities] ADD created_date DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_activities] ADD modified_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_activities]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_activities] ADD modified_date DATETIME NOT NULL
+	END
+GO
+
+/******************************************************************************
+** ALTER program_sso_resource Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_resource] ADD created_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_resource] ADD created_date DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_resource] ADD modified_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_resource]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_resource] ADD modified_date DATETIME NOT NULL
+	END
+GO
+
+/******************************************************************************
+** ALTER program_sso_trainer Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_trainer] ADD created_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_trainer] ADD created_date DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_by'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_trainer] ADD modified_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_date'
+				AND object_id = OBJECT_ID(N'[dbo].[program_sso_trainer]'))
+	BEGIN
+		ALTER TABLE [dbo].[program_sso_trainer] ADD modified_date DATETIME NOT NULL
+	END
+GO
+
+/******************************************************************************
+** ALTER roles Added Audit columns
+*******************************************************************************/
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_by'
+				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
+	BEGIN
+		ALTER TABLE [dbo].[roles] ADD created_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'created_date'
+				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
+	BEGIN
+		ALTER TABLE [dbo].[roles] ADD created_date DATETIME NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_by'
+				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
+	BEGIN
+		ALTER TABLE [dbo].[roles] ADD modified_by INT NOT NULL
+	END
+GO
+
+IF NOT EXISTS (SELECT 1
+				FROM sys.columns
+				WHERE Name = 'modified_date'
+				AND object_id = OBJECT_ID(N'[dbo].[roles]'))
+	BEGIN
+		ALTER TABLE [dbo].[roles] ADD modified_date DATETIME NOT NULL
+	END
+GO
