@@ -15,6 +15,14 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/28/2018 Boris Medrano   Initial version
 *******************************************************************************/
+IF EXISTS (SELECT 1 FROM sys.triggers
+    WHERE  NAME = 'TG_Requirements(Audit)_InsertUpdate')
+BEGIN
+		DROP TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]
+		PRINT 'EL TRIGGER TG_Requirements(Audit)_InsertUpdate SE ELIMINO '
+
+END    
+GO
 CREATE TRIGGER [dbo].[TG_Requirements(Audit)_InsertUpdate]
 ON [dbo].[requirements]
 FOR INSERT, UPDATE
