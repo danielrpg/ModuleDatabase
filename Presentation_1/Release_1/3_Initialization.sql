@@ -17,6 +17,8 @@
 ** 05/29/2018 Franz A. Lopez Choque		  Update schema version
 *******************************************************************************/
 use SSID;
+GO
+
 set xact_abort on;
 set nocount on;
 
