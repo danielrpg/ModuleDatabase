@@ -60,15 +60,15 @@ if(select count(*) from dbo.program_sso)=0
 begin
 	set identity_insert dbo.program_sso on;
 	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (1, '2018-05-27 23:56:44.8380000', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Pedro Fernandez', 500.5);
+		VALUES (1, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Pedro Fernandez', 500.5);
 	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (2, '2018-05-27 23:56:44.8420000', null, '3 semanas', 'Actualizar normas en seguridad industrial', 'Mejora en actualizacion de normas', 'Capacitar a todos los trabajadores', 'Jorge Eduardo', 300.5);
+		VALUES (2, '2018-05-27 23:56:44', null, '3 semanas', 'Actualizar normas en seguridad industrial', 'Mejora en actualizacion de normas', 'Capacitar a todos los trabajadores', 'Jorge Eduardo', 300.5);
 	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (3, '2018-05-27 23:56:44.8420000', null, '1 semana', 'Conocer accionar frente a un accidente', 'Incrementar el conocimiento sobre accidentes', 'Capacitar a todos los trabajadores', 'Olga Mercado', 100.5);
+		VALUES (3, '2018-05-27 23:56:44', null, '1 semana', 'Conocer accionar frente a un accidente', 'Incrementar el conocimiento sobre accidentes', 'Capacitar a todos los trabajadores', 'Olga Mercado', 100.5);
 	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (4, '2018-05-27 23:56:44.8420000', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Angela Perez', 500.5);
+		VALUES (4, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Angela Perez', 500.5);
 	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (5, '2018-05-27 23:56:44.8420000', null, '3 semanas', 'Incrementar el conocimiento sobre peligros maquinarios', 'Mejora del uso de maquinarias', 'Capacitar a todos los trabajadores', 'Maria Fanola', 540.5);
+		VALUES (5, '2018-05-27 23:56:44', null, '3 semanas', 'Incrementar el conocimiento sobre peligros maquinarios', 'Mejora del uso de maquinarias', 'Capacitar a todos los trabajadores', 'Maria Fanola', 540.5);
 	set identity_insert dbo.program_sso off;
 	print 'program_sso done';
 end
@@ -223,7 +223,7 @@ begin
 	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (138, 'enfermedad', 'Enfermedad muy contagiosa', '', 'gripe');
 	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (139, 'incidente', 'Perdida de material', '', '');
 	set identity_insert dbo.incident_type off;
-	print 'inident_typr done'; select * from incident;
+	print 'inident_typr done';
 end
 
 print 'insert data into the incident_detail table';
@@ -237,7 +237,7 @@ begin
 	print 'incident_detail done';
 end
 
-print 'insert data into the incident table'; select * from personals
+print 'insert data into the incident table';
 if(select count(*) from dbo.incident)=0
 begin
 	set identity_insert dbo.incident on;
@@ -271,7 +271,7 @@ begin
 	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (59, '2018-05-27 23:56:44', null, 'El departamento comercial agrupa los cargos relacionados con las ventas de la empresa.', 'Departamento comercial');
 	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (68, '2018-05-27 23:56:44', null, 'El departamento financiero agrupa los cargos encargados de las finanzas de la empresa.', 'Departamento financiero');
 	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (77, '2018-05-27 23:56:44', null, 'El departamento de recursos humanos agrupa los cargos encargados del personal.', 'Departamento de recursos humanos');
-	set identity_insert dbo.depertament off;
+	set identity_insert dbo.department off;
 	print 'department done';
 end
 
