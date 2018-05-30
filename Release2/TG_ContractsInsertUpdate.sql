@@ -15,7 +15,7 @@
 ** --------   --------        ---------------------------------------------------
 ** 05/28/2018 Boris Medrano   Initial version
 *******************************************************************************/
-IF EXISTS (SELECT * FROM sys.triggers
+IF EXISTS (SELECT 1 FROM sys.triggers
     WHERE  NAME = 'TG_Contracts(Audit)_InsertUpdate')
 BEGIN
 		DROP TRIGGER [dbo].[TG_Contracts(Audit)_InsertUpdate]
