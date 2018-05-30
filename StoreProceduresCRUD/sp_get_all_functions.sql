@@ -58,7 +58,13 @@ SET NOCOUNT ON;
 
 BEGIN
 
-    SELECT * FROM [dbo].[functions];
+    SELECT [func_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[func_description]
+      ,[func_name]
+      ,[position_position_id]
+  FROM [dbo].[functions]
 
 END
 

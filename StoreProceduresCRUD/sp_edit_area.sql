@@ -40,7 +40,11 @@ BEGIN
         ,updated_on       = GETDATE()
     WHERE area_id         = @area_id;
 
-    SELECT *
+    SELECT  [area_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[area_description]
+      ,[area_name]
     FROM [dbo].[areas]
     WHERE area_id = @area_id;
 

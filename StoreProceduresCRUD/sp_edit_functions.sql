@@ -84,12 +84,16 @@ BEGIN
 
 
 
-    SELECT *
-
-    FROM [dbo].[functions]
-
-    WHERE func_id = @func_id;
+    SELECT  [func_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[func_description]
+      ,[func_name]
+      ,[position_position_id]
+  FROM [dbo].[functions]
+  WHERE func_id = @func_id;
 
 
 
 END
+GO

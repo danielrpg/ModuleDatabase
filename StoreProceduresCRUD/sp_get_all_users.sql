@@ -28,5 +28,12 @@ AS
 SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
-    SELECT * FROM [dbo].[users];
+    SELECT [user_id]
+		,[created_on]
+		,[updated_on]
+		,[user_password]
+		,[user_active]
+		,[user_name]
+	FROM [dbo].[users]
 END
+GO
