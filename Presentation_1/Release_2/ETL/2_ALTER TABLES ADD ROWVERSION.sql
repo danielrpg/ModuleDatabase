@@ -1,5 +1,8 @@
 -- ALTER TABLES Rowversion
 
+USE SSID
+GO
+
 -- ALTER TABLEs
 /******************************************************************************
 **  Desc: Add row Rowversion timestamp, for all tables
