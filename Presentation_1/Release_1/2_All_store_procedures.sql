@@ -3459,9 +3459,387 @@ BEGIN
     SELECT @result; 
 END
 GO
+<<<<<<< HEAD
 PRINT 'Store procedure Created! -  [sp_create_area]';
+=======
+
+-- Create Position stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_position]
+	PRINT 'Drop procedure: [dbo].[sp_create_position]';
+END
+GO
+-- Create Position CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: Position
+**  Desc: Table for [dbo].[sp_create_position]
+** 
+**  Called by: SSI
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/27/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+
+CREATE PROCEDURE [dbo].[sp_create_position](
+				@position_description VARCHAR(800)
+			   ,@position_level INT
+			   ,@positon_name VARCHAR(300)
+			   ,@parent_position_position_id BIGINT
+)
+AS 
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+
+    INSERT INTO [dbo].[position](position_description
+								,position_level
+								,position_name
+								,parent_position_position_id
+								,created_on)
+    VALUES ( @position_description
+			,@position_level
+			,@positon_name
+			,@parent_position_position_id
+			,GETDATE());
+
+  SELECT @@IDENTITY AS position_id;
+END
 GO
 
+-- DELETE position stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_delete_position]
+	PRINT 'Drop procedure: [dbo].[sp_delete_position]';
+END
+GO
+-- Drop position CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: position
+**  Desc: delete an position
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+CREATE PROCEDURE [dbo].[sp_delete_position](
+    @position_id INT
+)
+AS
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN 
+    
+    DELETE FROM [dbo].[position]
+    WHERE position_id = @position_id;
+END
+GO
+
+-- UPDATE position stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_edit_position]
+	PRINT 'Drop procedure: [dbo].[sp_edit_position]';
+END
+GO
+-- UPDATE position CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: position
+**  Desc: Table for [dbo].[sp_edit_position]
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+CREATE PROCEDURE [dbo].[sp_edit_position](
+			    @position_id BIGINT
+			   ,@position_description VARCHAR(800)
+			   ,@position_level INT
+			   ,@position_name VARCHAR(300)
+			   ,@parent_position_position_id BIGINT
+)
+AS 
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+	UPDATE [dbo].[position]
+	SET 
+       [position_description] = @position_description
+      ,[position_level] = @position_level
+      ,[position_name] = @position_name
+      ,[parent_position_position_id] = @parent_position_position_id
+	  ,[created_on] = GETDATE()
+	WHERE [position_id] = @position_id;
+
+	SELECT [position_id]
+      ,[created_on]
+      ,[updated_on]
+      ,[position_description]
+      ,[position_level]
+      ,[position_name]
+      ,[parent_position_position_id]
+	FROM [dbo].[position]
+	WHERE [position_id] = @position_id;
+
+  SELECT @@IDENTITY AS position_id;
+END
+GO
+
+--GET positions store procedure
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_get_all_position]
+	PRINT 'Drop procedure: [dbo].[sp_get_all_position]';
+END
+GO
+-- Equipments CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: position
+**  Desc: Table for sp_get_all_position
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/28/2018
+
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+
+CREATE PROCEDURE [dbo].[sp_get_all_position](
+	@position_id BIGINT = null
+)
+AS
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+    SELECT   position_id
+			,position_name
+			,position_level
+			,position_description
+			,parent_position_position_id 
+	FROM [dbo].[position] as posi
+	WHERE posi.position_id = ISNULL(@position_id, posi.position_id);
+END
+GO
+
+-- Create department_position stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_department_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_department_position]
+	PRINT 'Drop procedure: [dbo].[sp_create_department_position]';
+END
+GO
+-- Create department_position CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: department_position
+**  Desc: Table for sp_create_department_position
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/28/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+
+CREATE PROCEDURE [dbo].[sp_create_department_position](
+				@department_id BIGINT
+			   ,@position_id BIGINT
+)
+AS 
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+
+    INSERT INTO [dbo].[department_position](
+					department_id
+				   ,position_id)
+    VALUES ( @department_id
+			,@position_id);
+
+  SELECT @@IDENTITY AS department_position_id;
+END
+GO
+
+-- DELETE department_position stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_department_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_delete_department_position]
+	PRINT 'Drop procedure: [dbo].[sp_delete_department_position]';
+END
+GO
+-- Drop department_position CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: department_position
+**  Desc: delete an department_position
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/27/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/27/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+CREATE PROCEDURE [dbo].[sp_delete_department_position](
+    @department_id BIGINT
+   ,@position_id BIGINT
+)
+AS
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN 
+    
+    DELETE FROM [dbo].[department_position]
+    WHERE department_id = @department_id AND
+		  position_id = @position_id;
+END
+GO
+
+-- UPDATE department_position stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_department_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_edit_department_position]
+	PRINT 'Drop procedure: [dbo].[sp_edit_department_position]';
+END
+GO
+-- Update Equipament CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: department_position
+**  Desc: Table for sp_edit_department_position
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/28/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        -------------------------------------------------
+** 05/28/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+
+CREATE PROCEDURE [dbo].[sp_edit_department_position](
+			    @department_id BIGINT
+			   ,@position_id BIGINT
+)
+AS 
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+
+    UPDATE [dbo].[department_position]
+     SET [department_id] = @department_id
+		,[position_id] = @position_id
+	 WHERE [department_id]=@department_id
+
+    SELECT [department_id]
+		  ,[position_id]
+	FROM [dbo].[department_position]
+	WHERE [department_id]=@department_id
+
+	SELECT @@IDENTITY AS department_position_id;
+
+END
+>>>>>>> 1385d2f76b2a3153a00c28ccf331a786c335203d
+GO
+
+--GET department_position store procedure
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_department_position]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_get_all_department_position]
+	PRINT 'Drop procedure: [dbo].[sp_get_all_department_position]';
+END
+GO
+-- department_position CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: Equipaments
+**  Desc: Table for sp_get_all_department_position
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/26/2018
+
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/26/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+
+CREATE PROCEDURE [dbo].[sp_get_all_department_position](
+	@department_id BIGINT = null
+)
+AS
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+    SELECT   department_id
+			,position_id 
+	FROM [dbo].[department_position] as de_po
+	WHERE de_po.department_id = ISNULL(@department_id, de_po.department_id);
+END
+GO
 
 
 
