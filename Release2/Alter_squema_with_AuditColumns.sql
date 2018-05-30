@@ -478,7 +478,7 @@ IF NOT EXISTS (SELECT 1
 				WHERE Name = 'CreatedBy'
 				AND object_id = OBJECT_ID(N'[dbo].[program_sso]'))
 	BEGIN
-		ALTER TABLE [dbo].[Incident_type] ADD CreatedBy INT NOT NULL
+		ALTER TABLE [dbo].[program_sso] ADD CreatedBy INT NOT NULL
 	END
 GO
 
