@@ -201,8 +201,8 @@ BEGIN
       ,[personal_email]
       ,[personal_last_name]
       ,[personal_name]
-    --  ,[personal_photo]
       ,[personal_telephone]
+      ,[personal_birthdate]
       ,[area_area_id]
      -- ,[assign_equipament_assign_id]
   FROM [dbo].[personals] as p
@@ -1362,6 +1362,7 @@ CREATE PROCEDURE [dbo].[sp_edit_personal](
    ,@personal_cellphone VARCHAR(100)
    ,@personal_telephone VARCHAR(100)
    ,@personal_active INT
+   ,@area_id INT
 )
 AS 
 SET XACT_ABORT ON;
@@ -1376,7 +1377,8 @@ BEGIN
         ,personal_cellphone = @personal_cellphone
         ,personal_telephone = @personal_telephone
         ,personal_active    = @personal_active
-        ,updated_on    =  GETDATE()
+        ,updated_on         =  GETDATE()
+		,area_area_id       = @area_id
     WHERE personal_id = @personal_id;
 
     SELECT  [personal_id]
@@ -1388,8 +1390,8 @@ BEGIN
       ,[personal_email]
       ,[personal_last_name]
       ,[personal_name]
-    --  ,[personal_photo]
       ,[personal_telephone]
+	  ,[personal_birthdate]
       ,[area_area_id]
   --    ,[assign_equipament_assign_id]
   FROM [dbo].[personals]
@@ -2093,12 +2095,31 @@ CREATE PROCEDURE [dbo].[sp_delete_personal](
    ,@result BIT OUTPUT
 )
 AS
-SET XACT_ABORT ON;
+SET XACT_ABORT ON;																
 SET NOCOUNT ON;
 BEGIN 
+
+	ALTER TABLE [dbo].[incident] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[personal_position_contract] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[personals] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[contracts] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[personal_position_contract] NOCHECK CONSTRAINT FK_PersPosContr_Personal
+
     
+	DELETE FROM [dbo].[history_area_personal]
+	WHERE personal_personal_id = @personal_id;
+
+	DELETE FROM [dbo].[personal_position_contract]
+	WHERE personal_id = @personal_id;
+
     DELETE FROM [dbo].[personals]
-    WHERE personal_id = @personal_id;
+    WHERE personal_id = @personal_id;																
+
+	ALTER TABLE [dbo].[incident] with check check constraint all
+	ALTER TABLE [dbo].[personal_position_contract] with check check constraint all
+	ALTER TABLE [dbo].[personals] with check check constraint all
+	ALTER TABLE [dbo].[contracts] with check check constraint all
+	ALTER TABLE [dbo].[personal_position_contract] CHECK CONSTRAINT FK_PersPosContr_Personal
 
     SET @result = 1;
     
@@ -2847,6 +2868,7 @@ CREATE PROCEDURE [dbo].[sp_create_personal](
    ,@personal_cellphone VARCHAR(100)
    ,@personal_telephone VARCHAR(100)
    ,@personal_active INT
+   ,@area_id INT
    ,@result BIT OUTPUT
 )
 AS 
@@ -2856,9 +2878,9 @@ BEGIN
 
     INSERT INTO [dbo].[personals]
     (personal_name, personal_last_name, personal_email, personal_direction
-    , personal_cellphone, personal_telephone ,personal_active, created_on)
+    , personal_cellphone, personal_telephone ,personal_active, created_on, area_area_id)
     VALUES (@personal_name, @personal_last_name, @personal_email, @personal_direction
-           , @personal_cellphone, @personal_telephone ,@personal_active, GETDATE());
+           , @personal_cellphone, @personal_telephone ,@personal_active, GETDATE(), @area_id);
 
     SET @result = @@IDENTITY;
 
