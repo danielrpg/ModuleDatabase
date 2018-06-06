@@ -35,12 +35,11 @@ GO
 **  Date:       Author:        Description:
 **  --------    --------      -----------------------------------------------------------------------
 ** 03/06/2018 Vanessa Alcocer  AuditHistory StoreProcedure creation.
-
+** 06/06/2018 Vanessa Alcocer  AuditHistory Adding startDate and endDate as Parameters.
 *****************************************************************************************************/
 CREATE PROCEDURE [dbo].[sp_AuditHistory]
- @ID INT = NULL,
- @TableName NVARCHAR(MAX) = NULL,
- @ColumnName NVARCHAR(MAX) = NULL
+  @StartDate DateTime = NULL,
+ @EndDate DateTime = NULL
  WITH RECOMPILE
 AS
 BEGIN
@@ -82,9 +81,7 @@ BEGIN
 				 ,ModifiedBy = ah.ModifiedBy
 		  FROM dbo.AuditHistory ah
 		  LEFT JOIN dbo.users u ON (ah.ModifiedBy = u.user_name)
-		  WHERE (@Id IS NULL OR @Id = ah.Id)
-			AND (ah.TableName = @TableName )
-			AND (ah.ColumnName = @ColumnName);
+		  WHERE (ah.ModifiedDate) between @StartDate and @EndDate;
 
 
 		-- Return @AuditHistory values
