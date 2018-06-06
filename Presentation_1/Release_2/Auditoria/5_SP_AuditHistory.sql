@@ -24,9 +24,8 @@ GO
 **  Parameters:
 **  Input
 **  ----------
-**  @id INT = null
-**  @TableName NVARCHAR(MAX)
-**  @ColumnName NVARCHAR(50)
+**  @StartDate DateTime
+**  @EndDate DateTime
 **
 **  Created: 03/06/2018
 *****************************************************************************************************
