@@ -789,11 +789,8 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_equipament]
-<<<<<<< HEAD
-	print 'deleting sp_create_equipament';
-=======
+
 	PRINT 'Store procedure deteled -  [sp_create_equipament]';
->>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
 END
 GO
 -- Create Equipament CRUD PROCEDURES
@@ -851,11 +848,8 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_equipament]
-<<<<<<< HEAD
-	print 'deleting sp_get_all_equipament';
-=======
+
 	PRINT 'Store procedure deteled -  [sp_get_all_equipament]';
->>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
 END
 GO
 -- Equipments CRUD PROCEDURES
@@ -893,13 +887,8 @@ BEGIN
 	FROM [dbo].[equipaments]
 	WHERE [equipament_id] = ISNULL(@equipament_id, [equipament_id]);
 END
-<<<<<<< HEAD
-=======
 GO
 PRINT 'Store procedure Created! -  [sp_get_all_equipament]';
-GO
->>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
-
 GO
 
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3287,66 +3276,6 @@ GO
 PRINT 'Store procedure Created! -  [sp_create_functions]';
 GO
 
-<<<<<<< HEAD
-=======
-
--- Create Equipament stored procedure.
-IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_equipament]') 
-		AND type in (N'P', N'PC'))
-BEGIN
-	DROP PROCEDURE [dbo].[sp_create_equipament]
-	PRINT 'Store procedure deteled -  [sp_create_equipament]';
-END
-GO
--- Create Equipament CRUD PROCEDURES
-/******************************************************************************
-**  Table Name: Equipaments
-**  Desc: Table for sp_create_equipament
-** 
-**  Called by: ssi
-**
-**  Author: Ivan Misericordia Eulate
-**
-**  Date: 05/27/2018
-*******************************************************************************
-**                            Change History
-*******************************************************************************
-**   Date:     Author:                            Description:
-** --------   --------        ---------------------------------------------------
-** 05/27/2018 Ivan Misericordia Eulate   Initial version
-*******************************************************************************/
-
-CREATE PROCEDURE [dbo].[sp_create_equipament](
-				@equipament_name VARCHAR(50)
-			   ,@equipament_type INT
-			   ,@equipament_description VARCHAR(200)
-			   ,@equipament_image VARBINARY(MAX)
-)
-AS 
-SET XACT_ABORT ON;
-SET NOCOUNT ON;
-BEGIN
-
-    INSERT INTO [dbo].[equipaments](equipament_name
-								  ,equipament_type
-								  ,equipament_description
-								  ,equipament_image
-								  ,created_on)
-    VALUES ( @equipament_name
-			,@equipament_type
-			,@equipament_description
-			,@equipament_image
-			,GETDATE());
-
-  SELECT @@IDENTITY AS equipament_id;
-END
-GO
-PRINT 'Store procedure Created! -  [sp_create_equipament]';
-GO
-
-
->>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_department]') 
 		AND type in (N'P', N'PC'))
