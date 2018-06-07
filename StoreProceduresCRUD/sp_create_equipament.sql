@@ -4,6 +4,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_equipament]
+	print 'deleting sp_create_equipament';
 END
 GO
 -- Create Equipament CRUD PROCEDURES
@@ -35,16 +36,19 @@ SET XACT_ABORT ON;
 SET NOCOUNT ON;
 BEGIN
 
-    INSERT INTO [dbo].[equipaments](equipament_name
-								  ,equipament_type
-								  ,equipament_description
-								  ,equipament_image
-								  ,created_on)
+    INSERT INTO [dbo].[equipaments](
+	   [equipament_name]
+      ,[equipament_type]
+      ,[equipament_description]
+      ,[equipament_image]
+      ,[created_on]
+      ,[updated_on])
     VALUES ( @equipament_name
 			,@equipament_type
 			,@equipament_description
 			,@equipament_image
-			,GETDATE());
+			,GETDATE()
+			,NULL);
 
   SELECT @@IDENTITY AS equipament_id;
 END
