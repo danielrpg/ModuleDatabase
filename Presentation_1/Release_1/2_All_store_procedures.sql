@@ -4,7 +4,7 @@ GO
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_update_incident_type]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_update_incident_type
-		PRINT 'SE HA ELIMINADO EL SP sp_update_incident_type';
+		PRINT 'Store procedure deteled -  sp_update_incident_type';
 	END
 GO
 
@@ -46,12 +46,13 @@ BEGIN
  WHERE [incident_type_id] = @incident_type_id
 END
 GO
-
+PRINT 'Store procedure Created! -  sp_update_incident_type';
+GO
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_update_incident_detail]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_update_incident_detail
-		PRINT 'SE HA ELIMINADO EL SP sp_update_incident_detail';
+		PRINT 'Store procedure deteled -  sp_update_incident_detail';
 	END
 GO
 
@@ -91,13 +92,14 @@ BEGIN
 	WHERE [incident_detail_id] = @incident_detail_id
 END
 GO
-
+PRINT 'Store procedure Created! -  sp_update_incident_detail';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_update_incident]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_update_incident
-		PRINT 'SE HA ELIMINADO EL SP sp_update_incident';
+		PRINT 'Store procedure deteled -  sp_update_incident';
 	END
 GO
 
@@ -152,12 +154,16 @@ BEGIN
 	SELECT @@IDENTITY AS incident_id;
 END
 GO
+PRINT 'Store procedure Created! -  sp_update_incident';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_personal_by_id]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_personal_by_id]
+	PRINT 'Store procedure deteled -  [sp_personal_by_id]';
 END
 GO
 -- Personal CRUD PROCEDURES
@@ -195,8 +201,8 @@ BEGIN
       ,[personal_email]
       ,[personal_last_name]
       ,[personal_name]
-    --  ,[personal_photo]
       ,[personal_telephone]
+      ,[personal_birthdate]
       ,[area_area_id]
      -- ,[assign_equipament_assign_id]
   FROM [dbo].[personals] as p
@@ -204,12 +210,14 @@ BEGIN
 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_personal_by_id]';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_get_incident_type]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_get_incident_type
-		PRINT 'SE HA ELIMINADO EL SP sp_get_incident_type';
+		PRINT 'Store procedure deteled -  sp_get_incident_type';
 	END
 GO
 
@@ -249,12 +257,14 @@ BEGIN
   WHERE [incident_type_id] = ISNULL(@incident_type_id,[incident_type_id]) 
 END
 GO
+PRINT 'Store procedure Created! -  sp_get_incident_type';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_get_incident_detail]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_get_incident_detail
-		PRINT 'SE HA ELIMINADO EL SP sp_get_incident_detail';
+		PRINT 'Store procedure deteled -  sp_get_incident_detail';
 	END
 GO
 
@@ -292,12 +302,14 @@ BEGIN
 	WHERE [incident_detail_id] = ISNULL(@incident_detail_id, [incident_detail_id])
 END
 GO
+PRINT 'Store procedure Created -  sp_get_incident_detail';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_get_incident]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_get_incident
-		PRINT 'SE HA ELIMINADO EL SP sp_get_incident';
+		PRINT 'Store procedure deteled -  sp_get_incident';
 	END
 GO
 
@@ -342,6 +354,8 @@ BEGIN
   WHERE [incident_id] = ISNULL(@incident_id, [incident_id])
 END
 GO
+PRINT 'Store procedure Created! -  sp_get_incident';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
@@ -349,6 +363,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_users]
+	PRINT 'Store procedure deteled -  [sp_get_all_users]';
 END
 GO
 -- Drop User CRUD PROCEDURES
@@ -383,6 +398,9 @@ BEGIN
 	FROM [dbo].[users]
 END
 GO
+PRINT 'Store procedure Created -  [sp_get_all_users]';
+GO
+
 
 -- GET Program_sso_trainer stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -390,6 +408,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_program_sso_trainer]
+	PRINT 'Store procedure deteled -  [sp_get_all_program_sso_trainer]';
 END
 GO
 /******************************************************************************
@@ -426,6 +445,9 @@ BEGIN
 	 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_program_sso_trainer]';
+GO
+
 
 -- GET Program_sso_resource stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -433,6 +455,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_program_sso_resource]
+	PRINT 'Store procedure deteled -  [sp_get_all_program_sso_resource]';
 END
 GO
 /******************************************************************************
@@ -467,6 +490,8 @@ BEGIN
 	 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_program_sso_resource]';
+GO
 
 
 -- GET Program_sso_activities stored procedure.
@@ -475,6 +500,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_program_sso_activities]
+	PRINT 'Store procedure deteled -  [sp_get_all_program_sso_activities]';
 END
 GO
 /******************************************************************************
@@ -513,6 +539,9 @@ BEGIN
 	 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_program_sso_activities]';
+GO
+
 
 -- GET Program_sso stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -520,6 +549,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_program_sso]
+	PRINT 'Store procedure deteled -  [sp_get_all_program_sso]';
 END
 GO
 /******************************************************************************
@@ -557,12 +587,16 @@ BEGIN
 	 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_program_sso]';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_personal]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_personal]
+	PRINT 'Store procedure deteled -  [sp_get_all_personal]';
 END
 GO
 -- Personal CRUD PROCEDURES
@@ -604,6 +638,8 @@ BEGIN
   FROM [dbo].[personals]
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_personal]';
+GO
 
 
 -- GET Equipament stored procedure.
@@ -612,6 +648,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_kardex_equipaments]
+	PRINT 'Store procedure deteled -  [sp_get_all_kardex_equipaments]';
 END
 GO
 -- Kardex_equipaments CRUD PROCEDURES
@@ -649,6 +686,9 @@ BEGIN
 	WHERE kardex.equipament_kardex_id = ISNULL(@kardex_id, kardex.equipament_kardex_id);
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_kardex_equipaments]';
+GO
+
 
 -- UPDATE Equipament stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -656,6 +696,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_inventory]
+	PRINT 'Store procedure deteled -  [sp_get_all_inventory]';
 END
 GO
 -- Inventory CRUD PROCEDURES
@@ -693,68 +734,42 @@ BEGIN
 	WHERE inventory.inventory_id = ISNULL(@inventory_id, inventory.inventory_id);
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_inventory]';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
-
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_functions]') 
-
 		AND type in (N'P', N'PC'))
-
 BEGIN
-
 	DROP PROCEDURE [dbo].[sp_get_all_functions]
-
+	PRINT 'Store procedure deteled -  [sp_get_all_functions]';
 END
-
 GO
 
 -- Functions CRUD PROCEDURES
-
 /******************************************************************************
-
 **  Table Name: functions
-
 **  Desc: Table for sp_get_all_functions
-
 ** 
-
 **  Called by: ssi
-
 **
-
 **  Author: Boris Gonzalo Medrano Guzman
-
 **
-
 **  Date: 05/29/2018
-
 *******************************************************************************
-
 **                            Change History
-
 *******************************************************************************
-
 **   Date:     Author:                            Description:
-
 ** --------   --------        ---------------------------------------------------
-
 ** 05/29/2018 Boris Gonzalo Medrano Guzman   Initial version
-
 *******************************************************************************/
 
-
-
 CREATE PROCEDURE [dbo].[sp_get_all_functions]
-
 AS
-
 SET XACT_ABORT ON;
-
 SET NOCOUNT ON;
-
 BEGIN
-
     SELECT [func_id]
       ,[created_on]
       ,[updated_on]
@@ -762,11 +777,10 @@ BEGIN
       ,[func_name]
       ,[position_position_id]
   FROM [dbo].[functions]
-
 END
-
 GO
-
+PRINT 'Store procedure deteled -  [sp_get_all_functions]';
+GO
 
 
 -- Create Equipament stored procedure.
@@ -775,7 +789,11 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_equipament]
+<<<<<<< HEAD
 	print 'deleting sp_create_equipament';
+=======
+	PRINT 'Store procedure deteled -  [sp_create_equipament]';
+>>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
 END
 GO
 -- Create Equipament CRUD PROCEDURES
@@ -824,6 +842,8 @@ BEGIN
   SELECT @@IDENTITY AS equipament_id;
 END
 GO
+PRINT 'Store procedure Created! -  [sp_create_equipament]';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
@@ -831,7 +851,11 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_equipament]
+<<<<<<< HEAD
 	print 'deleting sp_get_all_equipament';
+=======
+	PRINT 'Store procedure deteled -  [sp_get_all_equipament]';
+>>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
 END
 GO
 -- Equipments CRUD PROCEDURES
@@ -869,6 +893,12 @@ BEGIN
 	FROM [dbo].[equipaments]
 	WHERE [equipament_id] = ISNULL(@equipament_id, [equipament_id]);
 END
+<<<<<<< HEAD
+=======
+GO
+PRINT 'Store procedure Created! -  [sp_get_all_equipament]';
+GO
+>>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
 
 GO
 
@@ -877,6 +907,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_departments]
+	PRINT 'Store procedure deteled -  [sp_get_all_departments]';
 END
 GO
 
@@ -911,12 +942,16 @@ BEGIN
   FROM [dbo].[department]
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_departments]';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_get_all_contracts]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_contracts]
+	PRINT 'Store procedure deteled -  [sp_get_all_contracts]';
 END
 GO
 -- Personal CRUD PROCEDURES
@@ -954,6 +989,8 @@ BEGIN
   FROM [dbo].[contracts]
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_contracts]';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
@@ -961,6 +998,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_get_all_areas]
+	PRINT 'Store procedure deteled -  [sp_get_all_areas]';
 END
 GO
 -- Area CRUD PROCEDURES
@@ -994,6 +1032,8 @@ BEGIN
   FROM [dbo].[areas]
 END
 GO
+PRINT 'Store procedure Created! -  [sp_get_all_areas]';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
@@ -1001,6 +1041,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_user]
+	PRINT 'Store procedure deteled -  [sp_edit_user]';
 END
 GO
 
@@ -1051,6 +1092,8 @@ BEGIN
 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_edit_user]';
+GO
 
 -- UPDATE Program_sso_trainer stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -1058,6 +1101,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_program_sso_trainer]
+	PRINT 'Store procedure deteled -  [sp_edit_program_sso_trainer]';
 END
 GO
 /******************************************************************************
@@ -1108,9 +1152,9 @@ BEGIN
 	      ,[sso_trainer_specialty]
 	  FROM [dbo].[program_sso_trainer]
 	WHERE sso_trainer_id = @sso_trainer_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso_trainer] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso_trainer] created';
 GO
 
 -- UPDATE Program_sso_resource stored procedure.
@@ -1119,6 +1163,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_program_sso_resource]
+	PRINT 'Store procedure deteled -  [sp_edit_program_sso_resource]';
 END
 GO
 /******************************************************************************
@@ -1162,9 +1207,9 @@ BEGIN
 	      ,[sso_detail_id]
 	  FROM [dbo].[program_sso_resource]
 	WHERE sso_resource_id = @sso_resource_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso_resource] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso_resource] created';
 GO
 
 -- UPDATE Program_sso_activities stored procedure.
@@ -1173,6 +1218,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_program_sso_activities]
+	PRINT 'Store procedure deteled -  [sp_edit_program_sso_activities]';
 END
 GO
 /******************************************************************************
@@ -1225,9 +1271,9 @@ BEGIN
 	      ,[sso_trainer_id]
 	  FROM [dbo].[program_sso_activities]
 	WHERE sso_detail_id = @sso_detail_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso_activities] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso_activities] created';
 GO
 
 -- UPDATE Program_sso stored procedure.
@@ -1236,6 +1282,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_program_sso]
+	PRINT 'Store procedure deteled -  [sp_edit_program_sso]';
 END
 GO
 /******************************************************************************
@@ -1289,9 +1336,9 @@ BEGIN
 	      ,[sso_total_cost]
 	  FROM [dbo].[program_sso]
 	WHERE sso_id = @sso_id;
-
-	PRINT 'Procedure [dbo].[sp_edit_program_sso] created';
 END
+GO
+PRINT 'Procedure [dbo].[sp_edit_program_sso] created';
 GO
 
 
@@ -1300,6 +1347,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_personal]
+	PRINT 'Store procedure deteled -  [sp_edit_personal]';
 END
 GO
 -- Drop User CRUD PROCEDURES
@@ -1329,6 +1377,7 @@ CREATE PROCEDURE [dbo].[sp_edit_personal](
    ,@personal_cellphone VARCHAR(100)
    ,@personal_telephone VARCHAR(100)
    ,@personal_active INT
+   ,@area_id INT
 )
 AS 
 SET XACT_ABORT ON;
@@ -1343,7 +1392,8 @@ BEGIN
         ,personal_cellphone = @personal_cellphone
         ,personal_telephone = @personal_telephone
         ,personal_active    = @personal_active
-        ,updated_on    =  GETDATE()
+        ,updated_on         =  GETDATE()
+		,area_area_id       = @area_id
     WHERE personal_id = @personal_id;
 
     SELECT  [personal_id]
@@ -1355,15 +1405,17 @@ BEGIN
       ,[personal_email]
       ,[personal_last_name]
       ,[personal_name]
-    --  ,[personal_photo]
       ,[personal_telephone]
+	  ,[personal_birthdate]
       ,[area_area_id]
   --    ,[assign_equipament_assign_id]
   FROM [dbo].[personals]
     WHERE personal_id = @personal_id;
-
 END
 GO
+PRINT 'Store procedure Created! -  [sp_edit_personal]';
+GO
+
 
 -- UPDATE Kardex_equipament stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -1371,6 +1423,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_kardex_equipament]
+	PRINT 'Store procedure deteled -  [sp_edit_kardex_equipament]';
 END
 GO
 -- Update Kardex_equipaments CRUD PROCEDURES
@@ -1426,6 +1479,8 @@ BEGIN
 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_edit_kardex_equipament]';
+GO
 
 
 -- UPDATE Inventory stored procedure.
@@ -1434,6 +1489,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_inventory]
+	PRINT 'Store procedure deteled -  [sp_edit_inventory]';
 END
 GO
 -- Update Inventory CRUD PROCEDURES
@@ -1485,93 +1541,52 @@ BEGIN
 	SELECT @@IDENTITY AS inventory_id;
 END
 GO
+PRINT 'Store procedure Created! -  [sp_edit_inventory]';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
-
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_functions]') 
-
 		AND type in (N'P', N'PC'))
-
 BEGIN
-
 	DROP PROCEDURE [dbo].[sp_edit_functions]
-
+	PRINT 'Store procedure deteled -  [sp_edit_functions]';
 END
-
 GO
 
 -- Functions CRUD PROCEDURES
-
 /******************************************************************************
-
 **  Table Name: functions
-
 **  Desc: Table for sp_edit_functions
-
 ** 
-
 **  Called by: ssi
-
 **
-
 **  Author: Boris Gonzalo Medrano Guzman
-
 **
-
 **  Date: 05/29/2018
-
 *******************************************************************************
-
-**                            Change History
-
+**                          Change History
 *******************************************************************************
-
 **   Date:     Author:                            Description:
-
 ** --------   --------        ---------------------------------------------------
-
 ** 05/29/2018 Boris Gonzalo Medrano Guzman   Initial version
-
 *******************************************************************************/
-
-
-
 CREATE PROCEDURE [dbo].[sp_edit_functions](
-
     @func_id INT
-
    ,@func_name VARCHAR(50)
-
    ,@func_description VARCHAR(100)
-   
    ,@position_position_id INT
-
 )
-
 AS 
-
 SET XACT_ABORT ON;
-
 SET NOCOUNT ON;
-
 BEGIN
-
-
-
     UPDATE [dbo].[functions]
-
     SET func_name  = @func_name
-
         ,func_description  = @func_description
-        
         ,position_position_id = @position_position_id
-
         ,updated_on    =  GETDATE()
-
     WHERE func_id = @func_id;
-
-
 
     SELECT  [func_id]
       ,[created_on]
@@ -1581,10 +1596,9 @@ BEGIN
       ,[position_position_id]
   FROM [dbo].[functions]
   WHERE func_id = @func_id;
-
-
-
 END
+GO
+PRINT 'Store procedure Created! -  [sp_edit_functions]';
 GO
 
 
@@ -1594,6 +1608,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_equipament]
+	PRINT 'Store procedure deteled -  [sp_edit_equipament]';
 END
 GO
 -- Update Equipament CRUD PROCEDURES
@@ -1649,12 +1664,16 @@ BEGIN
 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_edit_equipament]';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_department]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_department]
+	PRINT 'Store procedure deteled -  [sp_edit_department]';
 END
 GO
 -- Drop DEPARTMENT CRUD PROCEDURES
@@ -1701,12 +1720,16 @@ BEGIN
 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_edit_department]';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_contract]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_contract]
+	PRINT 'Store procedure deteled -  [sp_edit_contract]';
 END
 GO
 -- Drop User CRUD PROCEDURES
@@ -1765,12 +1788,16 @@ BEGIN
 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_edit_contract]';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_edit_area]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_edit_area]
+	PRINT 'Store procedure deteled -  [sp_edit_area]';
 END
 GO
 -- Drop AREA CRUD PROCEDURES
@@ -1818,7 +1845,8 @@ BEGIN
 
 END
 GO
-
+PRINT 'Store procedure Created! -  [sp_edit_area]';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
@@ -1826,10 +1854,9 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_user]
+	PRINT 'Store procedure deteled -  [sp_delete_user]';
 END
 GO
-
-
 
 -- Drop User CRUD PROCEDURES
 /******************************************************************************
@@ -1862,8 +1889,10 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created -  [sp_delete_user]';
 GO
 
 
@@ -1873,6 +1902,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_program_sso_trainer]
+	PRINT 'Store procedure deteled -  [sp_delete_program_sso_trainer]';
 END
 GO
 /******************************************************************************
@@ -1905,9 +1935,12 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_delete_program_sso_trainer]';
+GO
+
 
 -- DELETE Program_sso_resource stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -1915,6 +1948,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_program_sso_resource]
+	PRINT 'Store procedure deteled -  [sp_delete_program_sso_resource]';
 END
 GO
 /******************************************************************************
@@ -1947,8 +1981,10 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_program_sso_resource]';
 GO
 
 
@@ -1958,6 +1994,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_program_sso_activities]
+	PRINT 'Store procedure deteled -  [sp_delete_program_sso_activities]';
 END
 GO
 /******************************************************************************
@@ -1990,8 +2027,10 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_program_sso_activities]';
 GO
 
 -- DELETE Program_sso stored procedure.
@@ -2000,6 +2039,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_program_sso]
+	PRINT 'Store procedure deteled -  [sp_delete_program_sso]';
 END
 GO
 /******************************************************************************
@@ -2032,8 +2072,10 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_program_sso]';
 GO
 
 
@@ -2042,6 +2084,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_personal]
+	PRINT 'Store procedure deteled -  [sp_delete_personal]';
 END
 GO
 
@@ -2067,24 +2110,45 @@ CREATE PROCEDURE [dbo].[sp_delete_personal](
    ,@result BIT OUTPUT
 )
 AS
-SET XACT_ABORT ON;
+SET XACT_ABORT ON;																
 SET NOCOUNT ON;
 BEGIN 
+
+	ALTER TABLE [dbo].[incident] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[personal_position_contract] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[personals] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[contracts] NOCHECK constraint ALL 
+	ALTER TABLE [dbo].[personal_position_contract] NOCHECK CONSTRAINT FK_PersPosContr_Personal
+
     
+	DELETE FROM [dbo].[history_area_personal]
+	WHERE personal_personal_id = @personal_id;
+
+	DELETE FROM [dbo].[personal_position_contract]
+	WHERE personal_id = @personal_id;
+
     DELETE FROM [dbo].[personals]
-    WHERE personal_id = @personal_id;
+    WHERE personal_id = @personal_id;																
+
+	ALTER TABLE [dbo].[incident] with check check constraint all
+	ALTER TABLE [dbo].[personal_position_contract] with check check constraint all
+	ALTER TABLE [dbo].[personals] with check check constraint all
+	ALTER TABLE [dbo].[contracts] with check check constraint all
+	ALTER TABLE [dbo].[personal_position_contract] CHECK CONSTRAINT FK_PersPosContr_Personal
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_personal]';
 GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_delete_incident_type]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_delete_incident_type
-		PRINT 'SE HA ELIMINADO EL SP sp_delete_incident_type';
+		PRINT 'Store procedure deteled -  sp_delete_incident_type';
 	END
 GO
 
@@ -2104,8 +2168,6 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 28/05/2018 Marcos Bustos   Initial version
 *******************************************************************************/
-
-
 CREATE PROCEDURE [dbo].[sp_delete_incident_type]
 (
 	@incident_type_id bigint 
@@ -2119,12 +2181,14 @@ BEGIN
   WHERE [incident_type_id] = @incident_type_id 
 END
 GO
+PRINT 'Store procedure Created! -  sp_delete_incident_type';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_delete_incident_detail]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_delete_incident_detail
-		PRINT 'SE HA ELIMINADO EL SP sp_delete_incident_detail';
+		PRINT 'Store procedure deteled -  sp_delete_incident_detail';
 	END
 GO
 
@@ -2157,12 +2221,14 @@ BEGIN
 	WHERE [incident_detail_id] = @incident_detail_id
 END
 GO
+PRINT 'Store procedure Created -  sp_delete_incident_detail';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_delete_incident]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_delete_incident
-		PRINT 'SE HA ELIMINADO EL SP sp_delete_incident';
+		PRINT 'Store procedure deteled -  sp_delete_incident';
 	END
 GO
 
@@ -2196,20 +2262,17 @@ BEGIN
   WHERE [incident_id] = @incident_id
 END
 GO
+PRINT 'Store procedure Created! -  sp_delete_incident';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
-
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_delete_functions]') 
-
 		AND type in (N'P', N'PC'))
-
 BEGIN
-
 	DROP PROCEDURE [dbo].[sp_delete_functions]
-
+	PRINT 'Store procedure deteled -  [sp_delete_functions]';
 END
-
 GO
 
 -- Drop functions CRUD PROCEDURES
@@ -2272,9 +2335,11 @@ BEGIN
     SET @result = 1;
 
     
-    RETURN @result; 
+    SELECT @result; 
 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_functions]';
 GO
 
 
@@ -2284,6 +2349,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_equipament]
+	PRINT 'Store procedure deteled -  [sp_delete_equipament]';
 END
 GO
 -- Drop Equipament CRUD PROCEDURES
@@ -2315,6 +2381,8 @@ BEGIN
     WHERE equipament_id = @equipament_id;
 END
 GO
+PRINT 'Store procedure Created! -  [sp_delete_equipament]';
+GO
 
 
 IF EXISTS (SELECT * FROM sys.objects 
@@ -2322,6 +2390,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_department]
+	PRINT 'Store procedure deteled -  [sp_delete_department]';
 END
 GO
 -- Drop User CRUD PROCEDURES
@@ -2355,8 +2424,10 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_department]';
 GO
 
 
@@ -2365,6 +2436,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_department]
+	PRINT 'Store procedure deteled -  [sp_delete_department]';
 END
 GO
 -- Drop User CRUD PROCEDURES
@@ -2401,8 +2473,10 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_department]';
 GO
 
 
@@ -2411,6 +2485,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_contract]
+	PRINT 'Store procedure deteled -  [sp_delete_contract]';
 END
 GO
 
@@ -2445,8 +2520,10 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_delete_contract]';
 GO
 
 
@@ -2455,6 +2532,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_delete_area]
+	PRINT 'Store procedure deteled -  [sp_delete_area]';
 END
 GO
 
@@ -2489,15 +2567,19 @@ BEGIN
 
     SET @result = 1;
     
-    RETURN @result; 
+    SELECT @result; 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_delete_area]';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_user]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_user]
+	PRINT 'Store procedure deteled -  [sp_create_user]';
 END
 GO
 -- Drop User CRUD PROCEDURES
@@ -2535,8 +2617,10 @@ BEGIN
 
     SET @result = @@IDENTITY;
 
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_create_user]';
 GO
 
 
@@ -2546,6 +2630,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_program_sso_trainer]
+	PRINT 'Store procedure deteled -  [sp_create_program_sso_trainer]';
 END
 GO
 /******************************************************************************
@@ -2590,9 +2675,10 @@ BEGIN
 			,@trainer_name
 			,@trainer_specialty);
 	SET @result = 1;
-    RETURN @result; 
-	PRINT 'Procedure [dbo].[sp_create_program_sso_trainer] created';
+    SELECT @result; 
 END
+GO
+PRINT 'Procedure [dbo].[sp_create_program_sso_trainer] created';
 GO
 
 -- Create Program_sso_resource stored procedure.
@@ -2601,6 +2687,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_program_sso_resource]
+	PRINT 'Store procedure deteled -  [sp_create_program_sso_resource]';
 END
 GO
 /******************************************************************************
@@ -2636,11 +2723,11 @@ BEGIN
 	VALUES ( @resource_cost
 			,@resource_detail);
 	SET @result = 1;
-    RETURN @result; 
-	PRINT 'Procedure [dbo].[sp_create_program_sso_resource] created';
+    SELECT @result; 
 END
 GO
-
+PRINT 'Procedure [dbo].[sp_create_program_sso_resource] created';
+GO
 
 -- Create Program_sso_activities stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -2648,6 +2735,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_program_sso_activities]
+	PRINT 'Store procedure deteled -  [sp_create_program_sso_activities]';
 END
 GO
 /******************************************************************************
@@ -2692,9 +2780,10 @@ BEGIN
 			,@detail_time
 			,@detail_type);
 	SET @result = 1;
-    RETURN @result; 
-	PRINT 'Procedure [dbo].[sp_create_program_sso_activities] created';
+    SELECT @result; 
 END
+GO
+PRINT 'Procedure [dbo].[sp_create_program_sso_activities] created';
 GO
 
 
@@ -2704,6 +2793,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_program_sso]
+	PRINT 'Store procedure deteled -  [sp_create_program_sso]';
 END
 GO
 /******************************************************************************
@@ -2751,9 +2841,10 @@ BEGIN
 			,@responsable
 			,@total_cost);
 	SET @result = 1;
-    RETURN @result; 
-	PRINT 'Procedure [dbo].[sp_create_program_sso] created';
+    SELECT @result; 
 END
+GO
+PRINT 'Procedure [dbo].[sp_create_program_sso] created';
 GO
 
 
@@ -2762,6 +2853,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_personal]
+	PRINT 'Store procedure deteled -  [sp_create_personal]';
 END
 GO
 
@@ -2791,6 +2883,7 @@ CREATE PROCEDURE [dbo].[sp_create_personal](
    ,@personal_cellphone VARCHAR(100)
    ,@personal_telephone VARCHAR(100)
    ,@personal_active INT
+   ,@area_id INT
    ,@result BIT OUTPUT
 )
 AS 
@@ -2800,14 +2893,16 @@ BEGIN
 
     INSERT INTO [dbo].[personals]
     (personal_name, personal_last_name, personal_email, personal_direction
-    , personal_cellphone, personal_telephone ,personal_active, created_on)
+    , personal_cellphone, personal_telephone ,personal_active, created_on, area_area_id)
     VALUES (@personal_name, @personal_last_name, @personal_email, @personal_direction
-           , @personal_cellphone, @personal_telephone ,@personal_active, GETDATE());
+           , @personal_cellphone, @personal_telephone ,@personal_active, GETDATE(), @area_id);
 
     SET @result = @@IDENTITY;
 
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_create_personal]';
 GO
 
 
@@ -2817,6 +2912,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_kardex_equipament]
+	PRINT 'Store procedure deteled -  [sp_create_kardex_equipament]';
 END
 GO
 -- Create Kardex_equipaments CRUD PROCEDURES
@@ -2865,6 +2961,8 @@ BEGIN
 	SELECT @@IDENTITY AS kardex_id;
 END
 GO
+PRINT 'Store procedure Created! -  [sp_create_kardex_equipament]';
+GO
 
 
 -- UPDATE Inventory stored procedure.
@@ -2873,6 +2971,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_inventory]
+	PRINT 'Store procedure deteled -  [sp_create_inventory]';
 END
 GO
 -- Create Inventory CRUD PROCEDURES
@@ -2923,13 +3022,14 @@ BEGIN
 	SELECT @@IDENTITY AS inventory_id;
 END
 GO
-
+PRINT 'Store procedure Created! -  [sp_create_inventory]';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_create_incident_type]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_create_incident_type
-		PRINT 'SE HA ELIMINADO EL SP sp_create_incident_type';
+		PRINT 'Store procedure deteled -  sp_create_incident_type';
 	END
 GO
 
@@ -2976,12 +3076,14 @@ BEGIN
 	SELECT @@IDENTITY AS incident_type_id;
 END
 GO
+PRINT 'Store procedure Created! -  sp_create_incident_type';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_create_incident_detail]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_create_incident_detail
-		PRINT 'SE HA ELIMINADO EL SP sp_create_incident_detail';
+		PRINT 'Store procedure deteled -  sp_create_incident_detail';
 	END
 GO
 
@@ -3025,12 +3127,14 @@ BEGIN
 	SELECT @@IDENTITY AS incident_detail_id;
 END
 GO
+PRINT 'Store procedure Created! -  sp_create_incident_detail';
+GO
 
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_create_incident]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
 		DROP PROCEDURE sp_create_incident
-		PRINT 'SE HA ELIMINADO EL SP sp_create_incident';
+		PRINT 'Store procedure deteled -  sp_create_incident';
 	END
 GO
 
@@ -3095,25 +3199,18 @@ INSERT INTO [dbo].[incident]
 	SELECT @@IDENTITY AS incident_id;
 END
 GO
-
-
-IF EXISTS (SELECT * FROM sys.objects 
-
-		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_functions]') 
-
-		AND type in (N'P', N'PC'))
-
-BEGIN
-
-	DROP PROCEDURE [dbo].[sp_create_functions]
-
-END
-
+PRINT 'Store procedure Created! -  sp_create_incident';
 GO
 
 
-
-
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_functions]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_functions]
+	PRINT 'Store procedure deteled -  [sp_create_functions]';
+END
+GO
 
 -- Functions CRUD PROCEDURES
 
@@ -3183,17 +3280,79 @@ BEGIN
 
 
 
-    RETURN @result; 
+    SELECT @result; 
 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_create_functions]';
+GO
+
+<<<<<<< HEAD
+=======
+
+-- Create Equipament stored procedure.
+IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_equipament]') 
+		AND type in (N'P', N'PC'))
+BEGIN
+	DROP PROCEDURE [dbo].[sp_create_equipament]
+	PRINT 'Store procedure deteled -  [sp_create_equipament]';
+END
+GO
+-- Create Equipament CRUD PROCEDURES
+/******************************************************************************
+**  Table Name: Equipaments
+**  Desc: Table for sp_create_equipament
+** 
+**  Called by: ssi
+**
+**  Author: Ivan Misericordia Eulate
+**
+**  Date: 05/27/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 05/27/2018 Ivan Misericordia Eulate   Initial version
+*******************************************************************************/
+
+CREATE PROCEDURE [dbo].[sp_create_equipament](
+				@equipament_name VARCHAR(50)
+			   ,@equipament_type INT
+			   ,@equipament_description VARCHAR(200)
+			   ,@equipament_image VARBINARY(MAX)
+)
+AS 
+SET XACT_ABORT ON;
+SET NOCOUNT ON;
+BEGIN
+
+    INSERT INTO [dbo].[equipaments](equipament_name
+								  ,equipament_type
+								  ,equipament_description
+								  ,equipament_image
+								  ,created_on)
+    VALUES ( @equipament_name
+			,@equipament_type
+			,@equipament_description
+			,@equipament_image
+			,GETDATE());
+
+  SELECT @@IDENTITY AS equipament_id;
+END
+GO
+PRINT 'Store procedure Created! -  [sp_create_equipament]';
+GO
 
 
+>>>>>>> b743b029bd9c99674990f6726892b26ebeda6dc3
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_department]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_department]
+	PRINT 'Store procedure deteled -  [sp_create_department]';
 END
 GO
 
@@ -3231,8 +3390,10 @@ BEGIN
 
     SET @result = @@IDENTITY;
 
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_create_department]';
 GO
 
 
@@ -3241,6 +3402,7 @@ IF EXISTS (SELECT * FROM sys.objects
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_contract]
+	PRINT 'Store procedure deteled -  [sp_create_contract]';
 END
 GO
 
@@ -3285,19 +3447,21 @@ BEGIN
 
     SET @result = @@IDENTITY;
 
-    RETURN @result; 
+    SELECT @result; 
 END
 GO
+PRINT 'Store procedure Created! -  [sp_create_contract]';
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[sp_create_area]') 
 		AND type in (N'P', N'PC'))
 BEGIN
 	DROP PROCEDURE [dbo].[sp_create_area]
+	PRINT 'Store procedure deteled -  [sp_create_area]';
 END
 GO
-
-
 -- Drop AREA CRUD PROCEDURES
 /******************************************************************************
 **  Table Name: area
@@ -3332,8 +3496,10 @@ BEGIN
 
     SET @result = @@IDENTITY;
 
-    RETURN @result; 
+    SELECT @result; 
 END
+GO
+PRINT 'Store procedure Created! -  [sp_create_area]';
 GO
 
 -- Create Position stored procedure.
@@ -3388,6 +3554,9 @@ BEGIN
   SELECT @@IDENTITY AS position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_create_position]';
+GO
+
 
 -- DELETE position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3427,6 +3596,9 @@ BEGIN
     WHERE position_id = @position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_delete_position]';
+GO
+
 
 -- UPDATE position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3487,6 +3659,9 @@ BEGIN
   SELECT @@IDENTITY AS position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_edit_position]';
+GO
+
 
 --GET positions store procedure
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3531,6 +3706,8 @@ BEGIN
 	FROM [dbo].[position] as posi
 	WHERE posi.position_id = ISNULL(@position_id, posi.position_id);
 END
+GO
+PRINT 'Create procedure: [dbo].[sp_get_all_position]';
 GO
 
 -- Create department_position stored procedure.
@@ -3578,6 +3755,8 @@ BEGIN
   SELECT @@IDENTITY AS department_position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_create_department_position]';
+GO
 
 -- DELETE department_position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3619,6 +3798,9 @@ BEGIN
 		  position_id = @position_id;
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_delete_department_position]';
+GO
+
 
 -- UPDATE department_position stored procedure.
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3670,6 +3852,9 @@ BEGIN
 
 END
 GO
+PRINT 'Create procedure: [dbo].[sp_edit_department_position]';
+GO
+
 
 --GET department_position store procedure
 IF EXISTS (SELECT * FROM sys.objects 
@@ -3712,7 +3897,5 @@ BEGIN
 	WHERE de_po.department_id = ISNULL(@department_id, de_po.department_id);
 END
 GO
-
-
-
-
+PRINT 'Create procedure: [dbo].[sp_get_all_department_position]';
+GO
