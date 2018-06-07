@@ -210,15 +210,15 @@ print 'insert data into the kardex_equipaments table';
 if(select count(*) from dbo.kardex_equipaments)=0
 begin
 	set identity_insert dbo.kardex_equipaments on;
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (1, '2018-05-28 15:13:25', null, 15, '2018-05-28 09:13:25', 15, 0, 1);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (2, '2018-05-28 15:13:25', null, 10, '2018-05-28 09:30:25', 0, 5, 2);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (3, '2018-05-28 15:13:25', null, 15, '2018-05-28 10:00:25', 15, 0, 3);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (4, '2018-05-28 15:13:25', null, 10, '2018-05-28 10:15:25', 0, 0, 4);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (5, '2018-05-28 15:13:25', null, 15, '2018-05-28 11:17:25', 15, 0, 5);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (6, '2018-05-28 15:13:25', null, 10, '2018-05-28 14:00:25', 0, 5, 6);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (7, '2018-05-28 15:13:25', null, 15, '2018-05-28 14:30:25', 15, 0, 7);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (8, '2018-05-28 15:13:25', null, 10, '2018-05-28 14:55:25', 0, 0, 8);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (9, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 9);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 1, '2018-05-28 15:13:25', null, 15, '2018-05-28 09:13:25', 15, 0, 1);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 2, '2018-05-28 15:13:25', null, 10, '2018-05-28 09:30:25', 0, 5, 2);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 3, '2018-05-28 15:13:25', null, 15, '2018-05-28 10:00:25', 15, 0, 3);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 4, '2018-05-28 15:13:25', null, 10, '2018-05-28 10:15:25', 0, 0, 4);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 5, '2018-05-28 15:13:25', null, 15, '2018-05-28 11:17:25', 15, 0, 5);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 6, '2018-05-28 15:13:25', null, 10, '2018-05-28 14:00:25', 0, 5, 6);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 7, '2018-05-28 15:13:25', null, 15, '2018-05-28 14:30:25', 15, 0, 7);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 8, '2018-05-28 15:13:25', null, 10, '2018-05-28 14:55:25', 0, 0, 8);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 9, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 9);
 	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (10, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:17:25', 0, 5, 10);
 	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (11, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:25:25', 15, 0, 11);
 	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (12, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:55:25', 0, 0, 12);
@@ -278,15 +278,33 @@ end
 -- End SSO
 
 -- Inicident
+        -- incident_type_id, -- 4
+        -- incident_type_name, -- accidente
+        -- incident_type_description, --
+        -- incident_type_type, -- accidente de personal, daños a la propiedad/equipos, Medio ambiente, Fatalidad
+        -- incident_type_subtype) -- forma del accidente, tipo de lesion, parte del cuerpo lesionada, Agente causante
 print 'insert data into the incident_type table';
 if(select count(*) from dbo.incident_type)=0
 begin
 	set identity_insert dbo.incident_type on;
-	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (1, 'accidente', 'Este es el registro de accidentes', '','');
-	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (2, 'enfermedad', 'Enfermedad muy contagiosa', '', 'gripe');
-	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (3, 'incidente', 'Perdida de material', '', '');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (1, 'accidente', 'este es el registro de accidentes', '','');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (2, 'enfermedad', 'enfermedad muy contagiosa', '', 'gripe');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (3, 'incidente', 'perdida de material', '', '');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (4, 'accidente', 'caida de persona a nivel', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (5, 'accidente', 'caida de persona a altura', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (6, 'accidente', 'caida de persona al agua', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (7, 'accidente', 'derrumbe o desplome de instalaciones', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (8, 'accidente', 'caida de objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (9, 'accidente', 'cisada sobre objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (10, 'accidente', 'choque contra objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (11, 'accidente', 'golpes por objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (12, 'accidente', 'apricionamiento o atrapamiento', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (13, 'accidente', 'Esfuerzos fisicos excesivos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (14, 'accidente', 'falsos movimientos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (15, 'accidente', 'exposicion al frio', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (16, 'accidente', 'expocicion al calor', 'accidente de personal', 'forma del accidente')
 	set identity_insert dbo.incident_type off;
-	print 'inident_typr done';
+	print 'inident_type done';
 end
 
 print 'insert data into the incident_detail table';
