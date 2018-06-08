@@ -1,29 +1,28 @@
--- Data initialization
-/******************************************************************************
+/*****************************************************************************
 **  DataBase: ssidb
 **  Desc: Initialization of basic data
 ** 
 **  Called by: ssi
 **
-**  Author: Ivan Misericordia Eulate
+**  Author: Franz A. Lopez Choque
 **
 **  Date: 05/28/2018
 *******************************************************************************
 **                            Change History
 *******************************************************************************
 **   Date:     Author:                            Description:
-** --------   --------        ---------------------------------------------------
-** 05/28/2018 Ivan Misericordia Eulate   Initial version
+** --------   -------------------        --------------------------------------
+** 05/28/2018 Ivan Misericordia Eulate   Initial version last version
 ** 05/29/2018 Franz A. Lopez Choque		  Update schema version
+** 05/30/2018 Franz A. Lopez Choque		  Add Data
 *******************************************************************************/
 use SSID;
-GO
-
 set xact_abort on;
 set nocount on;
 
 BEGIN TRANSACTION;
 
+-- Users
 print 'insert data into the roles table';
 if(select count(*) from dbo.roles)=0
 begin
@@ -49,22 +48,18 @@ begin
 	INSERT INTO dbo.user_role (user_id, role_id) VALUES (1, 1);
 	print 'user_role table done';
 end
+-- End Users
 
 -- PROGRAMA SSO
 print 'insert data into the program_sso table';
 if(select count(*) from dbo.program_sso)=0
 begin
 	set identity_insert dbo.program_sso on;
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (1, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Pedro Fernandez', 500.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (2, '2018-05-27 23:56:44', null, '3 semanas', 'Actualizar normas en seguridad industrial', 'Mejora en actualizacion de normas', 'Capacitar a todos los trabajadores', 'Jorge Eduardo', 300.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (3, '2018-05-27 23:56:44', null, '1 semana', 'Conocer accionar frente a un accidente', 'Incrementar el conocimiento sobre accidentes', 'Capacitar a todos los trabajadores', 'Olga Mercado', 100.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (4, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Angela Perez', 500.5);
-	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) 
-		VALUES (5, '2018-05-27 23:56:44', null, '3 semanas', 'Incrementar el conocimiento sobre peligros maquinarios', 'Mejora del uso de maquinarias', 'Capacitar a todos los trabajadores', 'Maria Fanola', 540.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (1, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Pedro Fernandez', 500.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (2, '2018-05-27 23:56:44', null, '3 semanas', 'Actualizar normas en seguridad industrial', 'Mejora en actualizacion de normas', 'Capacitar a todos los trabajadores', 'Jorge Eduardo', 300.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (3, '2018-05-27 23:56:44', null, '1 semana', 'Conocer accionar frente a un accidente', 'Incrementar el conocimiento sobre accidentes', 'Capacitar a todos los trabajadores', 'Olga Mercado', 100.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (4, '2018-05-27 23:56:44', null, '2 semanas', 'Mejorar los conocimientos de los empleados en seguridad industrial', 'Mejora en uso de material de seguridad', 'Capacitar a todos los trabajadores', 'Angela Perez', 500.5);
+	INSERT INTO dbo.program_sso (sso_id, created_on, updated_on, sso_execution_time, sso_goal, sso_indicator, sso_objetive, sso_responsable, sso_total_cost) VALUES (5, '2018-05-27 23:56:44', null, '3 semanas', 'Incrementar el conocimiento sobre peligros maquinarios', 'Mejora del uso de maquinarias', 'Capacitar a todos los trabajadores', 'Maria Fanola', 540.5);
 	set identity_insert dbo.program_sso off;
 	print 'program_sso done';
 end
@@ -73,20 +68,13 @@ print 'insert data into the program_sso_trainer table';
 if(select count(*) from dbo.program_sso_trainer)=0
 begin
 	set identity_insert dbo.program_sso_trainer on;
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (1, '20120618 10:34:09 AM', null, 'Experto en seguridad industrial', '123456789', null, 'Juan Perez', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (2, '2018-05-27 23:56:44', null, 'Experto en Accidentes maquinarios', '343423456', null, 'Gabriel Moreno', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (3, '2018-05-27 23:56:44', null, 'Experto en Accidentes con Maquinaria pesada', '545454545', null, 'Rafael Terrazas', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (4, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '323123434', null, 'Nicolas Marquez', 'Ing. Ambiental');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (5, '2018-05-27 23:56:44', null, 'Experto en salud ocupacional', '678987678', null, 'Florinda Mesa', 'Medico');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (6, '2018-05-27 23:56:44', null, 'Experto en accidentes', '567876567', null, 'Fernando Flores', 'Ing. Industrial');
-	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) 
-		VALUES (7, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '6767676767', null, 'Karina Marasi', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (1, '20120618 10:34:09 AM', null, 'Experto en seguridad industrial', '123456789', null, 'Juan Perez', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (2, '2018-05-27 23:56:44', null, 'Experto en Accidentes maquinarios', '343423456', null, 'Gabriel Moreno', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (3, '2018-05-27 23:56:44', null, 'Experto en Accidentes con Maquinaria pesada', '545454545', null, 'Rafael Terrazas', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (4, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '323123434', null, 'Nicolas Marquez', 'Ing. Ambiental');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (5, '2018-05-27 23:56:44', null, 'Experto en salud ocupacional', '678987678', null, 'Florinda Mesa', 'Medico');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (6, '2018-05-27 23:56:44', null, 'Experto en accidentes', '567876567', null, 'Fernando Flores', 'Ing. Industrial');
+	INSERT INTO dbo.program_sso_trainer (sso_trainer_id, created_on, updated_on, sso_trainer_skills, sso_trainer_ci, sso_trainer_image, sso_trainer_name, sso_trainer_specialty) VALUES (7, '2018-05-27 23:56:44', null, 'Experto ambiental en industrias', '6767676767', null, 'Karina Marasi', 'Ing. Industrial');
 	set identity_insert dbo.program_sso_trainer off;
 	print 'program_sso_trainer done';
 end
@@ -95,12 +83,9 @@ print 'insert data into the program_sso_activities table';
 if(select count(*) from program_sso_activities)=0
 begin
 	set identity_insert program_sso_activities on;
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) 
-		VALUES (134,'2018-05-27 23:56:44', null, 'Identificar los riesgos a los que estan expuestos los empleados', 'Los empleados identifique por su cuenta los riesgos en sus areas de trabajo', 20, '3 días', 'Capacitación', 1, 1);
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) 
-		VALUES (135,'2018-05-27 23:56:44', null, 'Identificar nuevas normas', 'Los empleados deben estar actualizados con las nuevas normas', 20, '1 día', 'Capacitación', null, null);
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) 
-		VALUES (136,'2018-05-27 23:56:44', null, 'Identificar acciones a tomar en caso de accidentes', 'Los empleados deben estar conscientes de las acciones que deben ejecutar frente a un accidente', 20, '2 día', 'Capacitación', null, null);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (1,'2018-05-27 23:56:44', null, 'Identificar los riesgos a los que estan expuestos los empleados', 'Los empleados identifique por su cuenta los riesgos en sus areas de trabajo', 20, '3 días', 'Capacitación', 1, 1);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (2,'2018-05-27 23:56:44', null, 'Identificar nuevas normas', 'Los empleados deben estar actualizados con las nuevas normas', 20, '1 día', 'Capacitación', null, null);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (3,'2018-05-27 23:56:44', null, 'Identificar acciones a tomar en caso de accidentes', 'Los empleados deben estar conscientes de las acciones que deben ejecutar frente a un accidente', 20, '2 día', 'Capacitación', null, null);
 	set identity_insert program_sso_activities off;
 	print 'program_sso_activities done';
 end
@@ -109,14 +94,10 @@ print 'insert data into the program_sso_resource table';
 if(select count(*) from dbo.program_sso_resource)=0
 begin
 	set identity_insert dbo.program_sso_resource on;
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (1, '2018-05-27 23:56:44', null, 200, 'Hojas tamaño carta', 134);
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (2, '2018-05-27 23:56:44', null, 300, 'Pliegos de cartulina', 135);
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (3, '2018-05-27 23:56:44', null, 100, 'Marcadores', 136);
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) 
-		VALUES (4, '2018-05-27 23:56:44', null, 200, 'Pliegos de cartulina', 136);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (1, '2018-05-27 23:56:44', null, 200, 'Hojas tamaño carta', 1);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (2, '2018-05-27 23:56:44', null, 300, 'Pliegos de cartulina', 2);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (3, '2018-05-27 23:56:44', null, 100, 'Marcadores', 3);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (4, '2018-05-27 23:56:44', null, 200, 'Pliegos de cartulina', 3);
 	set identity_insert dbo.program_sso_resource off;
 	print 'program_sso_resource done';
 end
@@ -125,22 +106,14 @@ print 'insert data into the area table';
 if(select count(*) from dbo.areas)=0
 begin
 	set identity_insert dbo.areas on;
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (1, '2018-05-27 23:56:43', null, 'Diseños de casas, habitaciones, otros ambientes.', 'Diseño');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (2, '2018-05-27 23:56:43', null, 'Remodelaciones de ambientes de casas, habitaciones, etc.', 'Remodelaciones');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (3, '2018-05-27 23:56:43', null, 'Ampliaciones de habitaciones, espacios recreativos, cocinas, areas comunes, etc.', 'Ampliaciones');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (4, '2018-05-27 23:56:43', null, 'Trabajos en metal para adaptación de Galpones  y Carpintería metálica para puertas, barandas, otros.', 'Galpones  y Carpintería metálica');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (5, '2018-05-27 23:56:43', null, 'Instalaciones hídricas para ambientes como cocinas, baños, lavandería, duchas, piscinas, jardines, etc.', 'Instalaciones hídricas');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (6, '2018-05-27 23:56:43', null, 'Instalaciones eléctricas en los diferentes ambientes donde se trabaje.', 'Instalaciones eléctricas');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (7, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra gruesa en la construcción, como ser estructura en las edificaciones, muros, pisos, pavimentos, techado, etc.', 'Obra gruesa');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) 
-		VALUES (8, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra fina en la construcción, como ser revoque de paredes, cielo raso, cerámica, etc. para puertas, barandas, otros.', 'Obra fina');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (1, '2018-05-27 23:56:43', null, 'Diseños de casas, habitaciones, otros ambientes.', 'Diseño');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (2, '2018-05-27 23:56:43', null, 'Remodelaciones de ambientes de casas, habitaciones, etc.', 'Remodelaciones');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (3, '2018-05-27 23:56:43', null, 'Ampliaciones de habitaciones, espacios recreativos, cocinas, areas comunes, etc.', 'Ampliaciones');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (4, '2018-05-27 23:56:43', null, 'Trabajos en metal para adaptación de Galpones  y Carpintería metálica para puertas, barandas, otros.', 'Galpones  y Carpintería metálica');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (5, '2018-05-27 23:56:43', null, 'Instalaciones hídricas para ambientes como cocinas, baños, lavandería, duchas, piscinas, jardines, etc.', 'Instalaciones hídricas');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (6, '2018-05-27 23:56:43', null, 'Instalaciones eléctricas en los diferentes ambientes donde se trabaje.', 'Instalaciones eléctricas');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (7, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra gruesa en la construcción, como ser estructura en las edificaciones, muros, pisos, pavimentos, techado, etc.', 'Obra gruesa');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (8, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra fina en la construcción, como ser revoque de paredes, cielo raso, cerámica, etc. para puertas, barandas, otros.', 'Obra fina');
 	set identity_insert dbo.areas off;
 	print 'areas table done';
 end
@@ -149,9 +122,63 @@ print 'insert data into the personal table';
 if(select count(*) from dbo.personals)=0
 begin
 	set identity_insert dbo.personals on;
-	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (1,'Jhon','Royal','jhon@gmail.com','av.villazon','796586','432145',1,null,'2018-05-27 23:56:43',null,4);
-	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (2,'Jhon','peck','jhondoe@gmail.com','av.mariscal','795981','4495215',1,null,'2018-05-27 23:56:43',null,5);
-	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (3,'Jhon','doe','jhonny@gmail.com','av.rivero','726586','4471515',1,null,'2018-05-27 23:56:43',null,6);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (1,'Jhon','Royal','jhon@gmail.com','av.villazon','796586','432145',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (2,'Jhon','peck','jhondoe@gmail.com','av.mariscal','795981','4495215',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (3,'Jhon','doe','jhonny@gmail.com','av.rivero','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (4,'Ivan','Misericordia Eulate','ivan@gmail.com','av.jumbol','726586','4471515',1,null,'2018-05-27 23:56:43',null,4);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (5,'Christian Marcelo','Tola Pacheco','marcelo@gmail.com','av.siglo XX','726586','4471515',1,null,'2018-05-27 23:56:43',null,5);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (6,'Gilmer Daniel','Fernandez Pinto','daniel@gmail.com','av. heroinas','726586','4471515',1,null,'2018-05-27 23:56:43',null,6);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (7,'Jesus David','Pierola Alvarado','david@gmail.com','av.ayacucho','726586','4471515',1,null,'2018-05-27 23:56:43',null,7);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (8,'Marcos','Bustos Jimenez','marcos@gmail.com','calle antezana','726586','4471515',1,null,'2018-05-27 23:56:43',null,8);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (9,'Infiltrado','Mendez Ariola','inf@gmail.com','calle antezana','726586','4471515',1,null,'2018-05-27 23:56:43',null,8);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (10,'Boris Gonzalo','Medrano Guzman','boris@gmail.com','calle sucre ','726586','4471515',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (11,'Vanessa','Alcocer Iriarte','vanessa@gmail.com','calle 16 julio','726586','4471515',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (12,'Franz Alberto','Lopez Choque','franz@gmail.com','calle Bolivar','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	-- repite number
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (13,'Jhon1','Royal','jhon1@gmail.com','av.villazon','796586','432145',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (14,'Jhon1','peck','jhondoe1@gmail.com','av.mariscal','795981','4495215',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (15,'Jhon1','doe','jhonny1@gmail.com','av.rivero','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (16,'Ivan1','Misericordia Eulate','ivan1@gmail.com','av.jumbol','726586','4471515',1,null,'2018-05-27 23:56:43',null,4);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (17,'Christian Marcelo1','Tola Pacheco','marcelo1@gmail.com','av.siglo XX','726586','4471515',1,null,'2018-05-27 23:56:43',null,5);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (18,'Gilmer Daniel1','Fernandez Pinto','daniel1@gmail.com','av. heroinas','726586','4471515',1,null,'2018-05-27 23:56:43',null,6);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (19,'Jesus David1','Pierola Alvarado','david1@gmail.com','av.ayacucho','726586','4471515',1,null,'2018-05-27 23:56:43',null,7);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (20,'Marcos1','Bustos Jimenez','marcos1@gmail.com','calle antezana','726586','4471515',1,null,'2018-05-27 23:56:43',null,8);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (21,'Boris Gonzalo1','Medrano Guzman','boris1@gmail.com','calle sucre ','726586','4471515',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (22,'Vanessa1','Alcocer Iriarte','vanessa1@gmail.com','calle 16 julio','726586','4471515',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (23,'Franz Alberto1','Lopez Choque','franz1@gmail.com','calle Bolivar','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (24,'Jhon2','Royal','jhon2@gmail.com','av.villazon','796586','432145',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (25,'Jhon2','peck','jhondoe2@gmail.com','av.mariscal','795981','4495215',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (26,'Jhon2','doe','jhonny2@gmail.com','av.rivero','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (27,'Ivan2','Misericordia Eulate','ivan2@gmail.com','av.jumbol','726586','4471515',1,null,'2018-05-27 23:56:43',null,4);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (28,'Christian Marcelo2','Tola Pacheco','marcelo2@gmail.com','av.siglo XX','726586','4471515',1,null,'2018-05-27 23:56:43',null,5);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (29,'Gilmer Daniel2','Fernandez Pinto','daniel2@gmail.com','av. heroinas','726586','4471515',1,null,'2018-05-27 23:56:43',null,6);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (30,'Jesus David2','Pierola Alvarado','david2@gmail.com','av.ayacucho','726586','4471515',1,null,'2018-05-27 23:56:43',null,7);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (31,'Marcos2','Bustos Jimenez','marcos2@gmail.com','calle antezana','726586','4471515',1,null,'2018-05-27 23:56:43',null,8);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (32,'Boris Gonzalo2','Medrano Guzman','boris2@gmail.com','calle sucre ','726586','4471515',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (33,'Vanessa2','Alcocer Iriarte','vanessa2@gmail.com','calle 16 julio','726586','4471515',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (34,'Franz Alberto2','Lopez Choque','franz2@gmail.com','calle Bolivar','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (35,'Jhon3','Royal','jhon3@gmail.com','av.villazon','796586','432145',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (36,'Jhon3','peck','jhondoe3@gmail.com','av.mariscal','795981','4495215',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (37,'Jhon3','doe','jhonny3@gmail.com','av.rivero','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (38,'Ivan3','Misericordia Eulate','ivan3@gmail.com','av.jumbol','726586','4471515',1,null,'2018-05-27 23:56:43',null,4);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (39,'Christian Marcelo3','Tola Pacheco','marcelo3@gmail.com','av.siglo XX','726586','4471515',1,null,'2018-05-27 23:56:43',null,5);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (40,'Gilmer Daniel3','Fernandez Pinto','daniel3@gmail.com','av. heroinas','726586','4471515',1,null,'2018-05-27 23:56:43',null,6);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (41,'Jesus David3','Pierola Alvarado','david3@gmail.com','av.ayacucho','726586','4471515',1,null,'2018-05-27 23:56:43',null,7);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (42,'Marcos3','Bustos Jimenez','marcos3@gmail.com','calle antezana','726586','4471515',1,null,'2018-05-27 23:56:43',null,8);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (43,'Boris Gonzalo3','Medrano Guzman','boris3@gmail.com','calle sucre ','726586','4471515',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (44,'Vanessa3','Alcocer Iriarte','vanessa3@gmail.com','calle 16 julio','726586','4471515',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (45,'Franz Alberto3','Lopez Choque','franz3@gmail.com','calle Bolivar','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (46,'Jhon4','Royal','jhon4@gmail.com','av.villazon','796586','432145',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (47,'Jhon4','peck','jhondoe4@gmail.com','av.mariscal','795981','4495215',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (48,'Jhon4','doe','jhonny4@gmail.com','av.rivero','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (49,'Ivan4','Misericordia Eulate','ivan4@gmail.com','av.jumbol','726586','4471515',1,null,'2018-05-27 23:56:43',null,4);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (50,'Christian Marcelo4','Tola Pacheco','marcelo4@gmail.com','av.siglo XX','726586','4471515',1,null,'2018-05-27 23:56:43',null,5);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (51,'Gilmer Daniel4','Fernandez Pinto','daniel4@gmail.com','av. heroinas','726586','4471515',1,null,'2018-05-27 23:56:43',null,6);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (52,'Jesus David4','Pierola Alvarado','david4@gmail.com','av.ayacucho','726586','4471515',1,null,'2018-05-27 23:56:43',null,7);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (53,'Marcos4','Bustos Jimenez','marcos4@gmail.com','calle antezana','726586','4471515',1,null,'2018-05-27 23:56:43',null,8);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (54,'Boris Gonzalo4','Medrano Guzman','boris4@gmail.com','calle sucre ','726586','4471515',1,null,'2018-05-27 23:56:43',null,1);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (55,'Vanessa4','Alcocer Iriarte','vanessa4@gmail.com','calle 16 julio','726586','4471515',1,null,'2018-05-27 23:56:43',null,2);
+	INSERT INTO dbo.personals(personal_id,[personal_name],[personal_last_name],[personal_email],[personal_direction],[personal_cellphone],[personal_telephone],[personal_active],[personal_birthdate],[created_on],[updated_on],[area_area_id]) VALUES (56,'Franz Alberto4','Lopez Choque','franz4@gmail.com','calle Bolivar','726586','4471515',1,null,'2018-05-27 23:56:43',null,3);
 	set identity_insert dbo.personals oFF;
 	print 'personals done';
 end
@@ -160,14 +187,21 @@ print 'insert data into the equipament table';
 if(select count(*) from dbo.equipaments)=0
 begin
 	set identity_insert dbo.equipaments on;
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (1, '2018-05-28 15:13:25', null, 'Casco tipo Jokey', 0x, 'Helmmet', 1);
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (2, '2018-05-28 15:13:25', null, 'Taladro electrico portatil bosch', 0x, 'Electric Drill', 2);
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (3, '2018-05-28 15:13:25', null, 'Casco tipo Jokey de ala Ancha', 0x, 'Helmmet2', 1);
-	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) 
-		VALUES (4, '2018-05-28 15:13:25', null, 'Taladro electrico de banca bosch', 0x, 'Drill', 2);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (1, '2018-01-28 08:13:25', null, 'Casco tipo Jokey', 0x, 'Helmmet', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (2, '2018-02-28 11:13:25', null, 'Taladro electrico portatil bosch', 0x, 'Electric Drill', 2);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (3, '2018-03-28 15:13:25', null, 'Casco tipo Jokey de ala Ancha', 0x, 'Helmmet2', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (4, '2018-04-28 16:13:25', null, 'Taladro electrico de banca bosch', 0x, 'Drill', 2);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (5, '2018-05-28 09:13:25', null, 'CUERDA SISAL', 0x, 'rope', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (6, '2018-05-28 15:13:25', null, 'EXTENSIBLE INDUSTRIAL IP-55', 0x, 'rope', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (7, '2018-05-28 15:13:25', null, 'ALCOTANA 5931-A', 0x, 'rope', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (8, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA 4411J0', 0x, 'alicate', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (9, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA 4411J1', 0x, 'alicate', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (10, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA 4411J2', 0x, 'alicate', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (11, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA 4411J3', 0x, 'alicate', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (12, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA 4411J4', 0x, 'alicate', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (13, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA EXT 4611A0', 0x, 'alicate', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (14, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA EXT 4611A3', 0x, 'alicate', 1);
+	INSERT INTO dbo.equipaments (equipament_id, created_on, updated_on, equipament_description, equipament_image, equipament_name, equipament_type) VALUES (15, '2018-05-28 15:13:25', null, 'ALICATE ARANDELA EXT 4611A4', 0x, 'alicate', 1);
 	set identity_insert dbo.equipaments off;
 	print 'equipament done';
 end
@@ -176,14 +210,21 @@ print 'insert data into the kardex_equipaments table';
 if(select count(*) from dbo.kardex_equipaments)=0
 begin
 	set identity_insert dbo.kardex_equipaments on;
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (1, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 1);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (2, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:13:25', 0, 5, 2);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (3, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 3);
-	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id)
-		VALUES (4, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:13:25', 0, 0, 4);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 1, '2018-05-28 15:13:25', null, 15, '2018-05-28 09:13:25', 15, 0, 1);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 2, '2018-05-28 15:13:25', null, 10, '2018-05-28 09:30:25', 0, 5, 2);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 3, '2018-05-28 15:13:25', null, 15, '2018-05-28 10:00:25', 15, 0, 3);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 4, '2018-05-28 15:13:25', null, 10, '2018-05-28 10:15:25', 0, 0, 4);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 5, '2018-05-28 15:13:25', null, 15, '2018-05-28 11:17:25', 15, 0, 5);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 6, '2018-05-28 15:13:25', null, 10, '2018-05-28 14:00:25', 0, 5, 6);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 7, '2018-05-28 15:13:25', null, 15, '2018-05-28 14:30:25', 15, 0, 7);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 8, '2018-05-28 15:13:25', null, 10, '2018-05-28 14:55:25', 0, 0, 8);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES ( 9, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:13:25', 15, 0, 9);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (10, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:17:25', 0, 5, 10);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (11, '2018-05-28 15:13:25', null, 15, '2018-05-28 15:25:25', 15, 0, 11);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (12, '2018-05-28 15:13:25', null, 10, '2018-05-28 15:55:25', 0, 0, 12);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (13, '2018-05-28 15:13:25', null, 15, '2018-05-28 16:30:25', 15, 0, 13);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (14, '2018-05-28 15:13:25', null, 10, '2018-05-28 17:19:25', 0, 5, 14);
+	INSERT INTO dbo.kardex_equipaments (equipament_kardex_id, created_on, updated_on, balance_kardex, date_kardex, entry_kardex, outlay_kardex, equipament_id) VALUES (15, '2018-05-28 15:13:25', null, 15, '2018-05-28 17:40:25', 15, 0, 15);
 	set identity_insert dbo.kardex_equipaments off;
 	print 'kardex done';
 end 
@@ -194,7 +235,19 @@ begin
 	set identity_insert dbo.inventory on;
 	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (1, '2018-05-28 16:20:04', null, 1, '2018-05-28 16:20:30', 'bueno', 1, 1);
 	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (2, '2018-05-28 16:21:40', null, 1, '2017-05-28 16:21:50', 'nuevo', 2, 2);
-	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (4, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 2);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (3, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 3);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (4, '2018-05-28 16:20:04', null, 1, '2018-05-28 16:20:30', 'bueno', 1, 4);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (5, '2018-05-28 16:21:40', null, 1, '2017-05-28 16:21:50', 'nuevo', 2, 5);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (6, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 6);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (7, '2018-05-28 16:20:04', null, 1, '2018-05-28 16:20:30', 'bueno', 1, 7);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (8, '2018-05-28 16:21:40', null, 1, '2017-05-28 16:21:50', 'nuevo', 2, 8);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (9, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 9);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (10, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 10);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (11, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 11);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (12, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 12);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (13, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 13);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (15, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 14);
+	INSERT INTO dbo.inventory (inventory_id, created_on, updated_on, active_assignament, date_assignament, status_assignament, equipament_id, personal_id) VALUES (16, '2016-05-28 16:22:33', null, 0, '2017-05-28 16:22:46', 'malo', 2, 15);
 	set identity_insert dbo.inventory off;
 	print 'inventory done';
 end
@@ -206,43 +259,96 @@ begin
 	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(1,'2018-05-27 23:56:43',null,null ,null,1,1);
 	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(2,'2016-05-28 16:22:33',null,null ,null,1,2);
 	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(3,'2015-05-27 23:56:43',null,null ,null,1,3);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(4,'2015-05-27 23:56:43',null,null ,null,1,4);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(5,'2015-05-27 23:56:43',null,null ,null,1,5);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(6,'2015-05-27 23:56:43',null,null ,null,1,6);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(7,'2015-05-27 23:56:43',null,null ,null,1,7);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(8,'2015-05-27 23:56:43',null,null ,null,1,8);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(9,'2015-05-27 23:56:43',null,null ,null,1,9);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(10,'2015-05-27 23:56:43',null,null ,null,1,10);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(11,'2015-05-27 23:56:43',null,null ,null,1,11);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(12,'2015-05-27 23:56:43',null,null ,null,1,12);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(13,'2015-05-27 23:56:43',null,null ,null,1,13);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(14,'2015-05-27 23:56:43',null,null ,null,1,15);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(15,'2015-05-27 23:56:43',null,null ,null,1,17);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(16,'2015-05-27 23:56:43',null,null ,null,1,18);
+	INSERT INTO [dbo].[history_area_personal]([hap_id],[created_on],[updated_on],[hap_datea_fin],[hap_date_ini],[hap_status],[personal_personal_id]) VALUES(17,'2015-05-27 23:56:43',null,null ,null,1,19); 
 	set identity_insert dbo.[history_area_personal] off;
 end
 -- End SSO
 
 -- Inicident
+        -- incident_type_id, -- 4
+        -- incident_type_name, -- accidente
+        -- incident_type_description, --
+        -- incident_type_type, -- accidente de personal, daños a la propiedad/equipos, Medio ambiente, Fatalidad
+        -- incident_type_subtype) -- forma del accidente, tipo de lesion, parte del cuerpo lesionada, Agente causante
 print 'insert data into the incident_type table';
 if(select count(*) from dbo.incident_type)=0
 begin
 	set identity_insert dbo.incident_type on;
-	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (137, 'accidente', 'Este es el registro de accidentes', '','');
-	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (138, 'enfermedad', 'Enfermedad muy contagiosa', '', 'gripe');
-	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (139, 'incidente', 'Perdida de material', '', '');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (1, 'accidente', 'este es el registro de accidentes', '','');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (2, 'enfermedad', 'enfermedad muy contagiosa', '', 'gripe');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (3, 'incidente', 'perdida de material', '', '');
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (4, 'accidente', 'caida de persona a nivel', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (5, 'accidente', 'caida de persona a altura', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (6, 'accidente', 'caida de persona al agua', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (7, 'accidente', 'derrumbe o desplome de instalaciones', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (8, 'accidente', 'caida de objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (9, 'accidente', 'cisada sobre objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (10, 'accidente', 'choque contra objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (11, 'accidente', 'golpes por objetos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (12, 'accidente', 'apricionamiento o atrapamiento', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (13, 'accidente', 'Esfuerzos fisicos excesivos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (14, 'accidente', 'falsos movimientos', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (15, 'accidente', 'exposicion al frio', 'accidente de personal', 'forma del accidente')
+	INSERT INTO dbo.incident_type (incident_type_id, incident_type_name, incident_type_description, incident_type_type, incident_type_subtype) VALUES (16, 'accidente', 'expocicion al calor', 'accidente de personal', 'forma del accidente')
 	set identity_insert dbo.incident_type off;
-	print 'inident_typr done';
+	print 'inident_type done';
 end
 
 print 'insert data into the incident_detail table';
 if(select count(*) from dbo.incident_detail)=0
 begin
 	set identity_insert dbo.incident_detail on;
-	INSERT INTO dbo.incident_detail (incident_detail_id, incident_detail_status, incident_detail_name, incident_detail_description) VALUES (141, 'entregado', '', 'En fecha 02 de Mayo el Ingeniero se accidente');
-	INSERT INTO dbo.incident_detail (incident_detail_id, incident_detail_status, incident_detail_name, incident_detail_description) VALUES (143, 'pendiente', '', 'En fecha 02 de Mayo el cortador Gonzales tenia gripe');
-	INSERT INTO dbo.incident_detail (incident_detail_id, incident_detail_status, incident_detail_name, incident_detail_description) VALUES (145, 'reportado', '', 'En fecha 24 de Abril el Licenciado Maldonado reporto que el piso del sector 7 estaba mojado');
+	INSERT INTO dbo.incident_detail (incident_detail_id, incident_detail_status, incident_detail_name, incident_detail_description) VALUES (1, 'entregado', '', 'En fecha 02 de Mayo el Ingeniero se accidente');
+	INSERT INTO dbo.incident_detail (incident_detail_id, incident_detail_status, incident_detail_name, incident_detail_description) VALUES (2, 'pendiente', '', 'En fecha 02 de Mayo el cortador Gonzales tenia gripe');
+	INSERT INTO dbo.incident_detail (incident_detail_id, incident_detail_status, incident_detail_name, incident_detail_description) VALUES (3, 'reportado', '', 'En fecha 24 de Abril el Licenciado Maldonado reporto que el piso del sector 7 estaba mojado');
 	set identity_insert dbo.incident_detail off;
 	print 'incident_detail done';
 end
 
 print 'insert data into the incident table';
+                                                                                                                                                                                                                                                                                            -- incident_id,
+                                                                                                                                                                                                                                                                                            -- incident_code, 
+                                                                                                                                                                                                                                                                                            -- incident_registered_date,
+                                                                                                                                                                                                                                                                                            -- incident_number,
+                                                                                                                                                                                                                                                                                            -- incident_reincident,
+                                                                                                                                                                                                                                                                                            -- incident_reported_by,
+                                                                                                                                                                                                                                                                                            -- incident_severity,
+                                                                                                                                                                                                                                                                                            -- incident_treatment,
+                                                                                                                                                                                                                                                                                            -- incident_detail_id,
+                                                                                                                                                                                                                                                                                            -- incident_type_id,
+                                                                                                                                                                                                                                                                                            -- personal_id
 if(select count(*) from dbo.incident)=0
 begin
 	set identity_insert dbo.incident on;
-	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id)
-		VALUES (140, 'ACC-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'alta', 0, 141, 137,1);
-	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id)
-		VALUES (142, 'ENF-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'baja', 0, 143, 138,2);
-	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id)
-		VALUES (144, 'INC-01', '2018-05-27 23:56:44', 0, 0, 'admin', 'media', 0, 145, 139,3);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (1, 'ACC-01', '2017-06-27 11:56:44', 0, 0, 'admin', 'alta', 0, 1, 1,1);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (2, 'ENF-01', '2017-07-27 11:56:44', 0, 0, 'admin', 'baja', 0, 2, 2,2);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (3, 'INC-01', '2017-08-27 11:56:44', 0, 0, 'admin', 'media', 0, 3, 3,3);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (4, 'ACC-01', '2017-01-27 11:56:44', 0, 0, 'admin', 'alta', 0, 1, 1,1);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (5, 'ACC-01', '2017-02-27 11:56:44', 0, 0, 'admin', 'baja', 0, 3, 4,4);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (6, 'ACC-01', '2017-03-27 11:56:44', 0, 0, 'admin', 'baja', 0, 3, 5,5);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (7, 'ACC-01', '2017-04-27 11:56:44', 0, 0, 'admin', 'baja', 0, 3, 6,6);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (8, 'ACC-01', '2017-06-27 11:56:44', 0, 0, 'admin', 'baja', 0, 3, 7,7);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (9, 'ACC-01', '2017-05-27 11:56:44', 0, 0, 'admin', 'baja', 0, 3, 8,8);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (10, 'ACC-01', '2018-05-22 16:56:44', 0, 0, 'admin', 'baja', 0, 3, 9,9);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (11, 'ACC-01', '2018-06-22 16:56:44', 0, 0, 'admin', 'baja', 0, 3, 10,10);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (12, 'ACC-01', '2018-07-27 16:56:44', 0, 0, 'admin', 'baja', 0, 3, 11,11);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (13, 'ACC-01', '2018-08-27 16:56:44', 0, 0, 'admin', 'baja', 0, 3, 12,12);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (14, 'ACC-01', '2018-09-27 16:56:44', 0, 0, 'admin', 'baja', 0, 3, 13,13);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (15, 'ACC-01', '2018-10-27 16:56:44', 0, 0, 'admin', 'baja', 0, 3, 14,14);
+	INSERT INTO dbo.incident (incident_id, incident_code, incident_registered_date, incident_number, incident_reincident, incident_reported_by, incident_severity, incident_treatment, incident_detail_id, incident_type_id, personal_id) VALUES (16, 'ACC-01', '2018-11-27 16:56:44', 0, 0, 'admin', 'baja', 0, 3, 15,15);
 	set identity_insert dbo.incident off;
 	print 'incident done';
 end
@@ -439,6 +545,4 @@ begin
 	set identity_insert dbo.[personal_position_contract] off;
 	print 'personal_position_contract done';
 end
-
 COMMIT TRANSACTION;
-
