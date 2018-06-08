@@ -46,54 +46,54 @@ BEGIN
   SET NOCOUNT ON;
 
   -- Create temp tblAuditHistory table in memory
-  DECLARE @tblAuditHistory TABLE (AuditHistoryId INT
-                                  ,TableName NVARCHAR(MAX)
-								  ,ColumnName NVARCHAR(MAX)
-                                  ,ID INT
-                                  ,[Date] DATETIME
-								  ,OldValue NVARCHAR(MAX)
-                                  ,NewValue NVARCHAR(MAX)
-								  ,ModifiedDate DATETIME
-                                  ,ModifiedBy NVARCHAR(MAX));
+  DECLARE @tblAuditHistory TABLE (audit_id INT
+                                  ,table_name NVARCHAR(MAX)
+								  ,column_name NVARCHAR(MAX)
+                                  ,id INT
+                                  ,[date] DATETIME
+								  ,old_value NVARCHAR(MAX)
+                                  ,new_value NVARCHAR(MAX)
+								  ,modified_date DATETIME
+                                  ,modified_by NVARCHAR(MAX));
 
 
       --Insert Rows in the New Table
 
-	  INSERT INTO @tblAuditHistory(AuditHistoryId
-									   ,TableName
-									   ,ColumnName
-									   ,ID
-									    ,[Date]
-										,OldValue
-										,NewValue
-									   ,ModifiedDate
-									   ,ModifiedBy)
+	  INSERT INTO @tblAuditHistory(audit_id
+									   ,table_name
+									   ,column_name
+									   ,id
+									    ,[date]
+										,old_value
+										,new_value
+									   ,modified_date
+									   ,modified_by)
 
-		  SELECT ah.AuditHistoryId
-				 ,ah.TableName
-				 ,ah.ColumnName
-				 ,ah.ID
-				  ,ah.[Date]
-				  ,ah.OldValue
-				 ,ah.NewValue
-				 ,ModifiedDate
-				 ,ModifiedBy = ah.ModifiedBy
-		  FROM dbo.AuditHistory ah
-		  LEFT JOIN dbo.users u ON (ah.ModifiedBy = u.user_name)
-		  WHERE (ah.ModifiedDate) between @StartDate and @EndDate;
+		  SELECT ah.audit_id
+				 ,ah.table_name
+				 ,ah.column_name
+				 ,ah.id
+				  ,ah.[date]
+				  ,ah.old_value
+				 ,ah.new_value
+				 ,ah.modified_date
+				 ,modified_by = ah.modified_by
+		  FROM dbo.audithistory ah
+		  LEFT JOIN dbo.users u ON (ah.modified_by = u.user_name)
+		  WHERE (ah.modified_date) between @StartDate and @EndDate;
 
 
 		-- Return @AuditHistory values
 		SELECT
-		  AuditHistoryId
-		  ,TableName
-		  ,ColumnName
-		  ,ID
-		  ,[Date]
-		  ,OldValue
-		  ,NewValue
-		  ,ModifiedDate
-		  ,ModifiedBy
+		  audit_id
+		  ,table_name
+		  ,column_name
+		  ,id
+		  ,[date]
+		  ,old_value
+		  ,new_value
+		  ,modified_date
+		  ,modified_by
 		FROM @tblAuditHistory
 
 	  END
