@@ -1,4 +1,4 @@
-USE SSID2
+USE SSID
 GO
 
 --Trigger of Incident_detail
