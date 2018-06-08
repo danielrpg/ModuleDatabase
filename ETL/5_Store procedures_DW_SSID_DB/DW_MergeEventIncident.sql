@@ -7,7 +7,7 @@ GO
 
 /******************************************************************************
 **  Name: ETL.DW_MergeEventIncident
-**  Desc: Merges Source ETL.EventIncident changes into Destination dbo.DimEventIncident table. 
+**  Desc: Merges Source ETL.EventIncident changes into Destination dbo.dim_event_incident table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -25,32 +25,32 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimEventIncident AS target
+	MERGE dbo.dim_event_incident AS target
 	USING ETL.EventIncident AS source
 	ON
 	(
-	  target.EventIncidentID = source.EventIncidentID
+	  target.event_incident_id = source.event_incident_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET EventIncidentDetail   = source.EventIncidentDetail
-			,EventIncidentSeverity = source.EventIncidentSeverity
-			,EventIncidentReportedBy = source.EventIncidentReportedBy
+		 SET event_incident_detail   = source.event_incident_detail
+			,event_incident_severity = source.event_incident_severity
+			,event_incident_reported_by = source.event_incident_reported_by
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 EventIncidentID
-		,EventIncidentDetail
-		,EventIncidentSeverity
-		,EventIncidentReportedBy
+		 event_incident_id
+		,event_incident_detail
+		,event_incident_severity
+		,event_incident_reported_by
 	  )
 	  VALUES
 	  (
-		source.EventIncidentID
-		,source.EventIncidentDetail
-		,source.EventIncidentSeverity
-		,source.EventIncidentReportedBy
+		source.event_incident_id
+		,source.event_incident_detail
+		,source.event_incident_severity
+		,source.event_incident_reported_by
 	  );
 END
 GO

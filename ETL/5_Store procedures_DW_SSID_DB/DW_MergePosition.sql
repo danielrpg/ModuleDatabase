@@ -7,7 +7,7 @@ GO
 
 /******************************************************************************
 **  Name: ETL.DW_MergePosition
-**  Desc: Merges Source ETL.Position changes into Destination dbo.DimPosition table. 
+**  Desc: Merges Source ETL.Position changes into Destination dbo.dim_position table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -25,29 +25,29 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimPosition AS target
+	MERGE dbo.dim_position AS target
 	USING ETL.Position AS source
 	ON
 	(
-	  target.PositionID = source.PositionID
+	  target.position_id = source.position_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET PositionName   = source.PositionName
-			,PositionParent = source.PositionParent
+		 SET position_name   = source.position_name
+			,position_parent = source.position_parent
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 PositionID
-		,PositionName
-		,PositionParent
+		 position_id
+		,position_name
+		,position_parent
 	  )
 	  VALUES
 	  (
-		source.PositionID
-		,source.PositionName
-		,source.PositionParent
+		source.position_id
+		,source.position_name
+		,source.position_parent
 	  );
 END
 GO

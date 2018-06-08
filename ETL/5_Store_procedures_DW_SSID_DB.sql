@@ -37,7 +37,7 @@ PRINT 'Creating store procedure DW_MergeArea';
 GO
 /******************************************************************************
 **  Name: ETL.DW_MergeArea
-**  Desc: Merges Source ETL.Area changes into Destination dbo.DimArea table. 
+**  Desc: Merges Source ETL.Area changes into Destination dbo.dim_area table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -55,26 +55,26 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimArea AS target
+	MERGE dbo.dim_area AS target
 	USING ETL.Area AS source
 	ON
 	(
-	  target.AreaID = source.AreaID
+	  target.area_id = source.area_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET AreaName   = source.AreaName
+		 SET area_name   = source.area_name
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 AreaID
-		,AreaName
+		 area_id
+		,area_name
 	  )
 	  VALUES
 	  (
-		source.AreaID
-		,source.AreaName
+		source.area_id
+		,source.area_name
 	  );
 END
 GO
@@ -90,7 +90,7 @@ PRINT 'Creating store procedure DW_MergeEventIncident';
 GO
 /******************************************************************************
 **  Name: ETL.DW_MergeEventIncident
-**  Desc: Merges Source ETL.EventIncident changes into Destination dbo.DimEventIncident table. 
+**  Desc: Merges Source ETL.EventIncident changes into Destination dbo.dim_event_incident table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -108,48 +108,48 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimEventIncident AS target
+	MERGE dbo.dim_event_incident AS target
 	USING ETL.EventIncident AS source
 	ON
 	(
-	  target.EventIncidentID = source.EventIncidentID
+	  target.event_incident_id = source.event_incident_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET EventIncidentDetail   = source.EventIncidentDetail
-			,EventIncidentSeverity = source.EventIncidentSeverity
-			,EventIncidentReportedBy = source.EventIncidentReportedBy
+		 SET event_incident_detail   = source.event_incident_detail
+			,event_incident_severity = source.event_incident_severity
+			,event_incident_reported_by = source.event_incident_reported_by
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 EventIncidentID
-		,EventIncidentDetail
-		,EventIncidentSeverity
-		,EventIncidentReportedBy
+		 event_incident_id
+		,event_incident_detail
+		,event_incident_severity
+		,event_incident_reported_by
 	  )
 	  VALUES
 	  (
-		source.EventIncidentID
-		,source.EventIncidentDetail
-		,source.EventIncidentSeverity
-		,source.EventIncidentReportedBy
+		source.event_incident_id
+		,source.event_incident_detail
+		,source.event_incident_severity
+		,source.event_incident_reported_by
 	  );
 END
 GO
 
-IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_MergeFactIncident') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_Mergefact_incident') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
-	DROP PROCEDURE ETL.DW_MergeFactIncident
-	PRINT 'Store procedure deleted - ETL.DW_MergeFactIncident';
+	DROP PROCEDURE ETL.DW_Mergefact_incident
+	PRINT 'Store procedure deleted - ETL.DW_Mergefact_incident';
 END
 GO
 
-PRINT 'Creating store procedure DW_MergeFactIncident';
+PRINT 'Creating store procedure DW_Mergefact_incident';
 GO
 /******************************************************************************
-**  Name: ETL.DW_MergeFactIncident
-**  Desc: Merges Source ETL.FactIncident changes into Destination dbo.FactIncident table. 
+**  Name: ETL.DW_Mergefact_incident
+**  Desc: Merges Source ETL.fact_incident changes into Destination dbo.fact_incident table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -162,43 +162,43 @@ GO
 **  --------    --------------					-------------------------------
 ** 28/05/2018   Jesús David Piérola Alvarado    Release 3.0 - DW
 ******************************************************************************/
-CREATE PROCEDURE [ETL].[DW_MergeFactIncident]
+CREATE PROCEDURE [ETL].[DW_Mergefact_incident]
 AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.FactIncident AS target
-	USING ETL.FactIncident AS source
+	MERGE dbo.fact_incident AS target
+	USING ETL.fact_incident AS source
 	ON
 	(
-	  target.PersonalID = source.PersonalID
-	  AND target.AreaID = source.AreaID
-	  AND target.PositionID = source.PositionID
-	  AND target.EventIncidentID = source.EventIncidentID
+	  target.personal_id = source.personal_id
+	  AND target.area_id = source.area_id
+	  AND target.position_id = source.position_id
+	  AND target.event_incident_id = source.event_incident_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET [Type]				= source.[Type]
-			,EventIncidentDate  = source.EventIncidentDate
+		 SET [type]				= source.[type]
+			,event_incident_date  = source.event_incident_date
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 PersonalID
-		,AreaID
-		,PositionID
-		,EventIncidentID
-		,[Type]
-		,EventIncidentDate
+		 personal_id
+		,area_id
+		,position_id
+		,event_incident_id
+		,[type]
+		,event_incident_date
 	  )
 	  VALUES
 	  (
-		source.PersonalID
-		,source.AreaID
-		,source.PositionID
-		,source.EventIncidentID
-		,source.[Type]
-		,source.EventIncidentDate
+		source.personal_id
+		,source.area_id
+		,source.position_id
+		,source.event_incident_id
+		,source.[type]
+		,source.event_incident_date
 	  );
 END
 GO
@@ -214,7 +214,7 @@ PRINT 'Creating store procedure DW_MergePersonal';
 GO
 /******************************************************************************
 **  Name: ETL.DW_MergePersonal
-**  Desc: Merges Source ETL.Personal changes into Destination dbo.DimPersonal table. 
+**  Desc: Merges Source ETL.Personal changes into Destination dbo.dim_personal table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -232,35 +232,35 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimPersonal AS target
+	MERGE dbo.dim_personal AS target
 	USING ETL.Personal AS source
 	ON
 	(
-	  target.PersonalID = source.PersonalID
+	  target.personal_id = source.personal_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET PersonalFullName   = source.PersonalFullName
-			,PersonalAge		= source.PersonalAge
-			,PersonalStatus		= source.PersonalStatus
-			,PersonalCountEquipa = source.PersonalCountEquipa
+		 SET personal_full_name   = source.personal_full_name
+			,personal_age		= source.personal_age
+			,personal_status		= source.personal_status
+			,personal_count_equipa = source.personal_count_equipa
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 PersonalID
-		,PersonalFullName
-		,PersonalAge
-		,PersonalStatus
-		,PersonalCountEquipa
+		 personal_id
+		,personal_full_name
+		,personal_age
+		,personal_status
+		,personal_count_equipa
 	  )
 	  VALUES
 	  (
-		source.PersonalID
-		,source.PersonalFullName
-		,source.PersonalAge
-		,source.PersonalStatus
-		,source.PersonalCountEquipa
+		source.personal_id
+		,source.personal_full_name
+		,source.personal_age
+		,source.personal_status
+		,source.personal_count_equipa
 	  );
 END
 GO
@@ -276,7 +276,7 @@ PRINT 'Creating store procedure DW_MergePosition';
 GO
 /******************************************************************************
 **  Name: ETL.DW_MergePosition
-**  Desc: Merges Source ETL.Position changes into Destination dbo.DimPosition table. 
+**  Desc: Merges Source ETL.Position changes into Destination dbo.dim_position table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -294,29 +294,29 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimPosition AS target
+	MERGE dbo.dim_position AS target
 	USING ETL.Position AS source
 	ON
 	(
-	  target.PositionID = source.PositionID
+	  target.position_id = source.position_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET PositionName   = source.PositionName
-			,PositionParent = source.PositionParent
+		 SET position_name   = source.position_name
+			,position_parent = source.position_parent
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 PositionID
-		,PositionName
-		,PositionParent
+		 position_id
+		,position_name
+		,position_parent
 	  )
 	  VALUES
 	  (
-		source.PositionID
-		,source.PositionName
-		,source.PositionParent
+		source.position_id
+		,source.position_name
+		,source.position_parent
 	  );
 END
 GO
