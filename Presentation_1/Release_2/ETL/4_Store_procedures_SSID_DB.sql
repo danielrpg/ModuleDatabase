@@ -33,9 +33,6 @@ BEGIN
 	PRINT ('Function Deleted -  GetTableMigrationLatestRowVersion')
 END
 GO
-
-PRINT 'Creating function GetTableMigrationLatestRowVersion';
-GO
 /******************************************************************************
 **  Name: GetTableMigrationLatestRowVersion
 **  Desc: Get Latest row version of table Migration
@@ -52,7 +49,6 @@ GO
 ** --------   --------                      -----------------------------------
 ** 27/05/2018 Jesús David Piérola Alvarado   Release 3.0 - DW
 *******************************************************************************/
-
 CREATE FUNCTION [ETL].[GetTableMigrationLatestRowVersion]
 (
 	@table VARCHAR(50)
@@ -69,6 +65,8 @@ BEGIN
   RETURN @last;
 END
 GO
+PRINT 'Creating function GetTableMigrationLatestRowVersion';
+GO
 
 -- Creacion de Funcion
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ETL].[GetDatabaseRowVersion]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
@@ -76,9 +74,6 @@ BEGIN
 	DROP FUNCTION [ETL].GetDatabaseRowVersion
 	PRINT ('Function Deleted -  GetDatabaseRowVersion')
 END
-GO
-
-PRINT 'Creating function GetDatabaseRowVersion';
 GO
 /******************************************************************************
 **  Name: GetDatabaseRowVersion
@@ -96,7 +91,6 @@ GO
 ** --------   --------                      -----------------------------------
 ** 27/05/2018 Jesús David Piérola Alvarado   Release 3.0 - DW
 *******************************************************************************/
-
 CREATE FUNCTION [ETL].[GetDatabaseRowVersion] ()
 RETURNS BIGINT
 AS
@@ -104,12 +98,7 @@ BEGIN
   RETURN CONVERT(BIGINT, MIN_ACTIVE_ROWVERSION()) - 1;
 END
 GO
-
-IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetAreaChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
-BEGIN
-	DROP PROCEDURE ETL.GetAreaChangesByRowVersion
-	PRINT 'Store procedure Deleted -  ETL.GetAreaChangesByRowVersion';
-END
+PRINT 'Creating function GetDatabaseRowVersion';
 GO
 
 -- Store procedures
@@ -119,9 +108,6 @@ BEGIN
 	DROP PROCEDURE ETL.UpdateTableMigration
 	PRINT 'Store procedure Deleted -  ETL.UpdateTableMigration';
 END
-GO
-
-PRINT 'Creating store procedure UpdateTableMigration';
 GO
 /******************************************************************************
 **  Name: UpdateTableMigration
@@ -153,15 +139,15 @@ BEGIN
 	WHERE TableName = @tableName;
 END
 GO
+PRINT 'Creating store procedure UpdateTableMigration';
+GO
+
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.PullDataToDatawarehouse') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.PullDataToDatawarehouse
 	PRINT 'Store procedure Deleted -  ETL.PullDataToDatawarehouse';
 END
-GO
-
-PRINT 'Creating store procedure PullDataToDatawarehouse';
 GO
 /******************************************************************************
 **  Name: PullTableDataToDW
@@ -204,8 +190,15 @@ BEGIN
 										,@current   = @currentDBTS;
 END
 GO
+PRINT 'Creating store procedure PullDataToDatawarehouse';
+GO
 
-PRINT 'Creating store procedure GetAreaChangesByRowVersion';
+
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetAreaChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+BEGIN
+	DROP PROCEDURE ETL.GetAreaChangesByRowVersion
+	PRINT 'Store procedure Deleted -  ETL.GetAreaChangesByRowVersion';
+END
 GO
 /******************************************************************************
 **  Name: GetAreaChangesByRowVersion
@@ -241,15 +234,15 @@ BEGIN
 			,a.area_name
 END
 GO
+PRINT 'Creating store procedure GetAreaChangesByRowVersion';
+GO
+
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetEventIncidentChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.GetEventIncidentChangesByRowVersion
 	PRINT 'Store procedure Deleted -  ETL.GetEventIncidentChangesByRowVersion';
 END
-GO
-
-PRINT 'Creating store procedure GetEventIncidentChangesByRowVersion';
 GO
 /******************************************************************************
 **  Name: GetEventIncidentChangesByRowVersion
@@ -305,15 +298,15 @@ BEGIN
 			  ,i.incident_reported_by
 END
 GO
+PRINT 'Creating store procedure GetEventIncidentChangesByRowVersion';
+GO
+
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetPersonalChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.GetPersonalChangesByRowVersion
 	PRINT 'Store procedure Deleted -  ETL.GetPersonalChangesByRowVersion';
 END
-GO
-
-PRINT 'Creating store procedure GetPersonalChangesByRowVersion';
 GO
 /******************************************************************************
 **  Name: GetPersonalChangesByRowVersion
@@ -373,15 +366,15 @@ BEGIN
 		  ,p.personal_active
 END
 GO
+PRINT 'Creating store procedure GetPersonalChangesByRowVersion';
+GO
+
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetPositionChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.GetPositionChangesByRowVersion
 	PRINT 'Store procedure Deleted -  ETL.GetPositionChangesByRowVersion';
 END
-GO
-
-PRINT 'Creating store procedure GetPositionChangesByRowVersion';
 GO
 /******************************************************************************
 **  Name: GetPositionChangesByRowVersion
@@ -419,15 +412,15 @@ BEGIN
 		  ,ISNULL(parent_position_position_id,0)
 END
 GO
+PRINT 'Creating store procedure GetPositionChangesByRowVersion';
+GO
+
 
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetFactIncidentChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.GetFactIncidentChangesByRowVersion
 	PRINT 'Store procedure Deleted -  ETL.GetFactIncidentChangesByRowVersion';
 END
-GO
-
-PRINT 'Creating store procedure GetFactIncidentChangesByRowVersion';
 GO
 /******************************************************************************
 **  Name: GetFactIncidentChangesByRowVersion
@@ -496,4 +489,6 @@ BEGIN
 		  ,it.incident_type_type
 		  ,i.incident_registered_date
 END
+GO
+PRINT 'Creating store procedure GetFactIncidentChangesByRowVersion';
 GO
