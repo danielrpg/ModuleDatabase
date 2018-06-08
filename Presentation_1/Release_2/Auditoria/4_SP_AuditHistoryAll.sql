@@ -1,10 +1,10 @@
-USE [SSID]
+USE [SSID2]
 GO
 
-IF EXISTS (SELECT 1 FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_AuditHistory]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+IF EXISTS (SELECT 1 FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[sp_AuditHistoryAll]') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 	BEGIN
-		DROP PROCEDURE sp_AuditHistory
-		PRINT 'Store procedure deleted -  [sp_AuditHistory]';
+		DROP PROCEDURE sp_AuditHistoryAll
+		PRINT 'Store procedure deleted -  [sp_AuditHistoryAll]';
 	END
 GO
 
@@ -15,17 +15,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /******************************************************************************
-**  Name: SP_AuditHistory
-**  Desc: Returns the audit history for a depending on the table name,
-**        column name and id
+**  Name: SP_AuditHistoryAll
+**  Desc: Returns the audit history table
 **
-**  Author: Vanessa Alcocer
+**  Author: Christian Tola
 **
 **  Parameters:
-**  Input
+**
 **  ----------
-**  @StartDate DateTime
-**  @EndDate DateTime
 **
 **  Created: 03/06/2018
 *****************************************************************************************************
@@ -33,12 +30,9 @@ GO
 *****************************************************************************************************
 **  Date:       Author:        Description:
 **  --------    --------      -----------------------------------------------------------------------
-** 03/06/2018 Vanessa Alcocer  AuditHistory StoreProcedure creation.
-** 06/06/2018 Vanessa Alcocer  AuditHistory Adding startDate and endDate as Parameters.
+** 08/06/2018 Christian Tola   AuditHistoryAll StoreProcedure creation.
 *****************************************************************************************************/
-CREATE PROCEDURE [dbo].[sp_AuditHistory]
-  @start_date DateTime = NULL,
- @end_date DateTime = NULL
+CREATE PROCEDURE [dbo].[sp_AuditHistoryAll]
  WITH RECOMPILE
 AS
 BEGIN
@@ -80,8 +74,6 @@ BEGIN
 				 ,modified_by = ah.modified_by
 		  FROM dbo.audithistory ah
 		  LEFT JOIN dbo.users u ON (ah.modified_by = u.user_name)
-		  WHERE (ah.modified_date) between @start_date and @end_date;
-
 
 		-- Return @AuditHistory values
 		SELECT
@@ -98,7 +90,5 @@ BEGIN
 
 	  END
 GO
-  PRINT 'Store procedure CREATED -  [sp_AuditHistory]';
+  PRINT 'Store procedure CREATED -  [sp_AuditHistoryAll]';
 GO
-
-
