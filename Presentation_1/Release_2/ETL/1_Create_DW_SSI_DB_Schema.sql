@@ -1,3 +1,20 @@
+/******************************************************************************
+**  Name: create schema for DW_SSI_DB
+** 
+**  Called by: ssi
+**
+**  Author: Marcos Bustos
+**
+**  Date: 05/26/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**   Date:     Author:                            Description:
+** --------   --------        ---------------------------------------------------
+** 26/05/2018 Marcos Bustos						Initial version
+** 06/06/2018 Jesus David Piérola Alvarado		Edited all names for not use CamelCase, Change Type IDs and NVARCHAR
+*******************************************************************************/
+
 -- Creamos o usamos DB para DW
 IF NOT EXISTS(
 	SELECT *
@@ -23,9 +40,9 @@ ELSE
 GO
 
 
--- Create Table DimPersonal
+-- Create Table dim_personal
 /******************************************************************************
-**  Table Name: DimPersonal
+**  Table Name: dim_personal
 **  Desc: Table for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -40,33 +57,33 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
-PRINT 'Creating the DimPersonal table....';
+PRINT 'Creating the dim_personal table....';
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[dbo].[DimPersonal]') 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[dim_personal]') 
 		       AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[DimPersonal](
-		[PersonalID] [int] NOT NULL,
-		[PersonalFullName] [varchar](100) NOT NULL,
-		[PersonalAge] [int] NOT NULL,
-		[PersonalStatus] [varchar](10) NOT NULL,
-		[PersonalCountEquipa] [int] NOT NULL
-	 CONSTRAINT [PK_DimPersonal] PRIMARY KEY CLUSTERED 
+	CREATE TABLE [dbo].[dim_personal](
+		[personal_id] [bigint] NOT NULL,
+		[personal_full_name] [varchar](100) NOT NULL,
+		[personal_age] [int] NOT NULL,
+		[personal_status] [varchar](10) NOT NULL,
+		[personal_count_equipa] [int] NOT NULL
+	 CONSTRAINT [PK_dim_personal] PRIMARY KEY CLUSTERED 
 	(
-		[PersonalID] ASC
+		[personal_id] ASC
 	))
-		PRINT 'Table DimPersonal created!';
+		PRINT 'Table dim_personal created!';
 	END
 ELSE 
 	BEGIN
-		PRINT 'Table DimPersonal already exists into the database';
+		PRINT 'Table dim_personal already exists into the database';
 	END
 GO
 
 
--- Create Table DimArea
+-- Create Table dim_area
 /******************************************************************************
-**  Table Name: DimArea
+**  Table Name: dim_area
 **  Desc: Table for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -81,30 +98,30 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
-PRINT 'Creating the DimArea table....';
+PRINT 'Creating the dim_area table....';
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[dbo].[DimArea]') 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[dim_area]') 
 		       AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[DimArea](
-		[AreaID] [int] NOT NULL,
-		[AreaName] [varchar](50) NOT NULL
-	 CONSTRAINT [PK_DimArea] PRIMARY KEY CLUSTERED 
+	CREATE TABLE [dbo].[dim_area](
+		[area_id] [bigint] NOT NULL,
+		[area_name] [varchar](50) NOT NULL
+	 CONSTRAINT [PK_dim_area] PRIMARY KEY CLUSTERED 
 	(
-		[AreaID] ASC
+		[area_id] ASC
 	))
-		PRINT 'Table DimArea created!';
+		PRINT 'Table dim_area created!';
 	END
 ELSE 
 	BEGIN
-		PRINT 'Table DimArea already exists into the database';
+		PRINT 'Table dim_area already exists into the database';
 	END
 GO
 
 
--- Create Table DimPosition
+-- Create Table dim_position
 /******************************************************************************
-**  Table Name: DimPosition
+**  Table Name: dim_position
 **  Desc: Table for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -119,31 +136,31 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
-PRINT 'Creating the DimPosition table....';
+PRINT 'Creating the dim_position table....';
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[dbo].[DimPosition]') 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[dim_position]') 
 		       AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[DimPosition](
-		[PositionID] [int] NOT NULL,
-		[PositionName] [varchar](150) NOT NULL,
-		[PositionParent] [varchar](150) NOT NULL
-	 CONSTRAINT [PK_DimPosition] PRIMARY KEY CLUSTERED 
+	CREATE TABLE [dbo].[dim_position](
+		[position_id] [bigint] NOT NULL,
+		[position_name] [varchar](150) NOT NULL,
+		[position_parent] [varchar](150) NOT NULL
+	 CONSTRAINT [PK_dim_position] PRIMARY KEY CLUSTERED 
 	(
-		[PositionID] ASC
+		[position_id] ASC
 	))
-		PRINT 'Table DimPosition created!';
+		PRINT 'Table dim_position created!';
 	END
 ELSE 
 	BEGIN
-		PRINT 'Table DimPosition already exists into the database';
+		PRINT 'Table dim_position already exists into the database';
 	END
 GO
 
 
--- Create Table DimEventIncident
+-- Create Table dim_event_incident
 /******************************************************************************
-**  Table Name: DimEventIncident
+**  Table Name: dim_event_incident
 **  Desc: Table for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -158,32 +175,32 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
-PRINT 'Creating the DimEventIncident table....';
+PRINT 'Creating the dim_event_incident table....';
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[dbo].[DimEventIncident]') 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[dim_event_incident]') 
 		       AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[DimEventIncident](
-		[EventIncidentID] [int] NOT NULL,
-		[EventIncidentDetail] [nvarchar](MAX) NOT NULL,
-		[EventIncidentSeverity] [varchar](150) NOT NULL,
-		[EventIncidentReportedBy] [varchar](50) NOT NULL
-	 CONSTRAINT [PK_DimEventIncident] PRIMARY KEY CLUSTERED 
+	CREATE TABLE [dbo].[dim_event_incident](
+		[event_incident_id] [bigint] NOT NULL,
+		[event_incident_detail] [varchar](MAX) NOT NULL,
+		[event_incident_severity] [varchar](150) NOT NULL,
+		[event_incident_reported_by] [varchar](50) NOT NULL
+	 CONSTRAINT [PK_dim_event_incident] PRIMARY KEY CLUSTERED 
 	(
-		[EventIncidentID] ASC
+		[event_incident_id] ASC
 	))
-		PRINT 'Table DimEventIncident created!';
+		PRINT 'Table dim_event_incident created!';
 	END
 ELSE 
 	BEGIN
-		PRINT 'Table DimEventIncident already exists into the database';
+		PRINT 'Table dim_event_incident already exists into the database';
 	END
 GO
 
 
--- Create Table FactIncident
+-- Create Table fact_incident
 /******************************************************************************
-**  Table Name: FactIncident
+**  Table Name: fact_incident
 **  Desc: Table for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -198,37 +215,37 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
-PRINT 'Creating the FactIncident table....';
+PRINT 'Creating the fact_incident table....';
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[dbo].[FactIncident]') 
+		       WHERE object_id = OBJECT_ID(N'[dbo].[fact_incident]') 
 		       AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[FactIncident](
-		[PersonalID] [int] NOT NULL,
-		[AreaID] [int] NOT NULL,
-		[PositionID] [int] NOT NULL,
-		[EventIncidentID] [int] NOT NULL,
-		[Type] [varchar](50) NOT NULL,
-		[EventIncidentDate] [datetime] NOT NULL
-	 CONSTRAINT [PK_FactIncident] PRIMARY KEY CLUSTERED 
+	CREATE TABLE [dbo].[fact_incident](
+		[personal_id] [bigint] NOT NULL,
+		[area_id] [bigint] NOT NULL,
+		[position_id] [bigint] NOT NULL,
+		[event_incident_id] [bigint] NOT NULL,
+		[type] [varchar](50) NOT NULL,
+		[event_incident_date] [datetime] NOT NULL
+	 CONSTRAINT [PK_fact_incident] PRIMARY KEY CLUSTERED 
 	(
-		[PersonalID] ASC,
-		[AreaID] ASC,
-		[PositionID] ASC,
-		[EventIncidentID] ASC
+		[personal_id] ASC,
+		[area_id] ASC,
+		[position_id] ASC,
+		[event_incident_id] ASC
 	))
-		PRINT 'Table FactIncident created!';
+		PRINT 'Table fact_incident created!';
 	END
 ELSE 
 	BEGIN
-		PRINT 'Table FactIncident already exists into the database';
+		PRINT 'Table fact_incident already exists into the database';
 	END
 GO
 
 
--- Create foreing key FK_DimPersonal
+-- Create foreing key FK_dim_personal
 /******************************************************************************
-**  Foreing key Name: FK_DimPersonal
+**  Foreing key Name: FK_dim_personal
 **  Desc: Foreing key for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -243,22 +260,22 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
--- Define the relationship between DimPesonal and FactIncident.
+-- Define the relationship between DimPesonal and fact_incident.
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
-       WHERE object_id = OBJECT_ID(N'[dbo].[FK_DimPersonal]')
-       AND parent_object_id = OBJECT_ID(N'[dbo].[FactIncident]'))
-ALTER TABLE [dbo].[FactIncident]  WITH CHECK ADD  
-       CONSTRAINT [FK_DimPersonal] FOREIGN KEY([PersonalID])
-REFERENCES [dbo].[DimPersonal] ([PersonalID])
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_dim_personal]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[fact_incident]'))
+ALTER TABLE [dbo].[fact_incident]  WITH CHECK ADD  
+       CONSTRAINT [FK_dim_personal] FOREIGN KEY([personal_id])
+REFERENCES [dbo].[dim_personal] ([personal_id])
 GO
-ALTER TABLE [dbo].[FactIncident] CHECK 
-       CONSTRAINT [FK_DimPersonal]
+ALTER TABLE [dbo].[fact_incident] CHECK 
+       CONSTRAINT [FK_dim_personal]
 GO
 
 
--- Create foreing key FK_DimArea
+-- Create foreing key FK_dim_area
 /******************************************************************************
-**  Foreing key Name: FK_DimArea
+**  Foreing key Name: FK_dim_area
 **  Desc: Foreing key for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -273,22 +290,22 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
--- Define the relationship between DimArea and FactIncident.
+-- Define the relationship between dim_area and fact_incident.
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
-       WHERE object_id = OBJECT_ID(N'[dbo].[FK_DimArea]')
-       AND parent_object_id = OBJECT_ID(N'[dbo].[FactIncident]'))
-ALTER TABLE [dbo].[FactIncident]  WITH CHECK ADD  
-       CONSTRAINT [FK_DimArea] FOREIGN KEY([AreaID])
-REFERENCES [dbo].[DimArea] ([AreaID])
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_dim_area]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[fact_incident]'))
+ALTER TABLE [dbo].[fact_incident]  WITH CHECK ADD  
+       CONSTRAINT [FK_dim_area] FOREIGN KEY([area_id])
+REFERENCES [dbo].[dim_area] ([area_id])
 GO
-ALTER TABLE [dbo].[FactIncident] CHECK 
-       CONSTRAINT [FK_DimArea]
+ALTER TABLE [dbo].[fact_incident] CHECK 
+       CONSTRAINT [FK_dim_area]
 GO
 
 
--- Create foreing key FK_DimPosition
+-- Create foreing key FK_dim_position
 /******************************************************************************
-**  Foreing key Name: FK_DimPosition
+**  Foreing key Name: FK_dim_position
 **  Desc: Foreing key for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -303,22 +320,22 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
--- Define the relationship between DimPosition and FactIncident.
+-- Define the relationship between dim_position and fact_incident.
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
-       WHERE object_id = OBJECT_ID(N'[dbo].[FK_DimPosition]')
-       AND parent_object_id = OBJECT_ID(N'[dbo].[FactIncident]'))
-ALTER TABLE [dbo].[FactIncident]  WITH CHECK ADD  
-       CONSTRAINT [FK_DimPosition] FOREIGN KEY([PositionID])
-REFERENCES [dbo].[DimPosition] ([PositionID])
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_dim_position]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[fact_incident]'))
+ALTER TABLE [dbo].[fact_incident]  WITH CHECK ADD  
+       CONSTRAINT [FK_dim_position] FOREIGN KEY([position_id])
+REFERENCES [dbo].[dim_position] ([position_id])
 GO
-ALTER TABLE [dbo].[FactIncident] CHECK 
-       CONSTRAINT [FK_DimPosition]
+ALTER TABLE [dbo].[fact_incident] CHECK 
+       CONSTRAINT [FK_dim_position]
 GO
 
 
--- Create foreing key FK_DimEventIncident
+-- Create foreing key FK_dim_event_incident
 /******************************************************************************
-**  Foreing key Name: FK_DimEventIncident
+**  Foreing key Name: FK_dim_event_incident
 **  Desc: Foreing key for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -333,16 +350,16 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
--- Define the relationship between DimEventIncident and FactIncident.
+-- Define the relationship between dim_event_incident and fact_incident.
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys 
-       WHERE object_id = OBJECT_ID(N'[dbo].[FK_DimEventIncident]')
-       AND parent_object_id = OBJECT_ID(N'[dbo].[FactIncident]'))
-ALTER TABLE [dbo].[FactIncident]  WITH CHECK ADD  
-       CONSTRAINT [FK_DimEventIncident] FOREIGN KEY([EventIncidentID])
-REFERENCES [dbo].[DimEventIncident] ([EventIncidentID])
+       WHERE object_id = OBJECT_ID(N'[dbo].[FK_dim_event_incident]')
+       AND parent_object_id = OBJECT_ID(N'[dbo].[fact_incident]'))
+ALTER TABLE [dbo].[fact_incident]  WITH CHECK ADD  
+       CONSTRAINT [FK_dim_event_incident] FOREIGN KEY([event_incident_id])
+REFERENCES [dbo].[dim_event_incident] ([event_incident_id])
 GO
-ALTER TABLE [dbo].[FactIncident] CHECK 
-       CONSTRAINT [FK_DimEventIncident]
+ALTER TABLE [dbo].[fact_incident] CHECK 
+       CONSTRAINT [FK_dim_event_incident]
 GO
 
 
@@ -370,11 +387,11 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[Personal](
-		[PersonalID] [int] NOT NULL,
-		[PersonalFullName] [varchar](100) NOT NULL,
-		[PersonalAge] [int] NOT NULL,
-		[PersonalStatus] [varchar](10) NOT NULL,
-		[PersonalCountEquipa] [int] NOT NULL
+		[personal_id] [bigint] NOT NULL,
+		[personal_full_name] [varchar](100) NOT NULL,
+		[personal_age] [int] NOT NULL,
+		[personal_status] [varchar](10) NOT NULL,
+		[personal_count_equipa] [int] NOT NULL
 		)
 		PRINT 'Table Personal created!';
 	END
@@ -408,8 +425,8 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[Area](
-		[AreaID] [int] NOT NULL,
-		[AreaName] [varchar](50) NOT NULL
+		[area_id] [bigint] NOT NULL,
+		[area_name] [varchar](50) NOT NULL
 	)
 		PRINT 'Table Area created!';
 	END
@@ -443,9 +460,9 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[Position](
-		[PositionID] [int] NOT NULL,
-		[PositionName] [varchar](150) NOT NULL,
-		[PositionParent] [varchar](150) NOT NULL
+		[position_id] [bigint] NOT NULL,
+		[position_name] [varchar](150) NOT NULL,
+		[position_parent] [varchar](150) NOT NULL
 	 )
 		PRINT 'Table Position created!';
 	END
@@ -479,10 +496,10 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[EventIncident](
-		[EventIncidentID] [int] NOT NULL,
-		[EventIncidentDetail] [nvarchar](MAX) NOT NULL,
-		[EventIncidentSeverity] [varchar](150) NOT NULL,
-		[EventIncidentReportedBy] [varchar](50) NOT NULL
+		[event_incident_id] [bigint] NOT NULL,
+		[event_incident_detail] [varchar](MAX) NOT NULL,
+		[event_incident_severity] [varchar](150) NOT NULL,
+		[event_incident_reported_by] [varchar](50) NOT NULL
 	)
 		PRINT 'Table EventIncident created!';
 	END
@@ -493,9 +510,9 @@ ELSE
 GO
 
 
--- Create Table [ETL].[FactIncident]
+-- Create Table [ETL].[fact_incident]
 /******************************************************************************
-**  Table Name: [ETL].[FactIncident]
+**  Table Name: [ETL].[fact_incident]
 **  Desc: Table for DW_SSI_DB
 ** 
 **  Called by: ssi
@@ -510,24 +527,24 @@ GO
 ** --------   --------        ---------------------------------------------------
 ** 05/26/2018 Marcos Bustos   Initial version
 *******************************************************************************/
-PRINT 'Creating the FactIncident table....';
+PRINT 'Creating the fact_incident table....';
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'[ETL].[FactIncident]') 
+		       WHERE object_id = OBJECT_ID(N'[ETL].[fact_incident]') 
 		       AND type in (N'U'))
 BEGIN
-	CREATE TABLE [ETL].[FactIncident](
-		[PersonalID] [int] NOT NULL,
-		[AreaID] [int] NOT NULL,
-		[PositionID] [int] NOT NULL,
-		[EventIncidentID] [int] NOT NULL,
+	CREATE TABLE [ETL].[fact_incident](
+		[personal_id] [bigint] NOT NULL,
+		[area_id] [int] NOT NULL,
+		[position_id] [int] NOT NULL,
+		[event_incident_id] [int] NOT NULL,
 		[Type] [varchar](50) NOT NULL,
-		[EventIncidentDate] [datetime] NOT NULL
+		[event_incident_date] [datetime] NOT NULL
 	)
-		PRINT 'Table FactIncident created!';
+		PRINT 'Table fact_incident created!';
 	END
 ELSE 
 	BEGIN
-		PRINT 'Table FactIncident already exists into the database';
+		PRINT 'Table fact_incident already exists into the database';
 	END
 GO
 

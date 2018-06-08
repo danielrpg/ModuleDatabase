@@ -7,7 +7,7 @@ GO
 
 /******************************************************************************
 **  Name: ETL.DW_MergePersonal
-**  Desc: Merges Source ETL.Personal changes into Destination dbo.DimPersonal table. 
+**  Desc: Merges Source ETL.Personal changes into Destination dbo.dim_personal table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -25,35 +25,35 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimPersonal AS target
+	MERGE dbo.dim_personal AS target
 	USING ETL.Personal AS source
 	ON
 	(
-	  target.PersonalID = source.PersonalID
+	  target.personal_id = source.personal_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET PersonalFullName   = source.PersonalFullName
-			,PersonalAge		= source.PersonalAge
-			,PersonalStatus		= source.PersonalStatus
-			,PersonalCountEquipa = source.PersonalCountEquipa
+		 SET personal_full_name   = source.personal_full_name
+			,personal_age		= source.personal_age
+			,personal_status		= source.personal_status
+			,personal_count_equipa = source.personal_count_equipa
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 PersonalID
-		,PersonalFullName
-		,PersonalAge
-		,PersonalStatus
-		,PersonalCountEquipa
+		 personal_id
+		,personal_full_name
+		,personal_age
+		,personal_status
+		,personal_count_equipa
 	  )
 	  VALUES
 	  (
-		source.PersonalID
-		,source.PersonalFullName
-		,source.PersonalAge
-		,source.PersonalStatus
-		,source.PersonalCountEquipa
+		source.personal_id
+		,source.personal_full_name
+		,source.personal_age
+		,source.personal_status
+		,source.personal_count_equipa
 	  );
 END
 GO
