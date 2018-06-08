@@ -1,1 +1,0 @@
-INSERT INTO ssidb.dbo.roles (role_id, created_on, updated_on, role_name) VALUES (1, '2018-05-29 09:05:09.7300000', '2018-05-29 09:05:09.9860000', 'ROLE_ADMIN');

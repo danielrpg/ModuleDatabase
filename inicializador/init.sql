@@ -33,6 +33,7 @@ begin
 	print 'roles table done';
 end
 
+
 print 'insert data into the users table';
 if(select count(*) from dbo.users)=0
 begin
@@ -42,6 +43,7 @@ begin
 	print 'users table done';			
 end
 
+
 print 'insert data into the user_role';
 if(select count(*) from dbo.user_role)=0
 begin
@@ -49,6 +51,7 @@ begin
 	print 'user_role table done';
 end
 -- End Users
+
 
 -- PROGRAMA SSO
 print 'insert data into the program_sso table';
@@ -63,6 +66,7 @@ begin
 	set identity_insert dbo.program_sso off;
 	print 'program_sso done';
 end
+
 
 print 'insert data into the program_sso_trainer table';
 if(select count(*) from dbo.program_sso_trainer)=0
@@ -79,22 +83,25 @@ begin
 	print 'program_sso_trainer done';
 end
 
+
+
 print 'insert data into the program_sso_activities table';
 if(select count(*) from program_sso_activities)=0
 begin
 	set identity_insert program_sso_activities on;
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (1,'2018-05-27 23:56:44', null, 'Identificar los riesgos a los que estan expuestos los empleados', 'Los empleados identifique por su cuenta los riesgos en sus areas de trabajo', 20, '3 d韆s', 'Capacitaci髇', 1, 1);
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (2,'2018-05-27 23:56:44', null, 'Identificar nuevas normas', 'Los empleados deben estar actualizados con las nuevas normas', 20, '1 d韆', 'Capacitaci髇', null, null);
-	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (3,'2018-05-27 23:56:44', null, 'Identificar acciones a tomar en caso de accidentes', 'Los empleados deben estar conscientes de las acciones que deben ejecutar frente a un accidente', 20, '2 d韆', 'Capacitaci髇', null, null);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (1,'2018-05-27 23:56:44', null, 'Identificar los riesgos a los que estan expuestos los empleados', 'Los empleados identifique por su cuenta los riesgos en sus areas de trabajo', 20, '3 d铆as', 'Capacitaci贸n', 1, 1);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (2,'2018-05-27 23:56:44', null, 'Identificar nuevas normas', 'Los empleados deben estar actualizados con las nuevas normas', 20, '1 d铆a', 'Capacitaci贸n', null, null);
+	INSERT INTO program_sso_activities (sso_detail_id, created_on, updated_on, sso_detail_activities, sso_detail_goal, so_detail_number, sso_detail_time, soo_detail_type, sso_id, sso_trainer_id) VALUES (3,'2018-05-27 23:56:44', null, 'Identificar acciones a tomar en caso de accidentes', 'Los empleados deben estar conscientes de las acciones que deben ejecutar frente a un accidente', 20, '2 d铆a', 'Capacitaci贸n', null, null);
 	set identity_insert program_sso_activities off;
 	print 'program_sso_activities done';
 end
+
 
 print 'insert data into the program_sso_resource table';
 if(select count(*) from dbo.program_sso_resource)=0
 begin
 	set identity_insert dbo.program_sso_resource on;
-	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (1, '2018-05-27 23:56:44', null, 200, 'Hojas tama駉 carta', 1);
+	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (1, '2018-05-27 23:56:44', null, 200, 'Hojas tama帽o carta', 1);
 	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (2, '2018-05-27 23:56:44', null, 300, 'Pliegos de cartulina', 2);
 	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (3, '2018-05-27 23:56:44', null, 100, 'Marcadores', 3);
 	INSERT INTO dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (4, '2018-05-27 23:56:44', null, 200, 'Pliegos de cartulina', 3);
@@ -102,21 +109,23 @@ begin
 	print 'program_sso_resource done';
 end
 
+
 print 'insert data into the area table';
 if(select count(*) from dbo.areas)=0
 begin
 	set identity_insert dbo.areas on;
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (1, '2018-05-27 23:56:43', null, 'Dise駉s de casas, habitaciones, otros ambientes.', 'Dise駉');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (1, '2018-05-27 23:56:43', null, 'Dise帽os de casas, habitaciones, otros ambientes.', 'Dise帽o');
 	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (2, '2018-05-27 23:56:43', null, 'Remodelaciones de ambientes de casas, habitaciones, etc.', 'Remodelaciones');
 	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (3, '2018-05-27 23:56:43', null, 'Ampliaciones de habitaciones, espacios recreativos, cocinas, areas comunes, etc.', 'Ampliaciones');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (4, '2018-05-27 23:56:43', null, 'Trabajos en metal para adaptaci髇 de Galpones  y Carpinter韆 met醠ica para puertas, barandas, otros.', 'Galpones  y Carpinter韆 met醠ica');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (5, '2018-05-27 23:56:43', null, 'Instalaciones h韉ricas para ambientes como cocinas, ba駉s, lavander韆, duchas, piscinas, jardines, etc.', 'Instalaciones h韉ricas');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (6, '2018-05-27 23:56:43', null, 'Instalaciones el閏tricas en los diferentes ambientes donde se trabaje.', 'Instalaciones el閏tricas');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (7, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra gruesa en la construcci髇, como ser estructura en las edificaciones, muros, pisos, pavimentos, techado, etc.', 'Obra gruesa');
-	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (8, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra fina en la construcci髇, como ser revoque de paredes, cielo raso, cer醡ica, etc. para puertas, barandas, otros.', 'Obra fina');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (4, '2018-05-27 23:56:43', null, 'Trabajos en metal para adaptaci贸n de Galpones  y Carpinter铆a met谩lica para puertas, barandas, otros.', 'Galpones  y Carpinter铆a met谩lica');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (5, '2018-05-27 23:56:43', null, 'Instalaciones h铆dricas para ambientes como cocinas, ba帽os, lavander铆a, duchas, piscinas, jardines, etc.', 'Instalaciones h铆dricas');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (6, '2018-05-27 23:56:43', null, 'Instalaciones el茅ctricas en los diferentes ambientes donde se trabaje.', 'Instalaciones el茅ctricas');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (7, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra gruesa en la construcci贸n, como ser estructura en las edificaciones, muros, pisos, pavimentos, techado, etc.', 'Obra gruesa');
+	INSERT INTO dbo.areas (area_id, created_on, updated_on, area_description, area_name) VALUES (8, '2018-05-27 23:56:43', null, 'Trabajos relacionados a la obra fina en la construcci贸n, como ser revoque de paredes, cielo raso, cer谩mica, etc. para puertas, barandas, otros.', 'Obra fina');
 	set identity_insert dbo.areas off;
 	print 'areas table done';
 end
+
 
 print 'insert data into the personal table';
 if(select count(*) from dbo.personals)=0
@@ -183,6 +192,7 @@ begin
 	print 'personals done';
 end
 
+
 print 'insert data into the equipament table';
 if(select count(*) from dbo.equipaments)=0
 begin
@@ -205,6 +215,7 @@ begin
 	set identity_insert dbo.equipaments off;
 	print 'equipament done';
 end
+
 
 print 'insert data into the kardex_equipaments table';
 if(select count(*) from dbo.kardex_equipaments)=0
@@ -229,6 +240,7 @@ begin
 	print 'kardex done';
 end 
 
+
 print 'insert data into the inventory table';
 if(select count(*) from dbo.inventory)=0
 begin
@@ -251,6 +263,7 @@ begin
 	set identity_insert dbo.inventory off;
 	print 'inventory done';
 end
+
 
 print 'insert data into the history_area_personal table';
 if(select count(*) from dbo.history_area_personal)=0
@@ -277,11 +290,12 @@ begin
 end
 -- End SSO
 
+
 -- Inicident
         -- incident_type_id, -- 4
         -- incident_type_name, -- accidente
         -- incident_type_description, --
-        -- incident_type_type, -- accidente de personal, da駉s a la propiedad/equipos, Medio ambiente, Fatalidad
+        -- incident_type_type, -- accidente de personal, da帽os a la propiedad/equipos, Medio ambiente, Fatalidad
         -- incident_type_subtype) -- forma del accidente, tipo de lesion, parte del cuerpo lesionada, Agente causante
 print 'insert data into the incident_type table';
 if(select count(*) from dbo.incident_type)=0
@@ -307,6 +321,7 @@ begin
 	print 'inident_type done';
 end
 
+
 print 'insert data into the incident_detail table';
 if(select count(*) from dbo.incident_detail)=0
 begin
@@ -317,6 +332,7 @@ begin
 	set identity_insert dbo.incident_detail off;
 	print 'incident_detail done';
 end
+
 
 print 'insert data into the incident table';
                                                                                                                                                                                                                                                                                             -- incident_id,
@@ -354,6 +370,7 @@ begin
 end
 -- End Insident
 
+
 print 'insert data into the contracts table';
 if(select count(*) from dbo.contracts)=0
 begin
@@ -364,12 +381,13 @@ begin
 	print 'contracts done';
 end
 
+
 print 'insert data into the department table';
 if(select count(*) from dbo.department)=0
 begin
 	set identity_insert dbo.department on;
-	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (1, '2018-05-27 23:56:43', null, 'El departamento de direcci髇 general agrupa los cargos relacionados con gerencia.', 'Direcci髇 General');
-	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (10, '2018-05-27 23:56:43', null, 'El departamento de direcci髇 general agrupa los cargos relacionados con operaciones.', 'Departamento t閏nico');
+	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (1, '2018-05-27 23:56:43', null, 'El departamento de direcci贸n general agrupa los cargos relacionados con gerencia.', 'Direcci贸n General');
+	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (10, '2018-05-27 23:56:43', null, 'El departamento de direcci贸n general agrupa los cargos relacionados con operaciones.', 'Departamento t茅cnico');
 	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (59, '2018-05-27 23:56:44', null, 'El departamento comercial agrupa los cargos relacionados con las ventas de la empresa.', 'Departamento comercial');
 	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (68, '2018-05-27 23:56:44', null, 'El departamento financiero agrupa los cargos encargados de las finanzas de la empresa.', 'Departamento financiero');
 	INSERT INTO dbo.department (department_id, created_on, updated_on, department_description, department_name) VALUES (77, '2018-05-27 23:56:44', null, 'El departamento de recursos humanos agrupa los cargos encargados del personal.', 'Departamento de recursos humanos');
@@ -391,14 +409,15 @@ begin
 	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (16, '2018-05-27 23:56:43', '2018-05-27 23:56:43', 'Bodeguero de obras.', 2, 'Bodeguero de obras', 11);
 	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (60, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Jefe de vivienda.', 1, 'Jefe de vivienda', 2);
 	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (69, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Asesor contable.', 1, 'Asesor contable', 2);
-	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (79, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Jefe de departamento t閏nico.', 1, 'Jefe de departamento t閏nico', 2);
-	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (81, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Jefe de administraci髇.', 1, 'Jefe de administraci髇', 2);
+	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (79, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Jefe de departamento t茅cnico.', 1, 'Jefe de departamento t茅cnico', 2);
+	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (81, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Jefe de administraci贸n.', 1, 'Jefe de administraci贸n', 2);
 	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (82, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Secretaria.', 2, 'Secretaria', 81);
-	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (83, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Mec醤ico.', 2, 'Mec醤ico', 81);
+	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (83, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Mec谩nico.', 2, 'Mec谩nico', 81);
 	INSERT INTO dbo.position (position_id, created_on, updated_on, position_description, position_level, position_name, parent_position_position_id) VALUES (84, '2018-05-27 23:56:44', '2018-05-27 23:56:44', 'Jefe de bodega.', 2, 'Jefe de bodega', 81);
 	set identity_insert dbo.position off;
 	print'position done';
 end
+
 
 print 'insert data into the department_position table';
 if(select count(*) from dbo.department_position)=0
@@ -421,119 +440,122 @@ begin
 	print 'department_position done';
 end
 
+
 print 'insert data into the requeriments table';
 if(select count(*) from dbo.requirements)=0
 begin
 	set identity_insert dbo.requirements on;
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (3, '2018-05-27 23:56:43', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 2);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (4, '2018-05-27 23:56:43', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 2);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (5, '2018-05-27 23:56:43', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 2);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (4, '2018-05-27 23:56:43', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 2);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (5, '2018-05-27 23:56:43', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 2);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (17, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 11);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (18, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 11);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (19, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 11);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (18, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 11);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (19, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 11);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (24, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 15);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (25, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 15);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (26, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 15);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (25, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 15);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (26, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 15);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (31, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 13);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (32, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 13);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (33, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 13);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (32, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 13);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (33, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 13);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (38, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 16);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (39, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 16);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (40, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 16);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (39, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 16);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (40, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 16);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (45, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 12);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (46, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 12);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (47, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 12);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (46, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 12);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (47, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 12);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (52, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 14);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (53, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 14);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (54, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 14);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (53, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 14);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (54, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 14);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (61, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 60);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (62, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 60);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (63, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 60);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (62, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 60);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (63, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 60);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (70, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 69);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (71, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 69);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (72, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 69);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (71, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 69);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (72, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 69);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (85, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 81);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (86, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 81);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (87, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 81);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (86, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 81);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (87, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 81);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (92, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 79);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (93, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 79);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (94, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 79);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (93, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 79);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (94, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 79);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (99, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 82);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (100, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 82);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (101, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 82);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (100, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 82);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (101, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 82);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (106, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 83);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (107, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 83);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (108, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 83);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (107, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 83);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (108, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 83);
 	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (127, '2018-05-27 23:56:44', null, 'Titulo en Administrador de empresas', 'Administrador de empresas', 84);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (128, '2018-05-27 23:56:44', null, 'Formaci髇 acad閙ica en Administrador de empresas', 'Formaci髇 acad閙ica', 84);
-	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (129, '2018-05-27 23:56:44', null, 'M醩 de 3 a駉s de experiencia  en cargos similares de Jefatura dentro el 醨ea de mantenimiento, fiscalizaci髇 de obras y administraci髇 de proyectos.', 'Experiencia', 84);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (128, '2018-05-27 23:56:44', null, 'Formaci贸n acad茅mica en Administrador de empresas', 'Formaci贸n acad茅mica', 84);
+	INSERT INTO dbo.requirements (requiriment_id, created_on, updated_on, requiriment_description, requiriment_name, position_position_id) VALUES (129, '2018-05-27 23:56:44', null, 'M谩s de 3 a帽os de experiencia  en cargos similares de Jefatura dentro el 谩rea de mantenimiento, fiscalizaci贸n de obras y administraci贸n de proyectos.', 'Experiencia', 84);
 	set identity_insert dbo.requirements off;
 	print 'requeriments done';
 end
+
 
 print 'insert data into the functions table';
 if(select count(*) from dbo.functions)=0
 begin
 	set identity_insert dbo.functions on;
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (6, '2018-05-27 23:56:43', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 2);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (7, '2018-05-27 23:56:43', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 2);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (8, '2018-05-27 23:56:43', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 2);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (9, '2018-05-27 23:56:43', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 2);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (7, '2018-05-27 23:56:43', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 2);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (8, '2018-05-27 23:56:43', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 2);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (9, '2018-05-27 23:56:43', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 2);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (20, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 11);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (21, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 11);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (22, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 11);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (23, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 11);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (21, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 11);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (22, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 11);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (23, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 11);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (27, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 15);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (28, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 15);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (29, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 15);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (30, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 15);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (28, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 15);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (29, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 15);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (30, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 15);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (34, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 13);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (35, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 13);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (36, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 13);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (37, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 13);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (35, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 13);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (36, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 13);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (37, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 13);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (41, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 16);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (42, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 16);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (43, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 16);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (44, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 16);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (42, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 16);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (43, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 16);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (44, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 16);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (48, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 12);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (49, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 12);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (50, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 12);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (51, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 12);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (49, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 12);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (50, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 12);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (51, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 12);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (55, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 14);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (56, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 14);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (57, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 14);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (58, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 14);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (56, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 14);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (57, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 14);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (58, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 14);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (64, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 60);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (65, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 60);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (66, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 60);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (67, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 60);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (65, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 60);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (66, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 60);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (67, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 60);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (73, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 69);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (74, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 69);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (75, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 69);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (76, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 69);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (74, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 69);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (75, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 69);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (76, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 69);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (88, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 81);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (89, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 81);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (90, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 81);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (91, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 81);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (89, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 81);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (90, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 81);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (91, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 81);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (95, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 79);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (96, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 79);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (97, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 79);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (98, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 79);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (96, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 79);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (97, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 79);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (98, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 79);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (102, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 82);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (103, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 82);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (104, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 82);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (105, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 82);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (103, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 82);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (104, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 82);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (105, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 82);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (109, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 83);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (110, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 83);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (111, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 83);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (112, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 83);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (110, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 83);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (111, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 83);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (112, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 83);
 	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (130, '2018-05-27 23:56:44', null, 'Debe encargarse de Genenciar la empresa de la mejor manera posible', 'Genenciar la empresa', 84);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (131, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci髇 de todos los recursos de la empresa', 'Administraci髇 de recursos', 84);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (132, '2018-05-27 23:56:44', null, 'Formulaci髇 de proyectos de Ingenier韆 Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci髇 de Proyectos', 84);
-	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (133, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci髇 de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 84);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (131, '2018-05-27 23:56:44', null, 'Debe encargarse de la Administraci贸n de todos los recursos de la empresa', 'Administraci贸n de recursos', 84);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (132, '2018-05-27 23:56:44', null, 'Formulaci贸n de proyectos de Ingenier铆a Civil de alta calidad, resistentes y seguros para los usuarios finales', 'Formulaci贸n de Proyectos', 84);
+	INSERT INTO dbo.functions (func_id, created_on, updated_on, func_description, func_name, position_position_id) VALUES (133, '2018-05-27 23:56:44', null, 'Establecer programas en la ejecuci贸n de obras enfocados al mejor aprovechamiento de los recursos', 'Establecer programas', 84);
 	set identity_insert dbo.functions off;
 	print 'functions done';
 end
+
 
 print 'insert data into the personal_position_contract table';
 if(select count(*) from dbo.[personal_position_contract])=0
@@ -545,4 +567,6 @@ begin
 	set identity_insert dbo.[personal_position_contract] off;
 	print 'personal_position_contract done';
 end
+
+
 COMMIT TRANSACTION;
