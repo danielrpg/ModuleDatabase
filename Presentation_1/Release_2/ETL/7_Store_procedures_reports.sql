@@ -25,7 +25,8 @@ GO
 *******************************************************************************
 **  Date:       Author:							Description:
 **  --------    --------------					-------------------------------
-** 05/06/2018   Marcos Bustos Jimenez		Release 3.0 - DW
+** 05/06/2018   Marcos Bustos Jimenez			Release 3.0 - DW
+** 06/07/2018   Jesus David Piérola Alvarado	Edit Table Name and fields
 ******************************************************************************/
 CREATE PROCEDURE [dbo].[GetIncidentByArea] 
 	@STARTDATE DATETIME
@@ -34,14 +35,14 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	SELECT COUNT(FI.EventIncidentID) NumIncidents
-		,FI.Type
-		,DA.AreaName
-	FROM FactIncident FI
-	INNER JOIN DimArea DA ON FI.AreaID = DA.AreaID
-	WHERE FI.EventIncidentDate BETWEEN @STARTDATE AND @ENDDATE
-	GROUP BY FI.Type, DA.AreaName
-	ORDER BY FI.Type, DA.AreaName
+	SELECT COUNT(FI.event_incident_id) NumIncidents
+		,FI.type
+		,DA.area_name
+	FROM dbo.fact_incident FI
+	INNER JOIN dbo.dim_area DA ON FI.area_id = DA.area_id
+	WHERE FI.event_incident_date BETWEEN @STARTDATE AND @ENDDATE
+	GROUP BY FI.Type, DA.area_name
+	ORDER BY FI.Type, DA.area_name
 END
 GO
 
@@ -71,6 +72,7 @@ GO
 **  Date:       Author:							Description:
 **  --------    --------------					-------------------------------
 ** 05/06/2018   Marcos Bustos Jimenez		Release 3.0 - DW
+** 06/07/2018   Jesus David Piérola Alvarado	Edit Table Name and fields
 ******************************************************************************/
 CREATE PROCEDURE [dbo].[GetIncidentDetails] 
 	@STARTDATE DATETIME
@@ -79,26 +81,22 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	SELECT FI.EventIncidentDate
-		,DP.PersonalFullName
-		,DP.PersonalStatus
-		,DP.PersonalAge
-		,FI.Type
-		,DA.AreaName
-		,DEI.EventIncidentDetail
-		,DEI.EventIncidentSeverity
-		,DEI.EventIncidentReportedBy
-		,DPT.PositionName
-		,DPT.PositionParent
-	FROM FactIncident FI
-	INNER JOIN DimArea DA ON FI.AreaID = DA.AreaID
-	INNER JOIN DimEventIncident DEI ON FI.EventIncidentID = DEI.EventIncidentID
-	INNER JOIN DimPersonal DP ON FI.PersonalID = DP.PersonalID
-	INNER JOIN DimPosition DPT ON FI.PositionID = DPT.PositionID
-	WHERE FI.EventIncidentDate BETWEEN @STARTDATE AND @ENDDATE
+	SELECT FI.event_incident_date
+		,DP.personal_full_name
+		,DP.personal_status
+		,DP.personal_age
+		,FI.type
+		,DA.area_name
+		,DEI.event_incident_detail
+		,DEI.event_incident_severity
+		,DEI.event_incident_reported_by
+		,DPT.position_name
+		,DPT.position_parent
+	FROM dbo.fact_incident FI
+	INNER JOIN dbo.dim_area DA ON FI.area_id = DA.area_id
+	INNER JOIN dbo.dim_event_incident DEI ON FI.event_incident_id = DEI.event_incident_id
+	INNER JOIN dbo.dim_personal DP ON FI.personal_id = DP.personal_id
+	INNER JOIN dbo.dim_position DPT ON FI.position_id = DPT.position_id
+	WHERE FI.event_incident_date BETWEEN @STARTDATE AND @ENDDATE
 END
 GO
-
-
-
-
