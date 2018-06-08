@@ -34,7 +34,7 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	SELECT COUNT(FI.EventIncidentID) Num_incidents
+	SELECT COUNT(FI.EventIncidentID) NumIncidents
 		,FI.Type
 		,DA.AreaName
 	FROM FactIncident FI
