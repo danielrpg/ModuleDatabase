@@ -387,11 +387,11 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[Personal](
-		[personal_id] [bigint] NOT NULL,
-		[personal_full_name] [varchar](100) NOT NULL,
-		[personal_age] [int] NOT NULL,
-		[personal_status] [varchar](10) NOT NULL,
-		[personal_count_equipa] [int] NOT NULL
+		[personal_id] [bigint],
+		[personal_full_name] [varchar](100),
+		[personal_age] [int],
+		[personal_status] [varchar](10),
+		[personal_count_equipa] [int]
 		)
 		PRINT 'Table Personal created!';
 	END
@@ -425,8 +425,8 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[Area](
-		[area_id] [bigint] NOT NULL,
-		[area_name] [varchar](50) NOT NULL
+		[area_id] [bigint],
+		[area_name] [varchar](50)
 	)
 		PRINT 'Table Area created!';
 	END
@@ -460,9 +460,9 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[Position](
-		[position_id] [bigint] NOT NULL,
-		[position_name] [varchar](150) NOT NULL,
-		[position_parent] [varchar](150) NOT NULL
+		[position_id] [bigint],
+		[position_name] [varchar](150),
+		[position_parent] [varchar](150)
 	 )
 		PRINT 'Table Position created!';
 	END
@@ -496,10 +496,10 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[EventIncident](
-		[event_incident_id] [bigint] NOT NULL,
-		[event_incident_detail] [varchar](MAX) NOT NULL,
-		[event_incident_severity] [varchar](150) NOT NULL,
-		[event_incident_reported_by] [varchar](50) NOT NULL
+		[event_incident_id] [bigint],
+		[event_incident_detail] [varchar](MAX),
+		[event_incident_severity] [varchar](150),
+		[event_incident_reported_by] [varchar](50)
 	)
 		PRINT 'Table EventIncident created!';
 	END
@@ -533,12 +533,12 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects
 		       AND type in (N'U'))
 BEGIN
 	CREATE TABLE [ETL].[fact_incident](
-		[personal_id] [bigint] NOT NULL,
-		[area_id] [int] NOT NULL,
-		[position_id] [int] NOT NULL,
-		[event_incident_id] [int] NOT NULL,
-		[Type] [varchar](50) NOT NULL,
-		[event_incident_date] [datetime] NOT NULL
+		[personal_id] [bigint],
+		[area_id] [int],
+		[position_id] [int],
+		[event_incident_id] [int],
+		[Type] [varchar](50),
+		[event_incident_date] [datetime]
 	)
 		PRINT 'Table fact_incident created!';
 	END
