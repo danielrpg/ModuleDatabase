@@ -175,6 +175,7 @@ BEGIN
 	  AND target.area_id = source.area_id
 	  AND target.position_id = source.position_id
 	  AND target.event_incident_id = source.event_incident_id
+	  AND target.event_incident_date = source.event_incident_date
 	)
 	WHEN MATCHED
 	THEN UPDATE 
@@ -195,7 +196,7 @@ BEGIN
 	  (
 		source.personal_id
 		,source.area_id
-		,source.position_id
+		,ISNULL(source.position_id,12)
 		,source.event_incident_id
 		,source.[type]
 		,source.event_incident_date
@@ -241,7 +242,7 @@ BEGIN
 	WHEN MATCHED
 	THEN UPDATE 
 		 SET personal_full_name   = source.personal_full_name
-			,personal_age		= source.personal_age
+			,personal_age		= ISNULL(source.personal_age,0)
 			,personal_status		= source.personal_status
 			,personal_count_equipa = source.personal_count_equipa
 	WHEN NOT MATCHED
@@ -258,7 +259,7 @@ BEGIN
 	  (
 		source.personal_id
 		,source.personal_full_name
-		,source.personal_age
+		,ISNULL(source.personal_age,0)
 		,source.personal_status
 		,source.personal_count_equipa
 	  );

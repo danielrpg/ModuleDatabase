@@ -40,7 +40,7 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Pull SSI
 EXECUTE [ETL].[PullDataToDatawarehouse] @table = ''EventIncident'';
 EXECUTE [ETL].[PullDataToDatawarehouse] @table = ''Personal'';
 EXECUTE [ETL].[PullDataToDatawarehouse] @table = ''Position'';
-EXECUTE [ETL].[PullDataToDatawarehouse] @table = ''FactIncident'';', 
+EXECUTE [ETL].[PullDataToDatawarehouse] @table = ''fact_incident'';', 
 		@database_name=N'SSID', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -59,7 +59,7 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Merge SS
 EXECUTE [ETL].[DW_MergeEventIncident];
 EXECUTE [ETL].[DW_MergePersonal];
 EXECUTE [ETL].[DW_MergePosition];
-EXECUTE [ETL].[DW_MergeFactIncident];', 
+EXECUTE [ETL].[DW_Mergefact_incident];', 
 		@database_name=N'DW_SSID_DB', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -78,7 +78,7 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Clean St
 TRUNCATE TABLE [ETL].[EventIncident];
 TRUNCATE TABLE [ETL].[Personal];
 TRUNCATE TABLE [ETL].[Position];
-TRUNCATE TABLE [ETL].[FactIncident];', 
+TRUNCATE TABLE [ETL].[fact_incident];', 
 		@database_name=N'DW_SSID_DB', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
