@@ -29,8 +29,8 @@ GO
 ** 06/07/2018   Jesus David Piérola Alvarado	Edit Table Name and fields
 ******************************************************************************/
 CREATE PROCEDURE [dbo].[GetIncidentByArea] 
-	@STARTDATE DATETIME
-	,@ENDDATE DATETIME
+	@STARTDATE NVARCHAR(50) = NULL
+	,@ENDDATE NVARCHAR(50) = NULL
 AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
@@ -40,7 +40,7 @@ BEGIN
 		,DA.area_name
 	FROM dbo.fact_incident FI
 	INNER JOIN dbo.dim_area DA ON FI.area_id = DA.area_id
-	WHERE FI.event_incident_date BETWEEN @STARTDATE AND @ENDDATE
+	WHERE FI.event_incident_date BETWEEN CONVERT(DATETIME, @STARTDATE, 103) AND CONVERT(DATETIME, @ENDDATE, 103)
 	GROUP BY FI.Type, DA.area_name
 	ORDER BY FI.Type, DA.area_name
 END
@@ -75,8 +75,8 @@ GO
 ** 06/07/2018   Jesus David Piérola Alvarado	Edit Table Name and fields
 ******************************************************************************/
 CREATE PROCEDURE [dbo].[GetIncidentDetails] 
-	@STARTDATE DATETIME
-	,@ENDDATE DATETIME
+	@STARTDATE NVARCHAR(50) = NULL
+	,@ENDDATE NVARCHAR(50) = NULL
 AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
@@ -97,7 +97,7 @@ BEGIN
 	INNER JOIN dbo.dim_event_incident DEI ON FI.event_incident_id = DEI.event_incident_id
 	INNER JOIN dbo.dim_personal DP ON FI.personal_id = DP.personal_id
 	INNER JOIN dbo.dim_position DPT ON FI.position_id = DPT.position_id
-	WHERE FI.event_incident_date BETWEEN @STARTDATE AND @ENDDATE
+	WHERE FI.event_incident_date BETWEEN CONVERT(DATETIME, @STARTDATE, 103) AND CONVERT(DATETIME, @ENDDATE, 103)
 END
 GO
 
