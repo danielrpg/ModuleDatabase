@@ -274,7 +274,7 @@ BEGIN
 		  ,EventIncidentSeverity	= i.incident_severity
 		  ,EventIncidentReportedBy	= i.incident_reported_by
 	FROM dbo.incident i
-			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
+			LEFT JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
 	WHERE i.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND i.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
 	GROUP BY i.incident_id
@@ -289,7 +289,7 @@ BEGIN
 		  ,EventIncidentSeverity	= i.incident_severity
 		  ,EventIncidentReportedBy	= i.incident_reported_by
 	FROM dbo.incident i
-			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
+			LEFT JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
 	WHERE id.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND id.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
 	GROUP BY i.incident_id
@@ -339,10 +339,10 @@ BEGIN
 		  ,PersonalSatus		= p.personal_active
 		  ,PersonalCountEquipa	= COUNT(i.inventory_id)
 	FROM dbo.personals p 
-			INNER JOIN inventory i ON p.personal_id = i.personal_id
+			LEFT JOIN inventory i ON p.personal_id = i.personal_id
 	WHERE p.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND p.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
-	AND i.active_assignament = 1
+	--AND i.active_assignament = 1
 	GROUP BY p.personal_id
 		  ,p.personal_name + ' ' + p.personal_last_name
 		  ,p.personal_birthdate
@@ -356,10 +356,10 @@ BEGIN
 		  ,PersonalSatus		= p.personal_active
 		  ,PersonalCountEquipa	= COUNT(i.inventory_id)
 	FROM dbo.personals p 
-			INNER JOIN inventory i ON p.personal_id = i.personal_id
+			LEFT JOIN inventory i ON p.personal_id = i.personal_id
 	WHERE i.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND i.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
-	AND i.active_assignament = 1
+	--AND i.active_assignament = 1
 	GROUP BY p.personal_id
 		  ,p.personal_name + ' ' + p.personal_last_name
 		  ,p.personal_birthdate
@@ -416,14 +416,14 @@ PRINT 'Creating store procedure GetPositionChangesByRowVersion';
 GO
 
 
-IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetFactIncidentChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.Getfact_incidentChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
-	DROP PROCEDURE ETL.GetFactIncidentChangesByRowVersion
-	PRINT 'Store procedure Deleted -  ETL.GetFactIncidentChangesByRowVersion';
+	DROP PROCEDURE ETL.Getfact_incidentChangesByRowVersion
+	PRINT 'Store procedure Deleted -  ETL.Getfact_incidentChangesByRowVersion';
 END
 GO
 /******************************************************************************
-**  Name: GetFactIncidentChangesByRowVersion
+**  Name: Getfact_incidentChangesByRowVersion
 **  Desc: Pulls Changes and Inserts from the dbo.incident table (FactIncident Data)
 **  Called By: ETL SQL Job.
 **
@@ -437,7 +437,7 @@ GO
 **  --------    --------					----------------------------------
 **  27/05/2018  Jesus David Piérola Alvarado Release 3.0 - DW
 ******************************************************************************/
-CREATE PROCEDURE ETL.GetFactIncidentChangesByRowVersion
+CREATE PROCEDURE ETL.Getfact_incidentChangesByRowVersion
 (
 	@LastRowVersionID BIGINT,
 	@CurrentDBTS      BIGINT
@@ -451,7 +451,7 @@ BEGIN
 		  ,AreaID			 = p.area_area_id
 		  ,PositionID		 = ppc.position_id
 		  ,EventIncidentID	 = i.incident_id
-		  ,[Type]			 = it.incident_type_type
+		  ,[Type]			 = it.incident_type_name
 		  ,EventIncidentDate = i.incident_registered_date
 	FROM dbo.incident i
 			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
@@ -464,7 +464,7 @@ BEGIN
 		  ,p.area_area_id
 		  ,ppc.position_id
 		  ,i.incident_id
-		  ,it.incident_type_type
+		  ,it.incident_type_name
 		  ,i.incident_registered_date
 
 	UNION 
@@ -473,7 +473,7 @@ BEGIN
 		  ,AreaID			 = p.area_area_id
 		  ,PositionID		 = ppc.position_id
 		  ,EventIncidentID	 = i.incident_id
-		  ,[Type]			 = it.incident_type_type
+		  ,[Type]			 = it.incident_type_name
 		  ,EventIncidentDate = i.incident_registered_date
 	FROM dbo.incident i
 			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
@@ -486,9 +486,9 @@ BEGIN
 		  ,p.area_area_id
 		  ,ppc.position_id
 		  ,i.incident_id
-		  ,it.incident_type_type
+		  ,it.incident_type_name
 		  ,i.incident_registered_date
 END
 GO
-PRINT 'Creating store procedure GetFactIncidentChangesByRowVersion';
+PRINT 'Creating store procedure Getfact_incidentChangesByRowVersion';
 GO

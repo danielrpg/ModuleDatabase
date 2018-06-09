@@ -40,7 +40,7 @@ BEGIN
 		INSERT INTO ETL.Migration(TableName, LatestChange)
 		VALUES('Area',0)
 		,('EventIncident',0)
-		,('FactIncident',0)
+		,('fact_incident',0)
 		,('Personal',0)
 		,('Position',0)
 	END

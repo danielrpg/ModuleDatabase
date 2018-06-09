@@ -416,14 +416,14 @@ PRINT 'Creating store procedure GetPositionChangesByRowVersion';
 GO
 
 
-IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.GetFactIncidentChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.Getfact_incidentChangesByRowVersion') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
-	DROP PROCEDURE ETL.GetFactIncidentChangesByRowVersion
-	PRINT 'Store procedure Deleted -  ETL.GetFactIncidentChangesByRowVersion';
+	DROP PROCEDURE ETL.Getfact_incidentChangesByRowVersion
+	PRINT 'Store procedure Deleted -  ETL.Getfact_incidentChangesByRowVersion';
 END
 GO
 /******************************************************************************
-**  Name: GetFactIncidentChangesByRowVersion
+**  Name: Getfact_incidentChangesByRowVersion
 **  Desc: Pulls Changes and Inserts from the dbo.incident table (FactIncident Data)
 **  Called By: ETL SQL Job.
 **
@@ -437,7 +437,7 @@ GO
 **  --------    --------					----------------------------------
 **  27/05/2018  Jesus David Piérola Alvarado Release 3.0 - DW
 ******************************************************************************/
-CREATE PROCEDURE ETL.GetFactIncidentChangesByRowVersion
+CREATE PROCEDURE ETL.Getfact_incidentChangesByRowVersion
 (
 	@LastRowVersionID BIGINT,
 	@CurrentDBTS      BIGINT
@@ -490,5 +490,5 @@ BEGIN
 		  ,i.incident_registered_date
 END
 GO
-PRINT 'Creating store procedure GetFactIncidentChangesByRowVersion';
+PRINT 'Creating store procedure Getfact_incidentChangesByRowVersion';
 GO
