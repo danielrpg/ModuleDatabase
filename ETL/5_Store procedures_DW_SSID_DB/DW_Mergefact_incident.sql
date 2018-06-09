@@ -1,10 +1,12 @@
 IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_Mergefact_incident') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
 	DROP PROCEDURE ETL.DW_Mergefact_incident
-	PRINT 'SE HA ELIMINADO EL SP ETL.DW_Mergefact_incident';
+	PRINT 'Store procedure deleted - ETL.DW_Mergefact_incident';
 END
 GO
 
+PRINT 'Creating store procedure DW_Mergefact_incident';
+GO
 /******************************************************************************
 **  Name: ETL.DW_Mergefact_incident
 **  Desc: Merges Source ETL.fact_incident changes into Destination dbo.fact_incident table. 
@@ -54,7 +56,7 @@ BEGIN
 	  (
 		source.personal_id
 		,source.area_id
-		,source.position_id
+		,ISNULL(source.position_id,12)
 		,source.event_incident_id
 		,source.[type]
 		,source.event_incident_date
