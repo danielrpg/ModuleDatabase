@@ -196,7 +196,7 @@ BEGIN
 	  (
 		source.personal_id
 		,source.area_id
-		,source.position_id
+		,ISNULL(source.position_id,12)
 		,source.event_incident_id
 		,source.[type]
 		,source.event_incident_date

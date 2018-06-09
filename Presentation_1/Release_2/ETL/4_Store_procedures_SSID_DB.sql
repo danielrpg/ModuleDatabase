@@ -457,7 +457,7 @@ BEGIN
 			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
 			INNER JOIN dbo.incident_type it ON i.incident_type_id = it.incident_type_id
 			INNER JOIN dbo.personals p ON i.personal_id = p.personal_id
-			INNER JOIN dbo.personal_position_contract ppc ON p.personal_id = ppc.personal_id
+			LEFT JOIN dbo.personal_position_contract ppc ON p.personal_id = ppc.personal_id
 	WHERE i.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND i.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
 	GROUP BY i.personal_id
@@ -479,7 +479,7 @@ BEGIN
 			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
 			INNER JOIN dbo.incident_type it ON i.incident_type_id = it.incident_type_id
 			INNER JOIN dbo.personals p ON i.personal_id = p.personal_id
-			INNER JOIN dbo.personal_position_contract ppc ON p.personal_id = ppc.personal_id
+			LEFT JOIN dbo.personal_position_contract ppc ON p.personal_id = ppc.personal_id
 	WHERE id.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND id.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
 	GROUP BY i.personal_id
