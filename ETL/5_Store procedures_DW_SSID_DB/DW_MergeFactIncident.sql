@@ -33,6 +33,7 @@ BEGIN
 	  AND target.area_id = source.area_id
 	  AND target.position_id = source.position_id
 	  AND target.event_incident_id = source.event_incident_id
+	  AND target.event_incident_date = source.event_incident_date
 	)
 	WHEN MATCHED
 	THEN UPDATE 

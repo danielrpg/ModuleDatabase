@@ -274,7 +274,7 @@ BEGIN
 		  ,EventIncidentSeverity	= i.incident_severity
 		  ,EventIncidentReportedBy	= i.incident_reported_by
 	FROM dbo.incident i
-			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
+			LEFT JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
 	WHERE i.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND i.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
 	GROUP BY i.incident_id
@@ -289,7 +289,7 @@ BEGIN
 		  ,EventIncidentSeverity	= i.incident_severity
 		  ,EventIncidentReportedBy	= i.incident_reported_by
 	FROM dbo.incident i
-			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
+			LEFT JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
 	WHERE id.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND id.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
 	GROUP BY i.incident_id
@@ -339,10 +339,10 @@ BEGIN
 		  ,PersonalSatus		= p.personal_active
 		  ,PersonalCountEquipa	= COUNT(i.inventory_id)
 	FROM dbo.personals p 
-			INNER JOIN inventory i ON p.personal_id = i.personal_id
+			LEFT JOIN inventory i ON p.personal_id = i.personal_id
 	WHERE p.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND p.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
-	AND i.active_assignament = 1
+	--AND i.active_assignament = 1
 	GROUP BY p.personal_id
 		  ,p.personal_name + ' ' + p.personal_last_name
 		  ,p.personal_birthdate
@@ -356,10 +356,10 @@ BEGIN
 		  ,PersonalSatus		= p.personal_active
 		  ,PersonalCountEquipa	= COUNT(i.inventory_id)
 	FROM dbo.personals p 
-			INNER JOIN inventory i ON p.personal_id = i.personal_id
+			LEFT JOIN inventory i ON p.personal_id = i.personal_id
 	WHERE i.[Rowversion] > CONVERT(ROWVERSION, @LastRowVersionID)
 	AND i.[Rowversion] <= CONVERT(ROWVERSION, @CurrentDBTS)
-	AND i.active_assignament = 1
+	--AND i.active_assignament = 1
 	GROUP BY p.personal_id
 		  ,p.personal_name + ' ' + p.personal_last_name
 		  ,p.personal_birthdate
@@ -451,7 +451,7 @@ BEGIN
 		  ,AreaID			 = p.area_area_id
 		  ,PositionID		 = ppc.position_id
 		  ,EventIncidentID	 = i.incident_id
-		  ,[Type]			 = it.incident_type_type
+		  ,[Type]			 = it.incident_type_name
 		  ,EventIncidentDate = i.incident_registered_date
 	FROM dbo.incident i
 			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
@@ -464,7 +464,7 @@ BEGIN
 		  ,p.area_area_id
 		  ,ppc.position_id
 		  ,i.incident_id
-		  ,it.incident_type_type
+		  ,it.incident_type_name
 		  ,i.incident_registered_date
 
 	UNION 
@@ -473,7 +473,7 @@ BEGIN
 		  ,AreaID			 = p.area_area_id
 		  ,PositionID		 = ppc.position_id
 		  ,EventIncidentID	 = i.incident_id
-		  ,[Type]			 = it.incident_type_type
+		  ,[Type]			 = it.incident_type_name
 		  ,EventIncidentDate = i.incident_registered_date
 	FROM dbo.incident i
 			INNER JOIN dbo.incident_detail id ON i.incident_detail_id = id.incident_detail_id
@@ -486,7 +486,7 @@ BEGIN
 		  ,p.area_area_id
 		  ,ppc.position_id
 		  ,i.incident_id
-		  ,it.incident_type_type
+		  ,it.incident_type_name
 		  ,i.incident_registered_date
 END
 GO
