@@ -1,13 +1,13 @@
-IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_MergeFactIncident') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'ETL.DW_Mergefact_incident') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
 BEGIN
-	DROP PROCEDURE ETL.DW_MergeFactIncident
-	PRINT 'SE HA ELIMINADO EL SP ETL.DW_MergeFactIncident';
+	DROP PROCEDURE ETL.DW_Mergefact_incident
+	PRINT 'SE HA ELIMINADO EL SP ETL.DW_Mergefact_incident';
 END
 GO
 
 /******************************************************************************
-**  Name: ETL.DW_MergeFactIncident
-**  Desc: Merges Source ETL.FactIncident changes into Destination dbo.FactIncident table. 
+**  Name: ETL.DW_Mergefact_incident
+**  Desc: Merges Source ETL.fact_incident changes into Destination dbo.fact_incident table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -20,43 +20,43 @@ GO
 **  --------    --------------					-------------------------------
 ** 28/05/2018   Jesús David Piérola Alvarado    Release 3.0 - DW
 ******************************************************************************/
-CREATE PROCEDURE [ETL].[DW_MergeFactIncident]
+CREATE PROCEDURE [ETL].[DW_Mergefact_incident]
 AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.FactIncident AS target
-	USING ETL.FactIncident AS source
+	MERGE dbo.fact_incident AS target
+	USING ETL.fact_incident AS source
 	ON
 	(
-	  target.PersonalID = source.PersonalID
-	  AND target.AreaID = source.AreaID
-	  AND target.PositionID = source.PositionID
-	  AND target.EventIncidentID = source.EventIncidentID
+	  target.personal_id = source.personal_id
+	  AND target.area_id = source.area_id
+	  AND target.position_id = source.position_id
+	  AND target.event_incident_id = source.event_incident_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET [Type]				= source.[Type]
-			,EventIncidentDate  = source.EventIncidentDate
+		 SET [type]				= source.[type]
+			,event_incident_date  = source.event_incident_date
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 PersonalID
-		,AreaID
-		,PositionID
-		,EventIncidentID
-		,[Type]
-		,EventIncidentDate
+		 personal_id
+		,area_id
+		,position_id
+		,event_incident_id
+		,[type]
+		,event_incident_date
 	  )
 	  VALUES
 	  (
-		source.PersonalID
-		,source.AreaID
-		,source.PositionID
-		,source.EventIncidentID
-		,source.[Type]
-		,source.EventIncidentDate
+		source.personal_id
+		,source.area_id
+		,source.position_id
+		,source.event_incident_id
+		,source.[type]
+		,source.event_incident_date
 	  );
 END
 GO

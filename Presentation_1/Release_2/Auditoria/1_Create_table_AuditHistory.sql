@@ -19,23 +19,23 @@ GO
 *******************************************************************************/
 PRINT 'Creating the AuditHistory table....';
 IF NOT EXISTS (SELECT 1 FROM sys.objects 
-		       WHERE object_id = OBJECT_ID(N'dbo.AuditHistory') 
+		       WHERE object_id = OBJECT_ID(N'dbo.audithistory') 
 		       AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[AuditHistory]
+	CREATE TABLE [dbo].[audithistory]
 	(
-		[AuditHistoryId] INT IDENTITY(1,1) NOT NULL CONSTRAINT [PK_AuditHistory] PRIMARY KEY,
-		[TableName]		 VARCHAR(50) NULL,
-		[ColumnName]	 VARCHAR(50) NULL,
-		[ID]             VARCHAR(50) NULL,
-		[Date]           DATETIME NULL,
-		[Oldvalue]       VARCHAR(MAX) NULL,
-		[NewValue]       VARCHAR(MAX) NULL,
-		[ModifiedDate]   DATETIME NOT NULL,
-		[ModifiedBy]     VARCHAR(50)
+		audit_id BIGINT IDENTITY(1,1) NOT NULL CONSTRAINT [PK_AuditHistory] PRIMARY KEY,
+		[table_name]		 VARCHAR(50) NULL,
+		[column_name]	 VARCHAR(50) NULL,
+		[id]             VARCHAR(50) NULL,
+		[date]           DATETIME NULL,
+		[old_value]       VARCHAR(MAX) NULL,
+		[new_value]       VARCHAR(MAX) NULL,
+		[modified_date]   DATETIME NOT NULL,
+		[modified_by]     VARCHAR(50)
 	);
 
-	ALTER TABLE [dbo].[AuditHistory] ADD CONSTRAINT [DF_AuditHistory_ModifiedDate]  DEFAULT (GETUTCDATE()) FOR [ModifiedDate]
+	ALTER TABLE [dbo].[audithistory] ADD CONSTRAINT [DF_AuditHistory_ModifiedDate]  DEFAULT (GETUTCDATE()) FOR [modified_date]
 		
 	PRINT 'Table AuditHistory created!';
 END

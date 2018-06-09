@@ -1,4 +1,0 @@
-INSERT INTO ssidb.dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (1, '2018-05-29 09:05:20.3220000', null, 200, 'Hojas tamaño carta', 129);
-INSERT INTO ssidb.dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (2, '2018-05-29 09:05:20.3840000', null, 300, 'Pliegos de cartulina', 130);
-INSERT INTO ssidb.dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (3, '2018-05-29 09:05:20.4390000', null, 100, 'Marcadores', 131);
-INSERT INTO ssidb.dbo.program_sso_resource (sso_resource_id, created_on, updated_on, sso_resource_cost, sso_resource_detail, sso_detail_id) VALUES (4, '2018-05-29 09:05:20.4840000', null, 200, 'Pliegos de cartulina', 131);

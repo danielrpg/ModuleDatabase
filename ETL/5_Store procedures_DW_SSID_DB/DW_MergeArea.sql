@@ -7,7 +7,7 @@ GO
 
 /******************************************************************************
 **  Name: ETL.DW_MergeArea
-**  Desc: Merges Source ETL.Area changes into Destination dbo.DimArea table. 
+**  Desc: Merges Source ETL.Area changes into Destination dbo.dim_area table. 
 **  Called By: SQL Job ETL
 **
 **  Author: Jesús David Piérola Alvarado
@@ -25,26 +25,26 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN
-	MERGE dbo.DimArea AS target
+	MERGE dbo.dim_area AS target
 	USING ETL.Area AS source
 	ON
 	(
-	  target.AreaID = source.AreaID
+	  target.area_id = source.area_id
 	)
 	WHEN MATCHED
 	THEN UPDATE 
-		 SET AreaName   = source.AreaName
+		 SET area_name   = source.area_name
 	WHEN NOT MATCHED
 	THEN 
 	  INSERT
 	  (
-		 AreaID
-		,AreaName
+		 area_id
+		,area_name
 	  )
 	  VALUES
 	  (
-		source.AreaID
-		,source.AreaName
+		source.area_id
+		,source.area_name
 	  );
 END
 GO
