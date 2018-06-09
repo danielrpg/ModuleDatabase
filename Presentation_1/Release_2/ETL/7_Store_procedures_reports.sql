@@ -100,3 +100,77 @@ BEGIN
 	WHERE FI.event_incident_date BETWEEN @STARTDATE AND @ENDDATE
 END
 GO
+
+
+-- Creation Store procedures for get amount incidents by severity
+
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'GetAmountIncidentBySeverity') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+BEGIN
+	DROP PROCEDURE GetAmountIncidentBySeverity
+	PRINT 'Store procedure deleted -  GetAmountIncidentBySeverity';
+END
+GO
+/******************************************************************************
+**  Name: GetAmountIncidentBySeverity
+**  Desc:Store procedures for get amount of incidents by severity
+**  Called By: API DW
+**
+**  Author: Jesus David Piérola Alvarado
+**
+**  Created: 08/06/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**  Date:       Author:							Description:
+**  --------    --------------					-------------------------------
+** 06/08/2018   Jesus David Piérola Alvarado	Release 3.0 - DW
+******************************************************************************/
+CREATE PROCEDURE dbo.GetAmountIncidentBySeverity
+AS
+SET NOCOUNT ON;
+SET XACT_ABORT ON;
+BEGIN
+	SELECT DEI.event_incident_severity
+			,COUNT(DEI.event_incident_id) amount_incidents
+	FROM dbo.dim_event_incident DEI
+	GROUP BY DEI.event_incident_severity
+END
+GO
+PRINT 'Store procedure GetAmountIncidentBySeverity Created';
+GO
+
+-- Creation Store procedures for get amount incidents by Type
+IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'GetAmountIncidentByType') AND OBJECTPROPERTY(ID, N'ISPROCEDURE') = 1)
+BEGIN
+	DROP PROCEDURE GetAmountIncidentByType
+	PRINT 'Store procedure deleted -  GetAmountIncidentByType';
+END
+GO
+/******************************************************************************
+**  Name: GetAmountIncidentByType
+**  Desc:Store procedures for get amount of incidents by Type
+**  Called By: API DW
+**
+**  Author: Jesus David Piérola Alvarado
+**
+**  Created: 08/06/2018
+*******************************************************************************
+**                            Change History
+*******************************************************************************
+**  Date:       Author:							Description:
+**  --------    --------------					-------------------------------
+** 06/08/2018   Jesus David Piérola Alvarado	Release 3.0 - DW
+******************************************************************************/
+CREATE PROCEDURE dbo.GetAmountIncidentByType 
+AS
+SET NOCOUNT ON;
+SET XACT_ABORT ON;
+BEGIN
+	SELECT FI.type
+			,COUNT(FI.event_incident_id) amount_incidents
+	FROM dbo.fact_incident FI
+	GROUP BY FI.type
+END
+GO
+PRINT 'Store procedure GetAmountIncidentByType Created';
+GO
