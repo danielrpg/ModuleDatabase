@@ -241,7 +241,7 @@ BEGIN
 	WHEN MATCHED
 	THEN UPDATE 
 		 SET personal_full_name   = source.personal_full_name
-			,personal_age		= source.personal_age
+			,personal_age		= ISNULL(source.personal_age,0)
 			,personal_status		= source.personal_status
 			,personal_count_equipa = source.personal_count_equipa
 	WHEN NOT MATCHED
@@ -258,7 +258,7 @@ BEGIN
 	  (
 		source.personal_id
 		,source.personal_full_name
-		,source.personal_age
+		,ISNULL(source.personal_age,0)
 		,source.personal_status
 		,source.personal_count_equipa
 	  );
