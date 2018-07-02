@@ -2708,9 +2708,13 @@ BEGIN
 
 	INSERT INTO [dbo].[program_sso_resource](
 			 sso_resource_cost
-			,sso_resource_detail)
+			,sso_resource_detail
+			,created_on
+			,sso_detail_id)
 	VALUES ( @resource_cost
-			,@resource_detail);
+			,@resource_detail
+			,GETDATE()
+			,1);
 	SET @result = 1;
     SELECT @result; 
 END
